@@ -74,4 +74,9 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 	public void run() {
 		PlayerManager.getPlayers().peek(player -> getObjective().update(player));
 	}
+
+	@Override
+	public void stop() {
+		cancel();
+	}
 }

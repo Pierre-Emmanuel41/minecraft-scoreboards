@@ -33,4 +33,9 @@ public interface IScoreboardUpdate {
 	 * @throws ObjectiveNotAttachedException If the objective to update is not attached to a {@link Scoreboard}
 	 */
 	void update();
+
+	/**
+	 * Stop the update of the objective.
+	 */
+	void stop();
 }
