@@ -15,7 +15,7 @@ public class HealthEntry extends AbstractEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the player health. See above.
 	 */
-	protected HealthEntry(int score, String before) {
+	public HealthEntry(int score, String before) {
 		this(score, before, null);
 	}
 
@@ -28,7 +28,7 @@ public class HealthEntry extends AbstractEntry {
 	 * @param before The sequence of characters to be displayed before the player health. See above.
 	 * @param after  The sequence of characters to be displayed before the player health. See above.
 	 */
-	protected HealthEntry(int score, String before, String after) {
+	public HealthEntry(int score, String before, String after) {
 		super(score);
 		this.before = before;
 		this.after = after;
