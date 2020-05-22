@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
 public abstract class AbstractEntry implements IEntry {
-	protected String oldValue, currentValue;
+	private String oldValue, currentValue;
 	private int score;
 
 	protected AbstractEntry(int score) {
@@ -24,8 +24,8 @@ public abstract class AbstractEntry implements IEntry {
 
 	@Override
 	public final void update(Player player) {
-		oldValue = getCurrentValue();
 		currentValue = updateCurrentValue(player);
+		oldValue = currentValue;
 	}
 
 	@Override
