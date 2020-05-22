@@ -75,6 +75,8 @@ public class ScoreboardUpdater extends ScoreboardManager {
 
 	/**
 	 * Stop the update of each registered objective.
+	 * 
+	 * @param removeScoreboard True if the scoreboard of each player should be removed, false otherwise.
 	 */
 	public static void stop(boolean removeScoreboard) {
 		if (!isRunning)
