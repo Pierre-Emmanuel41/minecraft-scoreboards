@@ -81,7 +81,7 @@ public class Objective implements IObjective {
 			return;
 
 		for (IEntry entry : entries.values()) {
-			scoreboard.resetScores(entry.getCurrentValue());
+			scoreboard.resetScores(entry.getOldValue());
 			entry.update(player);
 			objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
 		}
