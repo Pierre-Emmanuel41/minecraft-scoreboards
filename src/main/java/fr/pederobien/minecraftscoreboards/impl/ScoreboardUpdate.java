@@ -1,12 +1,13 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftmanagers.PlayerManager;
-import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.exceptions.ObjectiveNotAttachedException;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
@@ -15,7 +16,7 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 	private Plugin plugin;
 	private IObjective objective;
 	private long delay, period;
-	private Stream<Player> players;
+	private List<Player> players;
 
 	/**
 	 * Create a scheduled scoreboard update. If period and delay equals {@link Long#MIN_VALUE} then the update is scheduled to run on
@@ -59,8 +60,8 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 		if (!getObjective().getScoreboard().isPresent())
 			throw new ObjectiveNotAttachedException(getObjective());
 
-		players = PlayerManager.getPlayers();
-		ScoreboardManager.setPlayersScoreboard(players, getObjective().getScoreboard().get());
+		players = PlayerManager.getPlayers().collect(Collectors.toList());
+		action(player -> player.setScoreboard(getObjective().getScoreboard().get()));
 
 		if (period == Long.MIN_VALUE && delay == Long.MIN_VALUE)
 			runTask(getPlugin());
@@ -72,11 +73,16 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 
 	@Override
 	public void run() {
-		PlayerManager.getPlayers().peek(player -> getObjective().update(player));
+		action(player -> getObjective().update(player));
 	}
 
 	@Override
 	public void stop() {
 		cancel();
+	}
+
+	private void action(Consumer<Player> consumer) {
+		for (Player player : players)
+			consumer.accept(player);
 	}
 }
