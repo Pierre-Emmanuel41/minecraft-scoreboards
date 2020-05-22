@@ -1,5 +1,7 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import java.util.StringJoiner;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -9,9 +11,8 @@ public class LocationEntry extends AbstractEntry {
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
 	 * Location loc = player.getLocation();</br>
-	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + delimiter +
-	 * after;</br>
-	 * This constructor use " " as default delimiter and "" as value for parameter <code>after</code>.
+	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()</br>
+	 * This constructor use " " as default delimiter.
 	 * 
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the player location. See above.
@@ -23,9 +24,7 @@ public class LocationEntry extends AbstractEntry {
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
 	 * Location loc = player.getLocation();</br>
-	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + delimiter +
-	 * after;</br>
-	 * This constructor "" as value for parameter <code>after</code>.
+	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()
 	 * 
 	 * @param score     The line number of this entry.
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
@@ -56,6 +55,8 @@ public class LocationEntry extends AbstractEntry {
 	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();
-		return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + delimiter + after;
+		if (after == "")
+			return new StringJoiner(delimiter).add(before).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
+		return new StringJoiner(delimiter, before, after).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
 	}
 }
