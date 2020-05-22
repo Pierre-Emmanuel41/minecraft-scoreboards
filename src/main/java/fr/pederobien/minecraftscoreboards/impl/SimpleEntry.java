@@ -12,7 +12,7 @@ public class SimpleEntry extends AbstractEntry {
 	 * @param score The line number of this entry.
 	 * @param entry The entry to display in player's scoreboard.
 	 */
-	protected SimpleEntry(int score, String entry) {
+	public SimpleEntry(int score, String entry) {
 		super(score);
 		this.entry = entry;
 	}

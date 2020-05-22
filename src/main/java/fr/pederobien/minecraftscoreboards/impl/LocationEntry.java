@@ -16,7 +16,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the player location. See above.
 	 */
-	protected LocationEntry(int score, String before) {
+	public LocationEntry(int score, String before) {
 		this(score, before, " ");
 	}
 
@@ -31,7 +31,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 */
-	protected LocationEntry(int score, String before, String delimiter) {
+	public LocationEntry(int score, String before, String delimiter) {
 		this(score, before, delimiter, "");
 	}
 
@@ -46,7 +46,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
-	protected LocationEntry(int score, String before, String delimiter, String after) {
+	public LocationEntry(int score, String before, String delimiter, String after) {
 		super(score);
 		this.before = before;
 		this.delimiter = delimiter;
