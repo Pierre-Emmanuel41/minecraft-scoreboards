@@ -11,7 +11,7 @@ public abstract class MinecraftRunnable implements Runnable {
 	private int taskId;
 
 	public MinecraftRunnable() {
-		isCancelled = false;
+		isCancelled = true;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public abstract class MinecraftRunnable implements Runnable {
 	}
 
 	private void checkBeforeRun(Function<Object, Integer> function) {
-		if (!isCancelled) {
+		if (isCancelled) {
 			taskId = function.apply(null);
 			isCancelled = false;
 		}
