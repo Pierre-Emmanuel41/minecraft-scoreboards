@@ -12,10 +12,7 @@ import fr.pederobien.minecraftscoreboards.exceptions.ObjectiveNotAttachedExcepti
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
 
-public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUpdate {
-	private Plugin plugin;
-	private IObjective objective;
-	private long delay, period;
+public class ScoreboardUpdate extends AbstractScoreboardUpdate implements IScoreboardUpdate {
 	private List<Player> players;
 
 	/**
@@ -29,30 +26,7 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 	 * @param period    the number of ticks to wait between two updates.
 	 */
 	public ScoreboardUpdate(Plugin plugin, IObjective objective, long delay, long period) {
-		this.plugin = plugin;
-		this.objective = objective;
-		this.delay = delay;
-		this.period = period;
-	}
-
-	@Override
-	public Plugin getPlugin() {
-		return plugin;
-	}
-
-	@Override
-	public IObjective getObjective() {
-		return objective;
-	}
-
-	@Override
-	public long getDelay() {
-		return delay;
-	}
-
-	@Override
-	public long getPeriod() {
-		return period;
+		super(plugin, objective, delay, period);
 	}
 
 	@Override
@@ -63,9 +37,9 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 		players = PlayerManager.getPlayers().collect(Collectors.toList());
 		action(player -> player.setScoreboard(getObjective().getScoreboard().get()));
 
-		if (period == Long.MIN_VALUE && delay == Long.MIN_VALUE)
+		if (getPeriod() == Long.MIN_VALUE && getDelay() == Long.MIN_VALUE)
 			runTask(getPlugin());
-		else if (period == Long.MIN_VALUE)
+		else if (getPeriod() == Long.MIN_VALUE)
 			runTaskLater(getPlugin(), getDelay());
 		else
 			runTaskTimer(getPlugin(), getDelay(), getPeriod());
@@ -74,11 +48,6 @@ public class ScoreboardUpdate extends MinecraftRunnable implements IScoreboardUp
 	@Override
 	public void run() {
 		action(player -> getObjective().update(player));
-	}
-
-	@Override
-	public void stop() {
-		cancel();
 	}
 
 	private void action(Consumer<Player> consumer) {
