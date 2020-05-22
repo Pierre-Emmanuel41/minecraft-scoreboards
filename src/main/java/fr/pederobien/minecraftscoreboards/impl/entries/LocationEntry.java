@@ -1,9 +1,11 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraftscoreboards.impl.entries;
 
 import java.util.StringJoiner;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
 public class LocationEntry extends AbstractEntry {
 	private String before, delimiter, after;
