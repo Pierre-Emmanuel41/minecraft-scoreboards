@@ -1,5 +1,7 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import java.util.function.Function;
+
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
@@ -24,8 +26,7 @@ public abstract class AbstractEntry implements IEntry {
 
 	@Override
 	public final void update(Player player) {
-		currentValue = updateCurrentValue(player);
-		oldValue = currentValue;
+		internalUpdate(player, p -> updateCurrentValue(p));
 	}
 
 	@Override
@@ -46,4 +47,17 @@ public abstract class AbstractEntry implements IEntry {
 	 * @return The new value represented by this entry.
 	 */
 	protected abstract String updateCurrentValue(Player player);
+
+	/**
+	 * Method use internally, do not use.
+	 * 
+	 * @param player   The player whose objective is updated.
+	 * @param function The function used to update the current value of this entry.
+	 * @return A string that correspond to the current value of this entry.
+	 */
+	protected String internalUpdate(Player player, Function<Player, String> function) {
+		currentValue = function.apply(player);
+		oldValue = currentValue;
+		return currentValue;
+	}
 }
