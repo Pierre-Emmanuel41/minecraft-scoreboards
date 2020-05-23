@@ -59,6 +59,14 @@ public interface IObjective {
 	void update(Player player);
 
 	/**
+	 * Update this objective for the given player and the specified entry.
+	 * 
+	 * @param player The player whose scoreboard is updated.
+	 * @param entry  The entry to update in this objective.
+	 */
+	void update(Player player, IEntry entry);
+
+	/**
 	 * @return A list that contains all registered entries for this objective. This list is unmodifiable.
 	 */
 	List<IEntry> entries();

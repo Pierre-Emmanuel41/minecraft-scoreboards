@@ -64,14 +64,12 @@ public class Objective implements IObjective {
 	public void addEntry(IEntry entry) {
 		entries.put(entry.getScore(), entry);
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
-		updateObjective();
 	}
 
 	@Override
 	public void removeEntry(IEntry entry) {
 		entries.remove(entry.getScore());
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
-		updateObjective();
 	}
 
 	@Override
@@ -80,11 +78,13 @@ public class Objective implements IObjective {
 		if (!optScoreboard.isPresent())
 			return;
 
-		for (IEntry entry : entries.values()) {
-			scoreboard.resetScores(entry.getOldValue());
-			entry.update(player);
-			objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
-		}
+		for (IEntry entry : entries.values())
+			updateEntry(entry, player, false);
+	}
+
+	@Override
+	public void update(Player player, IEntry entry) {
+		updateEntry(entry, player, true);
 	}
 
 	@Override
@@ -99,7 +99,6 @@ public class Objective implements IObjective {
 			return;
 
 		objective = ScoreboardManager.createObjective(scoreboard, getName(), getCriteria(), getDisplayName(), getDisplaySlot());
-		updateObjective();
 	}
 
 	@Override
@@ -112,12 +111,11 @@ public class Objective implements IObjective {
 		return objective == null ? Optional.empty() : Optional.of(objective);
 	}
 
-	private void updateObjective() {
-		if (!getObjective().isPresent())
+	private void updateEntry(IEntry entry, Player player, boolean checkScoreboard) {
+		if (checkScoreboard && !getScoreboard().isPresent())
 			return;
-		for (IEntry entry : entries.values()) {
-			scoreboard.resetScores(entry.getCurrentValue());
-			objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
-		}
+		scoreboard.resetScores(entry.getOldValue());
+		entry.update(player);
+		objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 }
