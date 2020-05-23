@@ -73,7 +73,7 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageEvent(PlayerDeathEvent event) {
-		if (!isActivated() || !(event.getEntity() instanceof Player))
+		if (!(event.getEntity() instanceof Player))
 			return;
 		updateEvent(Source.DEATH, (Player) event.getEntity());
 		update();
@@ -82,7 +82,7 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDamageEvent(EntityDamageEvent event) {
-		if (!isActivated() || !(event.getEntity() instanceof Player))
+		if (!(event.getEntity() instanceof Player))
 			return;
 		updateEvent(Source.DAMAGE, (Player) event.getEntity());
 		damageEvent = event;
@@ -92,7 +92,7 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityRegainHealthEvent(EntityRegainHealthEvent event) {
-		if (!isActivated() || !(event.getEntity() instanceof Player))
+		if (!(event.getEntity() instanceof Player))
 			return;
 		updateEvent(Source.REGAIN, (Player) event.getEntity());
 		regainEvent = event;
@@ -102,8 +102,6 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-		if (!isActivated())
-			return;
 		target = event.getPlayer();
 		updateLater(20);
 	}
