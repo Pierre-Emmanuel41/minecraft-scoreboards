@@ -8,11 +8,13 @@ import org.bukkit.plugin.Plugin;
 import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.impl.ScoreboardUpdate;
+import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
 
 public class ScoreboardUpdater extends ScoreboardManager {
 	private static final List<IScoreboardUpdate> UPDATES = new ArrayList<IScoreboardUpdate>();
+	private static final List<IAutoUpdateObjective> AUTO_UPDATE_OBJECTIVES = new ArrayList<IAutoUpdateObjective>();
 	private static boolean isRunning;
 
 	/**
@@ -61,6 +63,15 @@ public class ScoreboardUpdater extends ScoreboardManager {
 			update.update();
 	}
 
+	public static void register(IAutoUpdateObjective objective) {
+		AUTO_UPDATE_OBJECTIVES.add(objective);
+		objective.register();
+		if (isRunning) {
+			objective.initialize();
+			objective.setActivated(true);
+		}
+	}
+
 	/**
 	 * Start the update of each registered objective.
 	 */
@@ -70,6 +81,10 @@ public class ScoreboardUpdater extends ScoreboardManager {
 
 		for (IScoreboardUpdate update : UPDATES)
 			update.update();
+		for (IAutoUpdateObjective objective : AUTO_UPDATE_OBJECTIVES) {
+			objective.initialize();
+			objective.setActivated(true);
+		}
 		isRunning = true;
 	}
 
@@ -84,6 +99,9 @@ public class ScoreboardUpdater extends ScoreboardManager {
 
 		for (IScoreboardUpdate update : UPDATES)
 			update.stop();
+
+		for (IAutoUpdateObjective objective : AUTO_UPDATE_OBJECTIVES)
+			objective.setActivated(false);
 
 		if (removeScoreboard)
 			PlayerManager.getPlayers().forEach(player -> removePlayerScoreboard(player));
