@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
-public class SimpleEntry extends AbstractEntry {
+public class MessageEntry extends AbstractEntry {
 	private String entry;
 
 	/**
@@ -14,7 +14,7 @@ public class SimpleEntry extends AbstractEntry {
 	 * @param score The line number of this entry.
 	 * @param entry The entry to display in player's scoreboard.
 	 */
-	public SimpleEntry(int score, String entry) {
+	public MessageEntry(int score, String entry) {
 		super(score);
 		this.entry = entry;
 	}
