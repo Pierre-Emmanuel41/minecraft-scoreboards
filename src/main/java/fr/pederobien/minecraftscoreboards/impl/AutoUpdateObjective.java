@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
@@ -56,12 +55,8 @@ public class AutoUpdateObjective extends Objective implements IAutoUpdateObjecti
 
 	@Override
 	public void initialize() {
-		PlayerManager.getPlayers().forEach(player -> {
-			action(entry -> {
-				getObjective().get().getScore(entry.initialize(player)).setScore(entry.getScore());
-			});
-			ScoreboardManager.setPlayerScoreboard(player, getScoreboard().get());
-		});
+		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
+		action(entry -> getObjective().get().getScore(entry.initialize(getPlayer())).setScore(entry.getScore()));
 	}
 
 	@Override
