@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries;
+package fr.pederobien.minecraftscoreboards.impl.entries.update;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;

@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries;
+package fr.pederobien.minecraftscoreboards.impl.entries.simple;
 
 import java.util.StringJoiner;
 
