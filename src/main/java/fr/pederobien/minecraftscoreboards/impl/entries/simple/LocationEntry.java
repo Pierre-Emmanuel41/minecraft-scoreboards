@@ -13,7 +13,7 @@ public class LocationEntry extends AbstractEntry {
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
 	 * Location loc = player.getLocation();</br>
-	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()</br>
+	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()</br>
 	 * This constructor use " " as default delimiter.
 	 * 
 	 * @param score  The line number of this entry.
@@ -26,7 +26,7 @@ public class LocationEntry extends AbstractEntry {
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
 	 * Location loc = player.getLocation();</br>
-	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()
+	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()
 	 * 
 	 * @param score     The line number of this entry.
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
@@ -39,8 +39,7 @@ public class LocationEntry extends AbstractEntry {
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
 	 * Location loc = player.getLocation();</br>
-	 * return before + delimiter + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + delimiter +
-	 * after;</br>
+	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + after;</br>
 	 * 
 	 * @param score     The line number of this entry.
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
@@ -57,8 +56,6 @@ public class LocationEntry extends AbstractEntry {
 	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();
-		if (after == "")
-			return new StringJoiner(delimiter).add(before).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
-		return new StringJoiner(delimiter, before, after).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
+		return before.concat(new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString()).concat(after);
 	}
 }
