@@ -33,7 +33,9 @@ public class EntityKilledEntry extends StatisticEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDeathEvent(EntityDeathEvent event) {
-		if (getEntityType().equals(event.getEntityType()))
-			update();
+		if (!getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null || !event.getEntity().getKiller().equals(getObjective().getPlayer()))
+			return;
+
+		update();
 	}
 }
