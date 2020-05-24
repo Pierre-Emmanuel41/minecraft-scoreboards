@@ -37,6 +37,8 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	@Override
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
+		if (!isActivated())
+			getObjective().getScoreboard().get().resetScores(getCurrentValue());
 	}
 
 	/**
