@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
 
-public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
+public class HealthEntry extends AbstractAutoUpdateEntry {
 	private String before, after;
 	private EntityDamageEvent damageEvent;
 	private EntityRegainHealthEvent regainEvent;
@@ -25,7 +25,7 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the player health. See above.
 	 */
-	public AutoUpdateHealthEntry(int score, String before) {
+	public HealthEntry(int score, String before) {
 		this(score, before, null);
 	}
 
@@ -38,7 +38,7 @@ public class AutoUpdateHealthEntry extends AbstractAutoUpdateEntry {
 	 * @param before The sequence of characters to be displayed before the player health. See above.
 	 * @param after  The sequence of characters to be displayed before the player health. See above.
 	 */
-	public AutoUpdateHealthEntry(int score, String before, String after) {
+	public HealthEntry(int score, String before, String after) {
 		super(score);
 		this.before = before;
 		this.after = after;

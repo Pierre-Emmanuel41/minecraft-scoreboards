@@ -7,13 +7,13 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
 
-public class AutoUpdateStatisticEntry extends AbstractAutoUpdateEntry {
+public class StatisticEntry extends AbstractAutoUpdateEntry {
 	private Statistic statistic;
 	private EntityType entityType;
 	private Material material;
 	private String before, after;
 
-	private AutoUpdateStatisticEntry(int score, Statistic statistic, EntityType entityType, Material material, String before, String after) {
+	private StatisticEntry(int score, Statistic statistic, EntityType entityType, Material material, String before, String after) {
 		super(score);
 		this.statistic = statistic;
 		this.entityType = entityType;
@@ -22,27 +22,27 @@ public class AutoUpdateStatisticEntry extends AbstractAutoUpdateEntry {
 		this.after = after;
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, String before, String after) {
+	public StatisticEntry(int score, Statistic statistic, String before, String after) {
 		this(score, statistic, null, null, before, after);
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, String before) {
+	public StatisticEntry(int score, Statistic statistic, String before) {
 		this(score, statistic, null, null, before, "");
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, EntityType entityType, String before, String after) {
+	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before, String after) {
 		this(score, statistic, entityType, null, before, after);
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, EntityType entityType, String before) {
+	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before) {
 		this(score, statistic, entityType, null, before, "");
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, Material material, String before, String after) {
+	public StatisticEntry(int score, Statistic statistic, Material material, String before, String after) {
 		this(score, statistic, null, material, before, after);
 	}
 
-	public AutoUpdateStatisticEntry(int score, Statistic statistic, Material material, String before) {
+	public StatisticEntry(int score, Statistic statistic, Material material, String before) {
 		this(score, statistic, null, material, before, "");
 	}
 
