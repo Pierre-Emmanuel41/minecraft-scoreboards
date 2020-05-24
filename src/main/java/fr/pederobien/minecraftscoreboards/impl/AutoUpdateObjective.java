@@ -3,6 +3,10 @@ package fr.pederobien.minecraftscoreboards.impl;
 import java.util.function.Consumer;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -11,9 +15,9 @@ import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
-public class AutoUpdateObjective extends Objective implements IAutoUpdateObjective {
+public class AutoUpdateObjective extends Objective implements IAutoUpdateObjective, Listener {
 	private Plugin plugin;
-	private boolean isActivated;
+	private boolean isActivated, isRegistered;
 
 	public AutoUpdateObjective(Player player, String name, String displayName, Plugin plugin) {
 		super(player, name, displayName);
@@ -68,6 +72,14 @@ public class AutoUpdateObjective extends Objective implements IAutoUpdateObjecti
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
 		action(entry -> entry.setActivated(isActivated));
+		if (!isRegistered)
+			getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	public void onPlayerJoinEvent(PlayerJoinEvent event) {
+		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
+			setPlayer(event.getPlayer());
 	}
 
 	private void action(Consumer<IAutoUpdateEntry> consumer) {

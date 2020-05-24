@@ -60,7 +60,7 @@ public class ScoreboardUpdater extends ScoreboardManager {
 	public static void register(IScoreboardUpdate update) {
 		UPDATES.add(update);
 		if (isRunning)
-			update.update();
+			update.start();
 	}
 
 	public static void register(IAutoUpdateObjective objective) {
@@ -80,7 +80,7 @@ public class ScoreboardUpdater extends ScoreboardManager {
 			return;
 
 		for (IScoreboardUpdate update : UPDATES)
-			update.update();
+			update.start();
 		for (IAutoUpdateObjective objective : AUTO_UPDATE_OBJECTIVES) {
 			objective.initialize();
 			objective.setActivated(true);

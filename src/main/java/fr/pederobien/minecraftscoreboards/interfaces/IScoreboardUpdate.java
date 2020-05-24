@@ -28,11 +28,11 @@ public interface IScoreboardUpdate {
 	long getPeriod();
 
 	/**
-	 * Update the scoreboard based on the plugin, objective, delay and the period.
+	 * Start the objective update based on the plugin, delay and the period.
 	 * 
 	 * @throws ObjectiveNotAttachedException If the objective to update is not attached to a {@link Scoreboard}
 	 */
-	void update();
+	void start();
 
 	/**
 	 * Stop the update of the objective.

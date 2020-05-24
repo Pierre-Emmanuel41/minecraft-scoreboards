@@ -24,7 +24,7 @@ public class ScoreboardUpdate extends AbstractScoreboardUpdate implements IScore
 	}
 
 	@Override
-	public void update() {
+	public void onStart() {
 		if (!getObjective().getScoreboard().isPresent())
 			throw new ObjectiveNotAttachedException(getObjective());
 

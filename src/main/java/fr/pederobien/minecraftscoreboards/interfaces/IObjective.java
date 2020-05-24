@@ -16,6 +16,14 @@ public interface IObjective {
 	Player getPlayer();
 
 	/**
+	 * Set the player tracked by this objective. Normally this method should be never called. But when a player quit and join the
+	 * server during an update, the player lose its scoreboard.
+	 * 
+	 * @param player The player to track.
+	 */
+	void setPlayer(Player player);
+
+	/**
 	 * @return The name of this objective.
 	 */
 	String getName();

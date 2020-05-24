@@ -48,6 +48,14 @@ public class Objective implements IObjective {
 	}
 
 	@Override
+	public void setPlayer(Player player) {
+		this.player = player;
+		if (!getScoreboard().isPresent())
+			return;
+		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
