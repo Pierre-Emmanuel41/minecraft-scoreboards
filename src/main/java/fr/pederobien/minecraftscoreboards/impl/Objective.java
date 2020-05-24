@@ -80,18 +80,18 @@ public class Objective implements IObjective {
 	}
 
 	@Override
-	public void update(Player player) {
+	public void update() {
 		Optional<Scoreboard> optScoreboard = getScoreboard();
 		if (!optScoreboard.isPresent())
 			return;
 
 		for (IEntry entry : entries.values())
-			updateEntry(entry, player, false);
+			updateEntry(entry, false);
 	}
 
 	@Override
-	public void update(Player player, IEntry entry) {
-		updateEntry(entry, player, true);
+	public void update(IEntry entry) {
+		updateEntry(entry, true);
 	}
 
 	@Override
@@ -118,11 +118,11 @@ public class Objective implements IObjective {
 		return objective == null ? Optional.empty() : Optional.of(objective);
 	}
 
-	private void updateEntry(IEntry entry, Player player, boolean checkScoreboard) {
-		if (checkScoreboard && !getScoreboard().isPresent())
+	private void updateEntry(IEntry entry, boolean checkScoreboard) {
+		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
 		scoreboard.resetScores(entry.getOldValue());
-		entry.update(player);
+		entry.update(getPlayer());
 		objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 }

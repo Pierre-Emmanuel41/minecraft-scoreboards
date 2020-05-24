@@ -2,7 +2,6 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
@@ -48,7 +47,8 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	protected void update() {
 		if (getObjective() == null || !isActivated())
 			return;
-		PlayerManager.getPlayers().forEach(player -> getObjective().update(player, this));
+
+		getObjective().update(this);
 	}
 
 	/**

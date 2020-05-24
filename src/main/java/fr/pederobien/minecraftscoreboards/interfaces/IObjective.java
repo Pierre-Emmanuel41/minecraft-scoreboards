@@ -57,19 +57,17 @@ public interface IObjective {
 	void removeEntry(IEntry entry);
 
 	/**
-	 * Update this objective. This method reset the objective for each entry old value and then display each entry current value.
-	 * 
-	 * @param player The player whose scoreboard is updated.
+	 * Update this objective for the tracked player. This method reset the objective for each entry old value and then display each
+	 * entry current value.
 	 */
-	void update(Player player);
+	void update();
 
 	/**
-	 * Update this objective for the given player and the specified entry.
+	 * Update this objective for the tracked player and the specified entry.
 	 * 
-	 * @param player The player whose scoreboard is updated.
-	 * @param entry  The entry to update in this objective.
+	 * @param entry The entry to update in this objective.
 	 */
-	void update(Player player, IEntry entry);
+	void update(IEntry entry);
 
 	/**
 	 * @return A list that contains all registered entries for this objective. This list is unmodifiable.
