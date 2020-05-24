@@ -2,6 +2,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import java.util.function.Consumer;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
@@ -15,18 +16,18 @@ public class AutoUpdateObjective extends Objective implements IAutoUpdateObjecti
 	private Plugin plugin;
 	private boolean isActivated;
 
-	public AutoUpdateObjective(String name, String displayName, Plugin plugin) {
-		super(name, displayName);
+	public AutoUpdateObjective(Player player, String name, String displayName, Plugin plugin) {
+		super(player, name, displayName);
 		this.plugin = plugin;
 	}
 
-	public AutoUpdateObjective(String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
-		super(name, displayName, displaySlot);
+	public AutoUpdateObjective(Player player, String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
+		super(player, name, displayName, displaySlot);
 		this.plugin = plugin;
 	}
 
-	public AutoUpdateObjective(String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
-		super(name, displayName, criteria, displaySlot);
+	public AutoUpdateObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
+		super(player, name, displayName, criteria, displaySlot);
 		this.plugin = plugin;
 	}
 

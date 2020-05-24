@@ -11,6 +11,11 @@ import org.bukkit.scoreboard.Scoreboard;
 public interface IObjective {
 
 	/**
+	 * @return The player tracked by this objective.
+	 */
+	Player getPlayer();
+
+	/**
 	 * @return The name of this objective.
 	 */
 	String getName();

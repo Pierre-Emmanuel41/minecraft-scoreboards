@@ -16,6 +16,7 @@ import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public class Objective implements IObjective {
+	private Player player;
 	private Scoreboard scoreboard;
 	private org.bukkit.scoreboard.Objective objective;
 	private Map<Integer, IEntry> entries;
@@ -23,21 +24,27 @@ public class Objective implements IObjective {
 	private String name, criteria, displayName;
 	private DisplaySlot displaySlot;
 
-	public Objective(String name, String displayName) {
-		this(name, displayName, DisplaySlot.SIDEBAR);
+	public Objective(Player player, String name, String displayName) {
+		this(player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
-	public Objective(String name, String displayName, DisplaySlot displaySlot) {
-		this(name, displayName, "dummy", displaySlot);
+	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot) {
+		this(player, name, displayName, "dummy", displaySlot);
 	}
 
-	public Objective(String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+		this.player = player;
 		this.name = name;
 		this.criteria = criteria;
 		this.displayName = displayName;
 		this.displaySlot = displaySlot;
 		entries = new HashMap<Integer, IEntry>();
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+	}
+
+	@Override
+	public Player getPlayer() {
+		return player;
 	}
 
 	@Override
