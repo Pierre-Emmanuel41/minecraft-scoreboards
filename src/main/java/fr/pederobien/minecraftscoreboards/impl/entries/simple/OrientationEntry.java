@@ -8,7 +8,6 @@ import fr.pederobien.minecraftmanagers.WorldManager;
 import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
 public class OrientationEntry extends AbstractEntry {
-	private String before;
 	private Block block;
 
 	/**
@@ -19,13 +18,23 @@ public class OrientationEntry extends AbstractEntry {
 	 * @param block  The target block.
 	 */
 	public OrientationEntry(int score, String before, Block block) {
-		super(score);
-		this.before = before;
+		this(score, before, block, "");
+	}
+
+	/**
+	 * Create an entry that displays the orientation to follow to reach the given block.
+	 * 
+	 * @param score  The line number of this entry.
+	 * @param before The sequence of characters to be displayed before the orientation to follow.
+	 * @param block  The target block.
+	 */
+	public OrientationEntry(int score, String before, Block block, String after) {
+		super(score, before, after);
 		this.block = block;
 	}
 
 	@Override
 	protected String updateCurrentValue(Player player) {
-		return before + EArrows.getArrow(WorldManager.getYaw(player, block.getLocation())).getUnicode();
+		return EArrows.getArrow(WorldManager.getYaw(player, block.getLocation())).getUnicode();
 	}
 }

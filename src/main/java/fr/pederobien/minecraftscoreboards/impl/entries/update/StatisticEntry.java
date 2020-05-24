@@ -11,37 +11,93 @@ public class StatisticEntry extends AbstractAutoUpdateEntry {
 	private Statistic statistic;
 	private EntityType entityType;
 	private Material material;
-	private String before, after;
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score      The line number of this entry.
+	 * @param statistic  The statistic tracked by this entry.
+	 * @param entityType The type of entity used to update this entry.
+	 * @param material   The material used to update this entry.
+	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 * @param after      The sequence of characters to be displayed after the player statistic.
+	 */
 	private StatisticEntry(int score, Statistic statistic, EntityType entityType, Material material, String before, String after) {
-		super(score);
+		super(score, before, after);
 		this.statistic = statistic;
 		this.entityType = entityType;
 		this.material = material;
-		this.before = before;
-		this.after = after;
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score     The line number of this entry.
+	 * @param statistic The statistic tracked by this entry.
+	 * @param before    The sequence of characters to be displayed before the player statistic.
+	 * @param after     The sequence of characters to be displayed after the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, String before, String after) {
 		this(score, statistic, null, null, before, after);
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score     The line number of this entry.
+	 * @param statistic The statistic tracked by this entry.
+	 * @param before    The sequence of characters to be displayed before the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, String before) {
 		this(score, statistic, null, null, before, "");
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score      The line number of this entry.
+	 * @param statistic  The statistic tracked by this entry.
+	 * @param entityType The type of entity used to update this entry.
+	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 * @param after      The sequence of characters to be displayed after the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before, String after) {
 		this(score, statistic, entityType, null, before, after);
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score      The line number of this entry.
+	 * @param statistic  The statistic tracked by this entry.
+	 * @param entityType The type of entity used to update this entry.
+	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before) {
 		this(score, statistic, entityType, null, before, "");
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score     The line number of this entry.
+	 * @param statistic The statistic tracked by this entry.
+	 * @param material  The material used to update this entry.
+	 * @param before    The sequence of characters to be displayed before the player statistic.
+	 * @param after     The sequence of characters to be displayed after the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, Material material, String before, String after) {
 		this(score, statistic, null, material, before, after);
 	}
 
+	/**
+	 * Create a statistic entry.
+	 * 
+	 * @param score     The line number of this entry.
+	 * @param statistic The statistic tracked by this entry.
+	 * @param material  The material used to update this entry.
+	 * @param before    The sequence of characters to be displayed before the player statistic.
+	 */
 	public StatisticEntry(int score, Statistic statistic, Material material, String before) {
 		this(score, statistic, null, material, before, "");
 	}
@@ -54,11 +110,11 @@ public class StatisticEntry extends AbstractAutoUpdateEntry {
 	@Override
 	protected String updateCurrentValue(Player player) {
 		if (material == null && entityType != null)
-			return before + player.getStatistic(statistic, entityType) + after;
+			return "" + player.getStatistic(statistic, entityType);
 		if (entityType == null && material != null)
-			return before + player.getStatistic(statistic, material) + after;
+			return "" + player.getStatistic(statistic, material);
 
-		return before + player.getStatistic(statistic) + after;
+		return "" + player.getStatistic(statistic);
 	}
 
 	/**

@@ -15,7 +15,7 @@ public class MessageEntry extends AbstractEntry {
 	 * @param entry The entry to display in player's scoreboard.
 	 */
 	public MessageEntry(int score, String entry) {
-		super(score);
+		super(score, "", "");
 		this.entry = entry;
 	}
 

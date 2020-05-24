@@ -11,7 +11,6 @@ import fr.pederobien.minecraftmanagers.WorldManager;
 import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
 
 public class OrientationEntry extends AbstractAutoUpdateEntry {
-	private String before;
 	private Block block;
 	private int call;
 
@@ -21,12 +20,23 @@ public class OrientationEntry extends AbstractAutoUpdateEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the orientation to follow.
 	 * @param block  The target block.
+	 * @param after  The sequence of characters to be displayed after the orientation to follow.
 	 */
-	public OrientationEntry(int score, String before, Block block) {
-		super(score);
-		this.before = before;
+	public OrientationEntry(int score, String before, Block block, String after) {
+		super(score, before, after);
 		this.block = block;
 		call = 0;
+	}
+
+	/**
+	 * Create an entry that displays the orientation to follow to reach the given block.
+	 * 
+	 * @param score  The line number of this entry.
+	 * @param before The sequence of characters to be displayed before the orientation to follow.
+	 * @param block  The target block.
+	 */
+	public OrientationEntry(int score, String before, Block block) {
+		this(score, before, block, "");
 	}
 
 	@Override
@@ -36,7 +46,7 @@ public class OrientationEntry extends AbstractAutoUpdateEntry {
 
 	@Override
 	protected String updateCurrentValue(Player player) {
-		return before + EArrows.getArrow(WorldManager.getYaw(player, block.getLocation())).getUnicode();
+		return EArrows.getArrow(WorldManager.getYaw(player, block.getLocation())).getUnicode();
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -44,7 +54,7 @@ public class OrientationEntry extends AbstractAutoUpdateEntry {
 		if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
 			return;
 
-		// Updating player objective each 3 calls.
+		// Updating player objective each 2 calls.
 		call++;
 		if (call > 2) {
 			update();

@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
 
 public class LocationEntry extends AbstractAutoUpdateEntry {
-	private String before, delimiter, after;
+	private String delimiter;
 	private int call;
 
 	/**
@@ -51,10 +51,8 @@ public class LocationEntry extends AbstractAutoUpdateEntry {
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
 	public LocationEntry(int score, String before, String delimiter, String after) {
-		super(score);
-		this.before = before;
+		super(score, before, after);
 		this.delimiter = delimiter;
-		this.after = after;
 		call = 0;
 	}
 
@@ -66,7 +64,7 @@ public class LocationEntry extends AbstractAutoUpdateEntry {
 	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();
-		return before.concat(new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString()).concat(after);
+		return new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

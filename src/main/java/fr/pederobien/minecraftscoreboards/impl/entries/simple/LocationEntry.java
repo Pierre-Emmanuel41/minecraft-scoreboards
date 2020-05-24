@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
 public class LocationEntry extends AbstractEntry {
-	private String before, delimiter, after;
+	private String delimiter;
 
 	/**
 	 * Create an entry that displays the player location. The message associated to this entry is :</br>
@@ -47,15 +47,13 @@ public class LocationEntry extends AbstractEntry {
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
 	public LocationEntry(int score, String before, String delimiter, String after) {
-		super(score);
-		this.before = before;
+		super(score, before, after);
 		this.delimiter = delimiter;
-		this.after = after;
 	}
 
 	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();
-		return before.concat(new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString()).concat(after);
+		return new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
 	}
 }
