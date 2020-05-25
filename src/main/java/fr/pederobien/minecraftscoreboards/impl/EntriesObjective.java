@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -97,5 +99,27 @@ public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective 
 		scoreboard.resetScores(entry.getOldValue());
 		entry.update(getPlayer());
 		objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
+	}
+
+	/**
+	 * Convenient method to do something on each registered entry.
+	 * 
+	 * @param consumer The action to do on each registered entry.
+	 */
+	protected void action(Consumer<T> consumer) {
+		for (T entry : entries())
+			consumer.accept(entry);
+	}
+
+	/**
+	 * Convenient method to do something on each registered entry that verify the given predicate.
+	 * 
+	 * @param predicate The predicate to filter each registered entry.
+	 * @param consumer  The action to do on each registered entry.
+	 */
+	protected void action(Predicate<T> predicate, Consumer<T> consumer) {
+		for (T entry : entries())
+			if (predicate.test(entry))
+				consumer.accept(entry);
 	}
 }
