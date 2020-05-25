@@ -1,14 +1,13 @@
 package fr.pederobien.minecraftscoreboards.impl.entries.update;
 
-import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.entries.common.StatisticEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.common.EntityKilledEntry;
 
-public class EntityKilledEntry extends StatisticEntry {
+public class AutoUpdateEntityKilledEntry extends EntityKilledEntry {
 
 	/**
 	 * Create an entry updated when an entity of the given {@link EntityType} is killed.
@@ -18,8 +17,8 @@ public class EntityKilledEntry extends StatisticEntry {
 	 * @param before     The sequence of characters to be displayed before the player statistic.
 	 * @param after      The sequence of characters to be displayed after the player statistic.
 	 */
-	public EntityKilledEntry(int score, EntityType entityType, String before, String after) {
-		super(score, Statistic.KILL_ENTITY, entityType, before, after);
+	public AutoUpdateEntityKilledEntry(int score, EntityType entityType, String before, String after) {
+		super(score, entityType, before, after);
 	}
 
 	/**
@@ -29,8 +28,8 @@ public class EntityKilledEntry extends StatisticEntry {
 	 * @param entityType The type of entity used to update this entry.
 	 * @param before     The sequence of characters to be displayed before the player statistic.
 	 */
-	public EntityKilledEntry(int score, EntityType entityType, String before) {
-		super(score, Statistic.KILL_ENTITY, entityType, before);
+	public AutoUpdateEntityKilledEntry(int score, EntityType entityType, String before) {
+		super(score, entityType, before);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
