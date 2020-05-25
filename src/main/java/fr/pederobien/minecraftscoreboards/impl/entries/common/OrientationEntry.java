@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.simple;
+package fr.pederobien.minecraftscoreboards.impl.entries.common;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
