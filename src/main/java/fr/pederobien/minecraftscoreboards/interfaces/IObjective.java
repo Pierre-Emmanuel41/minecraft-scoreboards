@@ -1,6 +1,6 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
-public interface IObjective<T extends IEntry> extends ISimpleObjective, IEntriesObjective<T>, IUpdateObjective {
+public interface IObjective extends ISimpleObjective, IEntriesObjective, IUpdateObjective {
 
 	/**
 	 * Initialize each registered entry if not already initialized.

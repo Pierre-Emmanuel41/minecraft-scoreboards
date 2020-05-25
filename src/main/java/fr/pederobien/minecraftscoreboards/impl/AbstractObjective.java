@@ -9,10 +9,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public abstract class AbstractObjective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
+public abstract class AbstractObjective extends EntriesObjective implements IObjective, Listener {
 	private boolean isInitialized, isActivated;
 
 	/**
