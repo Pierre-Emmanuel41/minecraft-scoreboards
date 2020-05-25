@@ -1,17 +1,12 @@
 package fr.pederobien.minecraftscoreboards.impl.entries.update;
 
-import java.util.StringJoiner;
-
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
 
-public class AutoUpdateLocationEntry extends AbstractEntry {
-	private String delimiter;
+public class AutoUpdateLocationEntry extends LocationEntry {
 	private int call;
 
 	/**
@@ -52,14 +47,7 @@ public class AutoUpdateLocationEntry extends AbstractEntry {
 	 */
 	public AutoUpdateLocationEntry(int score, String before, String delimiter, String after) {
 		super(score, before, after);
-		this.delimiter = delimiter;
 		call = 0;
-	}
-
-	@Override
-	protected String updateCurrentValue(Player player) {
-		Location loc = player.getLocation();
-		return new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
