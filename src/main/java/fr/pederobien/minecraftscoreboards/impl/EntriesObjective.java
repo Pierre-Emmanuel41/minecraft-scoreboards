@@ -63,12 +63,14 @@ public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective 
 
 	@Override
 	public void addEntry(T entry) {
+		entry.setObjective(this);
 		entries.put(entry.getScore(), entry);
 		entriesList = Collections.unmodifiableList(new ArrayList<T>(entries.values()));
 	}
 
 	@Override
 	public void removeEntry(T entry) {
+		entry.setObjective(null);
 		entries.remove(entry.getScore());
 		entriesList = Collections.unmodifiableList(new ArrayList<T>(entries.values()));
 	}
