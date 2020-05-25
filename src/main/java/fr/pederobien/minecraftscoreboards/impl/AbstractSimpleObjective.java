@@ -10,7 +10,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public abstract class SimpleObjective implements ISimpleObjective {
+public abstract class AbstractSimpleObjective implements ISimpleObjective {
 	private String name, criteria, displayName;
 	private DisplaySlot displaySlot;
 	private Player player;
@@ -24,7 +24,7 @@ public abstract class SimpleObjective implements ISimpleObjective {
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 */
-	protected SimpleObjective(Player player, String name, String displayName) {
+	protected AbstractSimpleObjective(Player player, String name, String displayName) {
 		this(player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
@@ -36,7 +36,7 @@ public abstract class SimpleObjective implements ISimpleObjective {
 	 * @param displayName The name displayed on the given player score board.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	protected SimpleObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
+	protected AbstractSimpleObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
 		this(player, name, displayName, "dummy", displaySlot);
 	}
 
@@ -49,7 +49,7 @@ public abstract class SimpleObjective implements ISimpleObjective {
 	 * @param criteria    The criteria tracked by this objective.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	protected SimpleObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	protected AbstractSimpleObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		this.player = player;
 		this.name = name;
 		this.criteria = criteria;

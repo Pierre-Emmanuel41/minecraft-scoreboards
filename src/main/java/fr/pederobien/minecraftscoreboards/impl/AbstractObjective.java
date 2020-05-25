@@ -11,7 +11,7 @@ import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public abstract class Objective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
+public abstract class AbstractObjective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
 	private boolean isActivated;
 
 	/**
@@ -21,7 +21,7 @@ public abstract class Objective<T extends IEntry> extends EntriesObjective<T> im
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 */
-	public Objective(Player player, String name, String displayName) {
+	public AbstractObjective(Player player, String name, String displayName) {
 		super(player, name, displayName);
 	}
 
@@ -33,7 +33,7 @@ public abstract class Objective<T extends IEntry> extends EntriesObjective<T> im
 	 * @param displayName The name displayed on the given player score board.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot) {
+	public AbstractObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
 		super(player, name, displayName, displaySlot);
 	}
 
@@ -46,7 +46,7 @@ public abstract class Objective<T extends IEntry> extends EntriesObjective<T> im
 	 * @param criteria    The criteria tracked by this objective.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	public AbstractObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		super(player, name, displayName, criteria, displaySlot);
 	}
 

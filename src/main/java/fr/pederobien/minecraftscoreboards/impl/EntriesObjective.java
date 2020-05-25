@@ -15,7 +15,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
-public class EntriesObjective<T extends IEntry> extends SimpleObjective implements IEntriesObjective<T> {
+public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective implements IEntriesObjective<T> {
 	private Map<Integer, T> entries;
 	private List<T> entriesList;
 	private Scoreboard scoreboard;
