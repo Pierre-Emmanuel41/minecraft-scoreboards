@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
@@ -18,15 +17,39 @@ import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 public abstract class Objective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
 	private boolean isActivated;
 
-	public Objective(Player player, String name, String displayName, Plugin plugin) {
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 */
+	public Objective(Player player, String name, String displayName) {
 		super(player, name, displayName);
 	}
 
-	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 * @param displaySlot The slot where this objective is displayed on player screen.
+	 */
+	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot) {
 		super(player, name, displayName, displaySlot);
 	}
 
-	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 * @param criteria    The criteria tracked by this objective.
+	 * @param displaySlot The slot where this objective is displayed on player screen.
+	 */
+	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		super(player, name, displayName, criteria, displaySlot);
 	}
 
