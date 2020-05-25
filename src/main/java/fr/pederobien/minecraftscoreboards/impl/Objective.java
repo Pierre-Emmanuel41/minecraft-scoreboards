@@ -1,7 +1,5 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import java.util.function.Consumer;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -10,7 +8,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
@@ -56,9 +53,6 @@ public abstract class Objective<T extends IEntry> extends EntriesObjective<T> im
 	@Override
 	public void initialize() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		action(entry -> {
-			getObjective().get().getScore(entry.initialize(getPlayer())).setScore(entry.getScore());
-		});
 	}
 
 	@Override
@@ -69,17 +63,11 @@ public abstract class Objective<T extends IEntry> extends EntriesObjective<T> im
 	@Override
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
-		action(entry -> entry.setActivated(isActivated));
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
-	}
-
-	private void action(Consumer<IAutoUpdateEntry> consumer) {
-		for (IEntry entry : entries())
-			consumer.accept((IAutoUpdateEntry) entry);
 	}
 }
