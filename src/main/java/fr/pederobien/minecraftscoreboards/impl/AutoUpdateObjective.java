@@ -5,8 +5,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
+import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 
-public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntry> {
+public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntry> implements IAutoUpdateObjective {
 
 	/**
 	 * Create an empty objective based on the given parameters.
