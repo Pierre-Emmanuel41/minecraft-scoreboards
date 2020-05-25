@@ -22,7 +22,7 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 	 * @param displayName The name displayed on the given player score board.
 	 */
 	public AbstractObjective(Player player, String name, String displayName) {
-		super(player, name, displayName);
+		this(player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
 	public AbstractObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
-		super(player, name, displayName, displaySlot);
+		this(player, name, displayName, "dummy", displaySlot);
 	}
 
 	/**
