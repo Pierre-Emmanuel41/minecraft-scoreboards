@@ -15,41 +15,19 @@ import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public class Objective extends EntriesObjective<IAutoUpdateEntry> implements IObjective, Listener {
-	private Plugin plugin;
-	private boolean isActivated, isRegistered;
+public class Objective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
+	private boolean isActivated;
 
 	public Objective(Player player, String name, String displayName, Plugin plugin) {
 		super(player, name, displayName);
-		this.plugin = plugin;
 	}
 
 	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
 		super(player, name, displayName, displaySlot);
-		this.plugin = plugin;
 	}
 
 	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
 		super(player, name, displayName, criteria, displaySlot);
-		this.plugin = plugin;
-	}
-
-	@Override
-	public Plugin getPlugin() {
-		return plugin;
-	}
-
-	@Override
-	public void addEntry(IAutoUpdateEntry entry) {
-		super.addEntry(entry);
-		entry.setObjective(this);
-	}
-
-	@Override
-	public void removeEntry(IAutoUpdateEntry entry) {
-		super.removeEntry(entry);
-		entry.setObjective(null);
-		entry.setActivated(false);
 	}
 
 	@Override
@@ -57,10 +35,6 @@ public class Objective extends EntriesObjective<IAutoUpdateEntry> implements IOb
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
 		action(entry -> {
 			getObjective().get().getScore(entry.initialize(getPlayer())).setScore(entry.getScore());
-			if (!isRegistered) {
-				getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
-				isRegistered = true;
-			}
 		});
 	}
 

@@ -1,13 +1,6 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
-import org.bukkit.plugin.Plugin;
-
-public interface IObjective extends ISimpleObjective, IEntriesObjective<IAutoUpdateEntry> {
-
-	/**
-	 * @return The plugin used to register each entry as event listener.
-	 */
-	Plugin getPlugin();
+public interface IObjective<T extends IEntry> extends ISimpleObjective, IEntriesObjective<T> {
 
 	/**
 	 * Initialize each registered entry.
