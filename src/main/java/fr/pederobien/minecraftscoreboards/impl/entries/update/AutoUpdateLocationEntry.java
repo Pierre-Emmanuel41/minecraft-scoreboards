@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
-public class LocationEntry extends AbstractEntry {
+public class AutoUpdateLocationEntry extends AbstractEntry {
 	private String delimiter;
 	private int call;
 
@@ -23,7 +23,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the player location. See above.
 	 */
-	public LocationEntry(int score, String before) {
+	public AutoUpdateLocationEntry(int score, String before) {
 		this(score, before, " ");
 	}
 
@@ -36,7 +36,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 */
-	public LocationEntry(int score, String before, String delimiter) {
+	public AutoUpdateLocationEntry(int score, String before, String delimiter) {
 		this(score, before, delimiter, "");
 	}
 
@@ -50,7 +50,7 @@ public class LocationEntry extends AbstractEntry {
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
-	public LocationEntry(int score, String before, String delimiter, String after) {
+	public AutoUpdateLocationEntry(int score, String before, String delimiter, String after) {
 		super(score, before, after);
 		this.delimiter = delimiter;
 		call = 0;
