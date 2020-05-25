@@ -11,7 +11,6 @@ import java.util.function.Predicate;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
@@ -20,8 +19,6 @@ import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective implements IEntriesObjective<T> {
 	private Map<Integer, T> entries;
 	private List<T> entriesList;
-	private Scoreboard scoreboard;
-	private Objective objective;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -98,9 +95,9 @@ public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective 
 	private void updateEntry(IEntry entry, boolean checkScoreboard) {
 		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
-		scoreboard.resetScores(entry.getOldValue());
+		getScoreboard().get().resetScores(entry.getOldValue());
 		entry.update(getPlayer());
-		objective.getScore(entry.getCurrentValue()).setScore(entry.getScore());
+		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 
 	/**
