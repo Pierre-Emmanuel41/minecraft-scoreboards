@@ -8,14 +8,14 @@ public interface IAutoUpdateEntry extends IEntry, Listener {
 	/**
 	 * @return The objective updated by this entry.
 	 */
-	IAutoUpdateObjective getObjective();
+	IPluginObjective getObjective();
 
 	/**
 	 * Set the objective to update for this entry.
 	 * 
 	 * @param objective The objective To update.
 	 */
-	void setObjective(IAutoUpdateObjective objective);
+	void setObjective(IPluginObjective objective);
 
 	/**
 	 * Initialize this entry for the given player.

@@ -3,7 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IPluginObjective;
 
 public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements IAutoUpdateEntry {
 	private boolean isActivated;
@@ -20,12 +20,12 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	}
 
 	@Override
-	public IAutoUpdateObjective getObjective() {
-		return (IAutoUpdateObjective) super.getObjective();
+	public IPluginObjective getObjective() {
+		return (IPluginObjective) super.getObjective();
 	}
 
 	@Override
-	public void setObjective(IAutoUpdateObjective objective) {
+	public void setObjective(IPluginObjective objective) {
 		super.setObjective(objective);
 	}
 
