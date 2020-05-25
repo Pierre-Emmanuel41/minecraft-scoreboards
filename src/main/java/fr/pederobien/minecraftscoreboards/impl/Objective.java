@@ -11,7 +11,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public abstract class AbstractObjective extends EntriesObjective implements IObjective, Listener {
+public class Objective extends EntriesObjective implements IObjective, Listener {
 	private boolean isInitialized, isActivated;
 
 	/**
@@ -23,7 +23,7 @@ public abstract class AbstractObjective extends EntriesObjective implements IObj
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 */
-	public AbstractObjective(Plugin plugin, Player player, String name, String displayName) {
+	public Objective(Plugin plugin, Player player, String name, String displayName) {
 		this(plugin, player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
@@ -37,7 +37,7 @@ public abstract class AbstractObjective extends EntriesObjective implements IObj
 	 * @param displayName The name displayed on the given player score board.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public AbstractObjective(Plugin plugin, Player player, String name, String displayName, DisplaySlot displaySlot) {
+	public Objective(Plugin plugin, Player player, String name, String displayName, DisplaySlot displaySlot) {
 		this(plugin, player, name, displayName, "dummy", displaySlot);
 	}
 
@@ -52,7 +52,7 @@ public abstract class AbstractObjective extends EntriesObjective implements IObj
 	 * @param criteria    The criteria tracked by this objective.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public AbstractObjective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	public Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		super(plugin, player, name, displayName, criteria, displaySlot);
 		isInitialized = false;
 		isActivated = false;
@@ -60,7 +60,7 @@ public abstract class AbstractObjective extends EntriesObjective implements IObj
 
 	@Override
 	public final void start() {
-		onStart();
+		action(entry -> entry.setActivated(true));
 		update();
 	}
 
@@ -94,9 +94,4 @@ public abstract class AbstractObjective extends EntriesObjective implements IObj
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
 	}
-
-	/**
-	 * Because method {@link #start()} is declared final, this is the only way to start the update of this objective.
-	 */
-	protected abstract void onStart();
 }
