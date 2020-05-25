@@ -8,9 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
-public class LocationEntry extends AbstractAutoUpdateEntry {
+public class LocationEntry extends AbstractEntry {
 	private String delimiter;
 	private int call;
 

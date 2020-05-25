@@ -11,9 +11,9 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
-public class HealthEntry extends AbstractAutoUpdateEntry {
+public class HealthEntry extends AbstractEntry {
 	private EntityDamageEvent damageEvent;
 	private EntityRegainHealthEvent regainEvent;
 	private Source source;

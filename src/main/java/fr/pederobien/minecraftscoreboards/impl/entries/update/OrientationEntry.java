@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 import fr.pederobien.minecraftmanagers.EArrows;
 import fr.pederobien.minecraftmanagers.WorldManager;
-import fr.pederobien.minecraftscoreboards.impl.AbstractAutoUpdateEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
 
-public class OrientationEntry extends AbstractAutoUpdateEntry {
+public class OrientationEntry extends AbstractEntry {
 	private Block block;
 	private int call;
 
