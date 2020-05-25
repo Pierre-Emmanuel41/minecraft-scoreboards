@@ -50,11 +50,6 @@ public class HealthEntry extends AbstractAutoUpdateEntry {
 	}
 
 	@Override
-	public String onInitialize(Player player) {
-		return updateCurrentValue(player);
-	}
-
-	@Override
 	protected String updateCurrentValue(Player player) {
 		Source src = player.equals(target) ? source : Source.UNKNOWN;
 

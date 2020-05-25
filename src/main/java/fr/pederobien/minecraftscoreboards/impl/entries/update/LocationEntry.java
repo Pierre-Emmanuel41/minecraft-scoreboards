@@ -57,11 +57,6 @@ public class LocationEntry extends AbstractAutoUpdateEntry {
 	}
 
 	@Override
-	protected String onInitialize(Player player) {
-		return updateCurrentValue(player);
-	}
-
-	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();
 		return new StringJoiner(delimiter).add("" + loc.getBlockX()).add("" + loc.getBlockY()).add("" + loc.getBlockZ()).toString();
@@ -72,7 +67,7 @@ public class LocationEntry extends AbstractAutoUpdateEntry {
 		if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
 			return;
 
-		// Updating player objective each 3 calls.
+		// Updating player objective each 4 calls.
 		call++;
 		if (call > 4) {
 			update();

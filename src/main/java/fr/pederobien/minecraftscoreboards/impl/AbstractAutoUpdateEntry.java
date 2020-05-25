@@ -1,7 +1,5 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import org.bukkit.entity.Player;
-
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 
@@ -30,8 +28,8 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	}
 
 	@Override
-	public final String initialize(Player player) {
-		return internalUpdate(player, p -> onInitialize(p));
+	public final void initialize() {
+		getObjective().getPlugin().getServer().getPluginManager().registerEvents(this, getObjective().getPlugin());
 	}
 
 	@Override
@@ -72,12 +70,4 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 			}
 		}.runTaskLater(getObjective().getPlugin(), delay);
 	}
-
-	/**
-	 * Because method {@link #initialize(Player)} is declared final, this method is the only way to initialise this entry.
-	 * 
-	 * @param player The player whose objective is updated.
-	 * @return A String that represent the initial value of this entry.
-	 */
-	protected abstract String onInitialize(Player player);
 }

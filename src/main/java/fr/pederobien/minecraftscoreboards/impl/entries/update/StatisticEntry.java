@@ -103,11 +103,6 @@ public class StatisticEntry extends AbstractAutoUpdateEntry {
 	}
 
 	@Override
-	protected String onInitialize(Player player) {
-		return updateCurrentValue(player);
-	}
-
-	@Override
 	protected String updateCurrentValue(Player player) {
 		if (material == null && entityType != null)
 			return "" + player.getStatistic(statistic, entityType);

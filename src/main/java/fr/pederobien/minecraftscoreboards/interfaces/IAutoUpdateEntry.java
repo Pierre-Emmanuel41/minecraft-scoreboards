@@ -1,6 +1,5 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 public interface IAutoUpdateEntry extends IEntry, Listener {
@@ -18,13 +17,9 @@ public interface IAutoUpdateEntry extends IEntry, Listener {
 	void setObjective(IAutoUpdateObjective objective);
 
 	/**
-	 * Initialize this entry for the given player.
-	 * 
-	 * @param player The player whose objective is updated.
-	 * 
-	 * @return The current value of this entry.
+	 * Initialize this entry before starting its update.
 	 */
-	String initialize(Player player);
+	void initialize();
 
 	/**
 	 * @return True if this entry can update the objective, false otherwise.
