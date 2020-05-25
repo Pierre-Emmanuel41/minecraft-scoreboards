@@ -12,7 +12,7 @@ import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public abstract class AbstractObjective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
-	private boolean isActivated;
+	private boolean isInitialized, isActivated;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -48,12 +48,18 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 	 */
 	public AbstractObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		super(player, name, displayName, criteria, displaySlot);
+		isInitialized = false;
+		isActivated = false;
 	}
 
 	@Override
 	public final void initialize() {
+		if (isInitialized)
+			return;
+
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		onInitialize();
+		action(entry -> entry.initialize());
+		isInitialized = true;
 	}
 
 	@Override
@@ -71,9 +77,4 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
 	}
-
-	/**
-	 * Because method {@link #initialize()} is declared final, this is the only way to initialize this objective.
-	 */
-	protected abstract void onInitialize();
 }

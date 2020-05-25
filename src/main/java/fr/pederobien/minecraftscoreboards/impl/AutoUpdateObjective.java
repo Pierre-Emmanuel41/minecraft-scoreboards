@@ -7,7 +7,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 
 public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntry> {
-	private boolean isRegistered;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -43,7 +42,6 @@ public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntr
 	 */
 	public AutoUpdateObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
 		super(player, name, displayName, criteria, displaySlot, plugin);
-		isRegistered = false;
 	}
 
 	@Override
@@ -54,12 +52,5 @@ public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntr
 	@Override
 	public void stop() {
 		action(entry -> entry.setActivated(false));
-	}
-
-	@Override
-	protected final void onInitialize() {
-		if (!isRegistered)
-			action(entry -> entry.initialize());
-		isRegistered = true;
 	}
 }
