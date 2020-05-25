@@ -15,7 +15,7 @@ import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public class Objective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
+public abstract class Objective<T extends IEntry> extends EntriesObjective<T> implements IObjective<T>, Listener {
 	private boolean isActivated;
 
 	public Objective(Player player, String name, String displayName, Plugin plugin) {
