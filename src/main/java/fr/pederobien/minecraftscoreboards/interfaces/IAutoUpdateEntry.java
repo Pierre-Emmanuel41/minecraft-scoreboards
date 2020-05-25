@@ -15,18 +15,6 @@ public interface IAutoUpdateEntry extends IEntry, Listener {
 	String initialize(Player player);
 
 	/**
-	 * @return The objective updated by this entry.
-	 */
-	IObjective getObjective();
-
-	/**
-	 * Set the objective to update for this entry.
-	 * 
-	 * @param objective The objective To update.
-	 */
-	void setObjective(IObjective objective);
-
-	/**
 	 * @return True if this entry can update the objective, false otherwise.
 	 */
 	boolean isActivated();

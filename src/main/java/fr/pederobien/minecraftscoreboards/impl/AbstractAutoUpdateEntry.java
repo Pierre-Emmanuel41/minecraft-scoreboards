@@ -4,10 +4,8 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements IAutoUpdateEntry {
-	private IObjective objective;
 	private boolean isActivated;
 
 	/**
@@ -24,16 +22,6 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	@Override
 	public final String initialize(Player player) {
 		return internalUpdate(player, p -> onInitialize(p));
-	}
-
-	@Override
-	public IObjective getObjective() {
-		return objective;
-	}
-
-	@Override
-	public void setObjective(IObjective objective) {
-		this.objective = objective;
 	}
 
 	@Override

@@ -5,10 +5,12 @@ import java.util.function.Function;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public abstract class AbstractEntry implements IEntry {
 	private String oldValue, currentValue, before, after;
 	private int score;
+	private IObjective objective;
 
 	/**
 	 * Create an entry.
@@ -21,6 +23,16 @@ public abstract class AbstractEntry implements IEntry {
 		this.score = score;
 		this.before = before;
 		this.after = after;
+	}
+
+	@Override
+	public IObjective getObjective() {
+		return objective;
+	}
+
+	@Override
+	public void setObjective(IObjective objective) {
+		this.objective = objective;
 	}
 
 	@Override

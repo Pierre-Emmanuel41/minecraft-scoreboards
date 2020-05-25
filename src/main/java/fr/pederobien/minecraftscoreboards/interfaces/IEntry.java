@@ -5,6 +5,18 @@ import org.bukkit.entity.Player;
 public interface IEntry {
 
 	/**
+	 * @return The objective updated by this entry.
+	 */
+	IObjective getObjective();
+
+	/**
+	 * Set the objective to update for this entry.
+	 * 
+	 * @param objective The objective To update.
+	 */
+	void setObjective(IObjective objective);
+
+	/**
 	 * Get the old value of this entry. This value is used to clear or reset the player's objective.
 	 * 
 	 * @return The old value of this entry.
