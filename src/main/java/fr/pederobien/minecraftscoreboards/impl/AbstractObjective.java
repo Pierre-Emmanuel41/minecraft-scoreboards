@@ -51,8 +51,9 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 	}
 
 	@Override
-	public void initialize() {
+	public final void initialize() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
+		onInitialize();
 	}
 
 	@Override
@@ -70,4 +71,9 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
 	}
+
+	/**
+	 * Because method {@link #initialize()} is declared final, this is the only way to initialize this objective.
+	 */
+	protected abstract void onInitialize();
 }
