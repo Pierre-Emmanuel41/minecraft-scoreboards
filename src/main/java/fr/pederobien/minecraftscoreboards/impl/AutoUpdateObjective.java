@@ -46,12 +46,7 @@ public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntr
 	}
 
 	@Override
-	public void start() {
+	public void onStart() {
 		action(entry -> entry.setActivated(true));
-	}
-
-	@Override
-	public void stop() {
-		action(entry -> entry.setActivated(false));
 	}
 }

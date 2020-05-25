@@ -53,6 +53,17 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 	}
 
 	@Override
+	public final void start() {
+		onStart();
+		update();
+	}
+
+	@Override
+	public void stop() {
+		action(entry -> entry.setActivated(false));
+	}
+
+	@Override
 	public final void initialize() {
 		if (isInitialized)
 			return;
@@ -77,4 +88,9 @@ public abstract class AbstractObjective<T extends IEntry> extends EntriesObjecti
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
 	}
+
+	/**
+	 * Because method {@link #start()} is declared final, this is the only way to start the update of this objective.
+	 */
+	protected abstract void onStart();
 }
