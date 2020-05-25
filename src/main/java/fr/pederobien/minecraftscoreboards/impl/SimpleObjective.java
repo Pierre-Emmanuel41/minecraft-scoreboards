@@ -1,14 +1,21 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import java.util.Optional;
+
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
+import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class SimpleObjective implements ISimpleObjective {
+public abstract class SimpleObjective implements ISimpleObjective {
 	private String name, criteria, displayName;
 	private DisplaySlot displaySlot;
 	private Player player;
+	private Scoreboard scoreboard;
+	private Objective objective;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -17,7 +24,7 @@ public class SimpleObjective implements ISimpleObjective {
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 */
-	public SimpleObjective(Player player, String name, String displayName) {
+	protected SimpleObjective(Player player, String name, String displayName) {
 		this(player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
@@ -29,7 +36,7 @@ public class SimpleObjective implements ISimpleObjective {
 	 * @param displayName The name displayed on the given player score board.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public SimpleObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
+	protected SimpleObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
 		this(player, name, displayName, "dummy", displaySlot);
 	}
 
@@ -42,7 +49,7 @@ public class SimpleObjective implements ISimpleObjective {
 	 * @param criteria    The criteria tracked by this objective.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public SimpleObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	protected SimpleObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		this.player = player;
 		this.name = name;
 		this.criteria = criteria;
@@ -78,5 +85,24 @@ public class SimpleObjective implements ISimpleObjective {
 	@Override
 	public DisplaySlot getDisplaySlot() {
 		return displaySlot;
+	}
+
+	@Override
+	public void setScoreboard(Scoreboard scoreboard) {
+		this.scoreboard = scoreboard;
+		if (scoreboard == null)
+			return;
+
+		objective = ScoreboardManager.createObjective(scoreboard, getName(), getCriteria(), getDisplayName(), getDisplaySlot());
+	}
+
+	@Override
+	public Optional<Scoreboard> getScoreboard() {
+		return scoreboard == null ? Optional.empty() : Optional.of(scoreboard);
+	}
+
+	@Override
+	public Optional<Objective> getObjective() {
+		return objective == null ? Optional.empty() : Optional.of(objective);
 	}
 }

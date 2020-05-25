@@ -12,7 +12,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
-import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
@@ -75,25 +74,6 @@ public class EntriesObjective<T extends IEntry> extends SimpleObjective implemen
 	@Override
 	public List<T> entries() {
 		return entriesList;
-	}
-
-	@Override
-	public void setScoreboard(Scoreboard scoreboard) {
-		this.scoreboard = scoreboard;
-		if (scoreboard == null)
-			return;
-
-		objective = ScoreboardManager.createObjective(scoreboard, getName(), getCriteria(), getDisplayName(), getDisplaySlot());
-	}
-
-	@Override
-	public Optional<Scoreboard> getScoreboard() {
-		return scoreboard == null ? Optional.empty() : Optional.of(scoreboard);
-	}
-
-	@Override
-	public Optional<Objective> getObjective() {
-		return objective == null ? Optional.empty() : Optional.of(objective);
 	}
 
 	@Override
