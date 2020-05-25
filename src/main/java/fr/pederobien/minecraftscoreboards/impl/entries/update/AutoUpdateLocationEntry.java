@@ -46,7 +46,7 @@ public class AutoUpdateLocationEntry extends LocationEntry {
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
 	public AutoUpdateLocationEntry(int score, String before, String delimiter, String after) {
-		super(score, before, after);
+		super(score, before, delimiter, after);
 		call = 0;
 	}
 
