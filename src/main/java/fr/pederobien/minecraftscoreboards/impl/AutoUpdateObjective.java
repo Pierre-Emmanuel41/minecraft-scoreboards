@@ -57,9 +57,9 @@ public class AutoUpdateObjective extends AbstractPluginObjective<IAutoUpdateEntr
 	}
 
 	@Override
-	protected void onInitialize() {
+	protected final void onInitialize() {
 		if (!isRegistered)
-			action(entry -> getPlugin().getServer().getPluginManager().registerEvents(entry, getPlugin()));
+			action(entry -> entry.initialize());
 		isRegistered = true;
 	}
 }
