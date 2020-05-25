@@ -4,10 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IPluginObjective;
 
-public abstract class AbstractPluginObjective extends AbstractObjective<IAutoUpdateEntry> implements IPluginObjective {
+public abstract class AbstractPluginObjective<T extends IEntry> extends AbstractObjective<T> implements IPluginObjective<T> {
 	private Plugin plugin;
 
 	/**
