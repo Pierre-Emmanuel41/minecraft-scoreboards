@@ -5,9 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.common.OrientationEntry;
 
-public class AutoUpdateOrientationEntry extends LocationEntry {
+public class AutoUpdateOrientationEntry extends OrientationEntry {
 	private int call;
 
 	/**
@@ -19,7 +19,7 @@ public class AutoUpdateOrientationEntry extends LocationEntry {
 	 * @param after  The sequence of characters to be displayed after the orientation to follow.
 	 */
 	public AutoUpdateOrientationEntry(int score, String before, Block block, String after) {
-		super(score, before, after);
+		super(score, before, block, after);
 		call = 0;
 	}
 
