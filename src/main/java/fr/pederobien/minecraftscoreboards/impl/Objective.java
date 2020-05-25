@@ -12,24 +12,24 @@ import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public class AutoUpdateObjective extends EntriesObjective<IAutoUpdateEntry> implements IAutoUpdateObjective, Listener {
+public class Objective extends EntriesObjective<IAutoUpdateEntry> implements IObjective, Listener {
 	private Plugin plugin;
 	private boolean isActivated, isRegistered;
 
-	public AutoUpdateObjective(Player player, String name, String displayName, Plugin plugin) {
+	public Objective(Player player, String name, String displayName, Plugin plugin) {
 		super(player, name, displayName);
 		this.plugin = plugin;
 	}
 
-	public AutoUpdateObjective(Player player, String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
+	public Objective(Player player, String name, String displayName, DisplaySlot displaySlot, Plugin plugin) {
 		super(player, name, displayName, displaySlot);
 		this.plugin = plugin;
 	}
 
-	public AutoUpdateObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
+	public Objective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot, Plugin plugin) {
 		super(player, name, displayName, criteria, displaySlot);
 		this.plugin = plugin;
 	}

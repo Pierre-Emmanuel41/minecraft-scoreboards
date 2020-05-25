@@ -3,7 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements IAutoUpdateEntry {
 	private boolean isActivated;
@@ -60,7 +60,7 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 			public void run() {
 				update();
 			}
-		}.runTaskLater(((IAutoUpdateObjective) getObjective()).getPlugin(), delay);
+		}.runTaskLater(((IObjective) getObjective()).getPlugin(), delay);
 	}
 
 	/**
