@@ -1,9 +1,8 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
+import org.bukkit.event.Listener;
 
-public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements IAutoUpdateEntry {
+public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements Listener {
 
 	/**
 	 * Create an entry capable to update the objective when minecraft events are thrown.
@@ -14,16 +13,6 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	 */
 	protected AbstractAutoUpdateEntry(int score, String before, String after) {
 		super(score, before, after);
-	}
-
-	@Override
-	public IAutoUpdateObjective getObjective() {
-		return (IAutoUpdateObjective) super.getObjective();
-	}
-
-	@Override
-	public void setObjective(IAutoUpdateObjective objective) {
-		super.setObjective(objective);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
@@ -23,37 +24,43 @@ public class EntriesObjective<T extends IEntry> extends AbstractSimpleObjective 
 	/**
 	 * Create an empty objective based on the given parameters.
 	 * 
+	 * @param plugin      The plugin of this objective. The plugin could be useful to register its entries as event listener of to
+	 *                    create periodic entry update.
 	 * @param player      The player associated to this objective. This player is used to display its informations.
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 */
-	public EntriesObjective(Player player, String name, String displayName) {
-		this(player, name, displayName, DisplaySlot.SIDEBAR);
+	public EntriesObjective(Plugin plugin, Player player, String name, String displayName) {
+		this(plugin, player, name, displayName, DisplaySlot.SIDEBAR);
 	}
 
 	/**
 	 * Create an empty objective based on the given parameters.
 	 * 
+	 * @param plugin      The plugin of this objective. The plugin could be useful to register its entries as event listener of to
+	 *                    create periodic entry update.
 	 * @param player      The player associated to this objective. This player is used to display its informations.
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public EntriesObjective(Player player, String name, String displayName, DisplaySlot displaySlot) {
-		this(player, name, displayName, "dummy", displaySlot);
+	public EntriesObjective(Plugin plugin, Player player, String name, String displayName, DisplaySlot displaySlot) {
+		this(plugin, player, name, displayName, "dummy", displaySlot);
 	}
 
 	/**
 	 * Create an empty objective based on the given parameters.
 	 * 
+	 * @param plugin      The plugin of this objective. The plugin could be useful to register its entries as event listener of to
+	 *                    create periodic entry update.
 	 * @param player      The player associated to this objective. This player is used to display its informations.
 	 * @param name        The name of this objective.
 	 * @param displayName The name displayed on the given player score board.
 	 * @param criteria    The criteria tracked by this objective.
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
-	public EntriesObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
-		super(player, name, displayName, criteria, displaySlot);
+	public EntriesObjective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+		super(plugin, player, name, displayName, criteria, displaySlot);
 		entries = new HashMap<Integer, T>();
 		entriesList = Collections.unmodifiableList(new ArrayList<T>(entries.values()));
 	}

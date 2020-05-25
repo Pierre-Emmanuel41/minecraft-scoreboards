@@ -3,11 +3,18 @@ package fr.pederobien.minecraftscoreboards.interfaces;
 import java.util.Optional;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 public interface ISimpleObjective {
+
+	/**
+	 * The plugin of this objective. The plugin could be useful to register its entries as event listener of to create periodic entry
+	 * update.
+	 */
+	Plugin getPlugin();
 
 	/**
 	 * @return The player tracked by this objective.
