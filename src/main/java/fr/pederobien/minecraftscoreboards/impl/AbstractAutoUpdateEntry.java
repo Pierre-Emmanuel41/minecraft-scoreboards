@@ -4,7 +4,6 @@ import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 
 public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements IAutoUpdateEntry {
-	private boolean isActivated;
 
 	/**
 	 * Create an entry capable to update the objective when minecraft events are thrown.
@@ -30,18 +29,6 @@ public abstract class AbstractAutoUpdateEntry extends AbstractEntry implements I
 	@Override
 	public final void initialize() {
 		getObjective().getPlugin().getServer().getPluginManager().registerEvents(this, getObjective().getPlugin());
-	}
-
-	@Override
-	public boolean isActivated() {
-		return isActivated;
-	}
-
-	@Override
-	public void setActivated(boolean isActivated) {
-		this.isActivated = isActivated;
-		if (!isActivated())
-			getObjective().getScoreboard().get().resetScores(getCurrentValue());
 	}
 
 	/**

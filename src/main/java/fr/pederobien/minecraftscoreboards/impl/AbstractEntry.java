@@ -11,6 +11,7 @@ public abstract class AbstractEntry implements IEntry {
 	private String oldValue, currentValue, before, after;
 	private int score;
 	private ISimpleObjective objective;
+	private boolean isActivated;
 
 	/**
 	 * Create an entry.
@@ -58,6 +59,23 @@ public abstract class AbstractEntry implements IEntry {
 	@Override
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	@Override
+	public void initialize() {
+
+	}
+
+	@Override
+	public boolean isActivated() {
+		return isActivated;
+	}
+
+	@Override
+	public void setActivated(boolean isActivated) {
+		this.isActivated = isActivated;
+		if (!isActivated())
+			getObjective().getScoreboard().get().resetScores(getCurrentValue());
 	}
 
 	/**
