@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import fr.pederobien.minecraftscoreboards.impl.entries.common.StatisticEntry;
+
 public class MinedBlockEntry extends StatisticEntry {
 
 	/**

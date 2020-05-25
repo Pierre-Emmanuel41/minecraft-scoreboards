@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.common;
 
 import org.bukkit.Material;
 import org.bukkit.Statistic;

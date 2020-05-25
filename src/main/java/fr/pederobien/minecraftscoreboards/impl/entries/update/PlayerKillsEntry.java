@@ -5,6 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import fr.pederobien.minecraftscoreboards.impl.entries.common.StatisticEntry;
+
 public class PlayerKillsEntry extends StatisticEntry {
 
 	/**
