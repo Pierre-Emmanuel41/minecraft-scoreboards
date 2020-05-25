@@ -15,7 +15,7 @@ import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
-public class AutoUpdateObjective extends Objective implements IAutoUpdateObjective, Listener {
+public class AutoUpdateObjective extends EntriesObjective<IAutoUpdateEntry> implements IAutoUpdateObjective, Listener {
 	private Plugin plugin;
 	private boolean isActivated, isRegistered;
 
@@ -53,14 +53,15 @@ public class AutoUpdateObjective extends Objective implements IAutoUpdateObjecti
 	}
 
 	@Override
-	public void register() {
-		action(entry -> getPlugin().getServer().getPluginManager().registerEvents(entry, getPlugin()));
-	}
-
-	@Override
 	public void initialize() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		action(entry -> getObjective().get().getScore(entry.initialize(getPlayer())).setScore(entry.getScore()));
+		action(entry -> {
+			getObjective().get().getScore(entry.initialize(getPlayer())).setScore(entry.getScore());
+			if (!isRegistered) {
+				getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
+				isRegistered = true;
+			}
+		});
 	}
 
 	@Override
@@ -72,8 +73,6 @@ public class AutoUpdateObjective extends Objective implements IAutoUpdateObjecti
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
 		action(entry -> entry.setActivated(isActivated));
-		if (!isRegistered)
-			getPlugin().getServer().getPluginManager().registerEvents(this, getPlugin());
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

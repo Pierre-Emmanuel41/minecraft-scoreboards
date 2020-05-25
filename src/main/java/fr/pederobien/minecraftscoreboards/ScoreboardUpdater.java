@@ -65,7 +65,6 @@ public class ScoreboardUpdater extends ScoreboardManager {
 
 	public static void register(IAutoUpdateObjective objective) {
 		AUTO_UPDATE_OBJECTIVES.add(objective);
-		objective.register();
 		if (isRunning) {
 			objective.initialize();
 			objective.setActivated(true);
