@@ -113,4 +113,31 @@ public abstract class AbstractEntry implements IEntry {
 	protected String getAfter() {
 		return after;
 	}
+
+	/**
+	 * Update the objective to which this entry is attached. If the objective is null or this entry is not activated, nothing happen.
+	 * Is arrives that when a player is joining the server or respawning, the objective is not updated. An other way to update it is
+	 * to use {@link #updateLater(long)}.
+	 */
+	protected void update() {
+		if (getObjective() == null || !isActivated())
+			return;
+
+		getObjective().update(this);
+	}
+
+	/**
+	 * Update the objective after the given server ticks.
+	 * 
+	 * @param delay The number of server ticks to wait before updating the objective.
+	 */
+	protected void updateLater(long delay) {
+		new MinecraftRunnable() {
+
+			@Override
+			public void run() {
+				update();
+			}
+		}.runTaskLater(getObjective().getPlugin(), delay);
+	}
 }
