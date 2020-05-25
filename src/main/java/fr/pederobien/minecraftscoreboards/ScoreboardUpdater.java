@@ -9,7 +9,8 @@ import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.impl.ScoreboardUpdate;
 import fr.pederobien.minecraftscoreboards.interfaces.IAutoUpdateObjective;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
 
 public class ScoreboardUpdater extends ScoreboardManager {
@@ -23,7 +24,7 @@ public class ScoreboardUpdater extends ScoreboardManager {
 	 * @param plugin    the reference to the plugin scheduling task.
 	 * @param objective The objective to update.
 	 */
-	public static IScoreboardUpdate register(Plugin plugin, IObjective objective) {
+	public static IScoreboardUpdate register(Plugin plugin, IEntriesObjective<IEntry> objective) {
 		return register(plugin, objective, Long.MIN_VALUE, Long.MIN_VALUE);
 	}
 
@@ -34,7 +35,7 @@ public class ScoreboardUpdater extends ScoreboardManager {
 	 * @param objective The objective to update.
 	 * @param delay     The number of ticks to wait before running the task.
 	 */
-	public static IScoreboardUpdate register(Plugin plugin, IObjective objective, long delay) {
+	public static IScoreboardUpdate register(Plugin plugin, IEntriesObjective<IEntry> objective, long delay) {
 		return register(plugin, objective, Long.MIN_VALUE, Long.MIN_VALUE);
 	}
 
@@ -46,7 +47,7 @@ public class ScoreboardUpdater extends ScoreboardManager {
 	 * @param delay     The number of ticks to wait before running the task.
 	 * @param period    the number of ticks to wait between two updates.
 	 */
-	public static IScoreboardUpdate register(Plugin plugin, IObjective objective, long delay, long period) {
+	public static IScoreboardUpdate register(Plugin plugin, IEntriesObjective<IEntry> objective, long delay, long period) {
 		IScoreboardUpdate update = new ScoreboardUpdate(plugin, objective, delay, period);
 		register(update);
 		return update;

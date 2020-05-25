@@ -6,13 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
+import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
+import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public abstract class AbstractScoreboardUpdate extends MinecraftRunnable implements IScoreboardUpdate, Listener {
 	private Plugin plugin;
-	private IObjective objective;
+	private IEntriesObjective<IEntry> objective;
 	private long delay, period;
 	private boolean isRegistered, isRunning;
 
@@ -26,7 +27,7 @@ public abstract class AbstractScoreboardUpdate extends MinecraftRunnable impleme
 	 * @param delay     The number of ticks to wait before running the task.
 	 * @param period    the number of ticks to wait between two updates.
 	 */
-	protected AbstractScoreboardUpdate(Plugin plugin, IObjective objective, long delay, long period) {
+	protected AbstractScoreboardUpdate(Plugin plugin, IEntriesObjective<IEntry> objective, long delay, long period) {
 		this.plugin = plugin;
 		this.objective = objective;
 		this.delay = delay;
@@ -41,7 +42,7 @@ public abstract class AbstractScoreboardUpdate extends MinecraftRunnable impleme
 	}
 
 	@Override
-	public IObjective getObjective() {
+	public ISimpleObjective getObjective() {
 		return objective;
 	}
 

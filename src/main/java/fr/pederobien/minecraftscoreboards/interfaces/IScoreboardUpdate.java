@@ -15,7 +15,7 @@ public interface IScoreboardUpdate {
 	/**
 	 * @return The objective to update.
 	 */
-	IObjective getObjective();
+	ISimpleObjective getObjective();
 
 	/**
 	 * @return The number of ticks to wait before running the task.

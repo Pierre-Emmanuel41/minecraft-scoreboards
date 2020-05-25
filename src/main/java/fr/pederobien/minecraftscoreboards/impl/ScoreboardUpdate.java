@@ -4,7 +4,8 @@ import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.exceptions.ObjectiveNotAttachedException;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IScoreboardUpdate;
 
 public class ScoreboardUpdate extends AbstractScoreboardUpdate implements IScoreboardUpdate {
@@ -19,7 +20,7 @@ public class ScoreboardUpdate extends AbstractScoreboardUpdate implements IScore
 	 * @param delay     The number of ticks to wait before running the task.
 	 * @param period    the number of ticks to wait between two updates.
 	 */
-	public ScoreboardUpdate(Plugin plugin, IObjective objective, long delay, long period) {
+	public ScoreboardUpdate(Plugin plugin, IEntriesObjective<IEntry> objective, long delay, long period) {
 		super(plugin, objective, delay, period);
 	}
 

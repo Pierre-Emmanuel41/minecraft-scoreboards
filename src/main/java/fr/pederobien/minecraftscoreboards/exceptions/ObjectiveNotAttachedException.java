@@ -1,19 +1,19 @@
 package fr.pederobien.minecraftscoreboards.exceptions;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class ObjectiveNotAttachedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
-	private IObjective objective;
+	private ISimpleObjective objective;
 
-	public ObjectiveNotAttachedException(IObjective objective) {
+	public ObjectiveNotAttachedException(ISimpleObjective objective) {
 		super("The objective " + objective.getName() + " is not attached to a scoreboard");
 	}
 
 	/**
 	 * @return The not registered objective.
 	 */
-	public IObjective getObjective() {
+	public ISimpleObjective getObjective() {
 		return objective;
 	}
 }
