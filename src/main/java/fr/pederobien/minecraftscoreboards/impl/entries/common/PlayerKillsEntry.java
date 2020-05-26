@@ -1,11 +1,6 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.common;
 
 import org.bukkit.Statistic;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.PlayerDeathEvent;
-
-import fr.pederobien.minecraftscoreboards.impl.entries.common.StatisticEntry;
 
 public class PlayerKillsEntry extends StatisticEntry {
 
@@ -28,12 +23,5 @@ public class PlayerKillsEntry extends StatisticEntry {
 	 */
 	public PlayerKillsEntry(int score, String before, String after) {
 		super(score, Statistic.PLAYER_KILLS, before, after);
-	}
-
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onPlayerDeathEvent(PlayerDeathEvent event) {
-		/*
-		 * if (event.getEntity().getKiller().getName().equals(getObjective().getPlayer().getName())) return;
-		 */
 	}
 }
