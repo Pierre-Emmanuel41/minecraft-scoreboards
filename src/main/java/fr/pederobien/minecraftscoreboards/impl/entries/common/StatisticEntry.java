@@ -103,6 +103,11 @@ public class StatisticEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected String updateCurrentValue(Player player) {
 		if (material == null && entityType != null)
 			return "" + player.getStatistic(statistic, entityType);

@@ -37,6 +37,11 @@ public class TeamEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected String updateCurrentValue(Player player) {
 		Optional<Team> optTeam = TeamManager.getTeam(player);
 		return !optTeam.isPresent() ? "?" : colored ? optTeam.get().getColor() + optTeam.get().getName() + ChatColor.RESET : optTeam.get().getName();

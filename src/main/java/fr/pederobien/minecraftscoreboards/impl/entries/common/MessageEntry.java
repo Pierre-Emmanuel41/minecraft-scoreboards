@@ -20,6 +20,11 @@ public class MessageEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected final String updateCurrentValue(Player player) {
 		return entry;
 	}

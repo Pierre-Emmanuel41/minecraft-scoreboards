@@ -50,6 +50,11 @@ public class HealthEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected String updateCurrentValue(Player player) {
 		Source src = player.equals(target) ? source : Source.UNKNOWN;
 

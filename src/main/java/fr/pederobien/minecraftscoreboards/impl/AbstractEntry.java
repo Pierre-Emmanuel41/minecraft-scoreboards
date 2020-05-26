@@ -62,11 +62,6 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
-	public void initialize() {
-		getObjective().getPlugin().getServer().getPluginManager().registerEvents(this, getObjective().getPlugin());
-	}
-
-	@Override
 	public boolean isActivated() {
 		return isActivated;
 	}

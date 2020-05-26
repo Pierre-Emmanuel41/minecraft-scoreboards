@@ -34,6 +34,11 @@ public class OrientationEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected String updateCurrentValue(Player player) {
 		return EArrows.getArrow(WorldManager.getYaw(player, block.getLocation())).getUnicode();
 	}

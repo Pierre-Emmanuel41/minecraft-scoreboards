@@ -38,6 +38,11 @@ public class HealthEntry extends AbstractEntry {
 	}
 
 	@Override
+	public void initialize() {
+
+	}
+
+	@Override
 	protected String updateCurrentValue(Player player) {
 		return format.format(player.getHealth()) + getAfter(player);
 	}
