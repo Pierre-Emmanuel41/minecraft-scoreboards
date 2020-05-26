@@ -1,25 +1,39 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public abstract class AbstractEntryUpdater implements IEntry {
+	private Plugin plugin;
+	private ISimpleObjective objective;
 	private IEntry source;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
 	 * 
-	 * @param source The source tracked by this updater.
+	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
+	 *                  create periodic entry update.
+	 * @param objective The objective associated to the source entry.
+	 * @param source    The source tracked by this updater.
 	 */
-	protected AbstractEntryUpdater(IEntry source) {
+	protected AbstractEntryUpdater(Plugin plugin, ISimpleObjective objective, IEntry source) {
+		this.plugin = plugin;
+		this.objective = objective;
 		this.source = source;
 	}
 
-	@Override
+	/**
+	 * @return The plugin associated to this updater.
+	 */
+	public Plugin getPlugin() {
+		return plugin;
+	}
+
 	public ISimpleObjective getObjective() {
-		return source.getObjective();
+		return objective;
 	}
 
 	@Override
@@ -66,7 +80,7 @@ public abstract class AbstractEntryUpdater implements IEntry {
 	 * Update the objective associated to the source entry for the source entry.
 	 */
 	protected void update() {
-		source.getObjective().update(source);
+		getObjective().update(source);
 	}
 
 	/**
