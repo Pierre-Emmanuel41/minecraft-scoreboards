@@ -1,9 +1,8 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
-public interface IEntry extends Listener {
+public interface IEntry {
 
 	/**
 	 * @return The objective updated by this entry.
