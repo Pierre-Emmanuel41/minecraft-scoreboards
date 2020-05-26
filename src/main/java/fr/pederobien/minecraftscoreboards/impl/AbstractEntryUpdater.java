@@ -6,10 +6,10 @@ import org.bukkit.plugin.Plugin;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public abstract class AbstractEntryUpdater implements IEntry {
+public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	private Plugin plugin;
 	private ISimpleObjective objective;
-	private IEntry source;
+	private T source;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
@@ -19,7 +19,7 @@ public abstract class AbstractEntryUpdater implements IEntry {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected AbstractEntryUpdater(Plugin plugin, ISimpleObjective objective, IEntry source) {
+	protected AbstractEntryUpdater(Plugin plugin, ISimpleObjective objective, T source) {
 		this.plugin = plugin;
 		this.objective = objective;
 		this.source = source;
@@ -81,7 +81,7 @@ public abstract class AbstractEntryUpdater implements IEntry {
 	/**
 	 * @return The source entry updated by this updater.
 	 */
-	protected IEntry getSource() {
+	protected T getSource() {
 		return source;
 	}
 }

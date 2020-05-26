@@ -5,7 +5,7 @@ import org.bukkit.plugin.Plugin;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class PeriodicUpdater extends AbstractEntryUpdater {
+public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	private InternalUpdater updater;
 
 	/**
@@ -16,7 +16,7 @@ public class PeriodicUpdater extends AbstractEntryUpdater {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, IEntry source, long delay, long period) {
+	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, T source, long delay, long period) {
 		super(plugin, objective, source);
 		updater = new InternalUpdater(delay, period);
 	}
