@@ -23,6 +23,31 @@ public class PlayerKillsAutoUpdater extends AutoUpdater<PlayerKillsEntry> {
 		super(plugin, objective, source);
 	}
 
+	/**
+	 * Create an entry that is updated when a player kills another player.
+	 * 
+	 * @param plugin    The plugin to register this entry as event listener.
+	 * @param objective The objective associated to the source entry.
+	 * @param score     The line number of this entry.
+	 * @param before    The sequence of characters to be displayed before the player kill number.
+	 */
+	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before) {
+		this(plugin, objective, new PlayerKillsEntry(score, before));
+	}
+
+	/**
+	 * Create an entry that is updated when a player kills another player.
+	 * 
+	 * @param plugin    The plugin to register this entry as event listener.
+	 * @param objective The objective associated to the source entry.
+	 * @param score     The line number of this entry.
+	 * @param before    The sequence of characters to be displayed before the player kill number.
+	 * @param after     The sequence of characters to be displayed after the player kill number.
+	 */
+	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, String after) {
+		this(plugin, objective, new PlayerKillsEntry(score, before, after));
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerDeathEvent(PlayerDeathEvent event) {
 		if (event.getEntity().getKiller().equals(getObjective().getPlayer()))

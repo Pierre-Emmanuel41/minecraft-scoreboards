@@ -1,5 +1,6 @@
 package fr.pederobien.minecraftscoreboards.impl.entries.update;
 
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -23,6 +24,32 @@ public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, OrientationEntry source) {
 		super(plugin, objective, source);
 		call = 0;
+	}
+
+	/**
+	 * Create an entry that displays the orientation to follow to reach the given block.
+	 * 
+	 * @param plugin    The plugin to register this entry as event listener.
+	 * @param objective The objective associated to the source entry.
+	 * @param score     The line number of this entry.
+	 * @param before    The sequence of characters to be displayed before the orientation to follow.
+	 * @param block     The target block.
+	 */
+	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, Block block) {
+		this(plugin, objective, new OrientationEntry(score, before, block));
+	}
+
+	/**
+	 * Create an entry that displays the orientation to follow to reach the given block.
+	 * 
+	 * @param plugin    The plugin to register this entry as event listener.
+	 * @param objective The objective associated to the source entry.
+	 * @param score     The line number of this entry.
+	 * @param before    The sequence of characters to be displayed before the orientation to follow.
+	 * @param block     The target block.
+	 */
+	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, Block block, String after) {
+		this(plugin, objective, new OrientationEntry(score, before, block, after));
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

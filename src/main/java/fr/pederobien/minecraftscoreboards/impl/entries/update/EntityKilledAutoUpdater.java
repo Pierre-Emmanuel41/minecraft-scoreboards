@@ -25,6 +25,33 @@ public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {
 		super(plugin, objective, source);
 	}
 
+	/**
+	 * Create an entry updated when an entity of the given {@link EntityType} is killed.
+	 * 
+	 * @param plugin     The plugin to register this entry as event listener.
+	 * @param objective  The objective associated to the source entry.
+	 * @param score      The line number of this entry.
+	 * @param entityType The type of entity used to update this entry.
+	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 * @param after      The sequence of characters to be displayed after the player statistic.
+	 */
+	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, EntityType entityType, String before, String after) {
+		this(plugin, objective, new EntityKilledEntry(score, entityType, before, after));
+	}
+
+	/**
+	 * Create an entry updated when an entity of the given {@link EntityType} is killed.
+	 * 
+	 * @param plugin     The plugin to register this entry as event listener.
+	 * @param objective  The objective associated to the source entry.
+	 * @param score      The line number of this entry.
+	 * @param entityType The type of entity used to update this entry.
+	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 */
+	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, EntityType entityType, String before) {
+		this(plugin, objective, new EntityKilledEntry(score, entityType, before));
+	}
+
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDeathEvent(EntityDeathEvent event) {
 		if (!getSource().getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null
