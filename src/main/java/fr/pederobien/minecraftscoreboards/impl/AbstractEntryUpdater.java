@@ -37,11 +37,6 @@ public abstract class AbstractEntryUpdater implements IEntry {
 	}
 
 	@Override
-	public void setObjective(ISimpleObjective objective) {
-		source.setObjective(objective);
-	}
-
-	@Override
 	public String getOldValue() {
 		return source.getOldValue();
 	}

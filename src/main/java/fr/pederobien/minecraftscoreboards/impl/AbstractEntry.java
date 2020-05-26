@@ -5,12 +5,10 @@ import java.util.function.Function;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public abstract class AbstractEntry implements IEntry {
 	private String oldValue, currentValue, before, after;
 	private int score;
-	private ISimpleObjective objective;
 	private boolean isActivated;
 
 	/**
@@ -24,16 +22,6 @@ public abstract class AbstractEntry implements IEntry {
 		this.score = score;
 		this.before = before;
 		this.after = after;
-	}
-
-	@Override
-	public ISimpleObjective getObjective() {
-		return objective;
-	}
-
-	@Override
-	public void setObjective(ISimpleObjective objective) {
-		this.objective = objective;
 	}
 
 	@Override
@@ -69,8 +57,6 @@ public abstract class AbstractEntry implements IEntry {
 	@Override
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
-		if (!isActivated())
-			getObjective().getScoreboard().get().resetScores(getCurrentValue());
 	}
 
 	/**

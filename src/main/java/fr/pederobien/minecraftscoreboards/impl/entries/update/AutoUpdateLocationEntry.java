@@ -52,13 +52,10 @@ public class AutoUpdateLocationEntry extends LocationEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
-		if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
-			return;
-
-		// Updating player objective each 4 calls.
-		call++;
-		if (call > 4) {
-			call = 0;
-		}
+		/*
+		 * if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName())) return;
+		 * 
+		 * // Updating player objective each 4 calls. call++; if (call > 4) { call = 0; }
+		 */
 	}
 }

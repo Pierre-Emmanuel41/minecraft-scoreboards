@@ -34,7 +34,9 @@ public class AutoUpdateEntityKilledEntry extends EntityKilledEntry {
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityDeathEvent(EntityDeathEvent event) {
-		if (!getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null || !event.getEntity().getKiller().equals(getObjective().getPlayer()))
-			return;
+		/*
+		 * if (!getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null ||
+		 * !event.getEntity().getKiller().equals(getObjective().getPlayer())) return;
+		 */
 	}
 }
