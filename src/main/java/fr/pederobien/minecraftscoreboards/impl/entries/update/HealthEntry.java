@@ -80,7 +80,6 @@ public class HealthEntry extends AbstractEntry {
 		if (!(event.getEntity() instanceof Player))
 			return;
 		updateEvent(Source.DEATH, (Player) event.getEntity());
-		update();
 		source = Source.UNKNOWN;
 	}
 
@@ -90,7 +89,6 @@ public class HealthEntry extends AbstractEntry {
 			return;
 		updateEvent(Source.DAMAGE, (Player) event.getEntity());
 		damageEvent = event;
-		update();
 		source = Source.UNKNOWN;
 	}
 
@@ -100,14 +98,12 @@ public class HealthEntry extends AbstractEntry {
 			return;
 		updateEvent(Source.REGAIN, (Player) event.getEntity());
 		regainEvent = event;
-		update();
 		source = Source.UNKNOWN;
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
 		target = event.getPlayer();
-		updateLater(20);
 	}
 
 	private void updateEvent(Source source, Player target) {

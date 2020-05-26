@@ -33,6 +33,6 @@ public class PlayerKillsEntry extends StatisticEntry {
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerDeathEvent(PlayerDeathEvent event) {
 		if (event.getEntity().getKiller().getName().equals(getObjective().getPlayer().getName()))
-			update();
+			return;
 	}
 }

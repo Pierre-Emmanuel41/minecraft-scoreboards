@@ -36,7 +36,5 @@ public class AutoUpdateEntityKilledEntry extends EntityKilledEntry {
 	public void onEntityDeathEvent(EntityDeathEvent event) {
 		if (!getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null || !event.getEntity().getKiller().equals(getObjective().getPlayer()))
 			return;
-
-		update();
 	}
 }

@@ -42,7 +42,6 @@ public class AutoUpdateOrientationEntry extends OrientationEntry {
 		// Updating player objective each 2 calls.
 		call++;
 		if (call > 2) {
-			update();
 			call = 0;
 		}
 	}

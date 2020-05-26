@@ -58,7 +58,6 @@ public class AutoUpdateLocationEntry extends LocationEntry {
 		// Updating player objective each 4 calls.
 		call++;
 		if (call > 4) {
-			update();
 			call = 0;
 		}
 	}
