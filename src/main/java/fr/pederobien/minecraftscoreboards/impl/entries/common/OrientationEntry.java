@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftmanagers.EArrows;
 import fr.pederobien.minecraftmanagers.WorldManager;
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class OrientationEntry extends AbstractEntry {
+public class OrientationEntry extends AbstractSimpleEntry {
 	private Block block;
 
 	/**
@@ -31,11 +31,6 @@ public class OrientationEntry extends AbstractEntry {
 	public OrientationEntry(int score, String before, Block block, String after) {
 		super(score, before, after);
 		this.block = block;
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override

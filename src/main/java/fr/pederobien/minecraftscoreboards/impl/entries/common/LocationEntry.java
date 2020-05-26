@@ -5,9 +5,9 @@ import java.util.StringJoiner;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class LocationEntry extends AbstractEntry {
+public class LocationEntry extends AbstractSimpleEntry {
 	private String delimiter;
 
 	/**
@@ -49,11 +49,6 @@ public class LocationEntry extends AbstractEntry {
 	public LocationEntry(int score, String before, String delimiter, String after) {
 		super(score, before, after);
 		this.delimiter = delimiter;
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override

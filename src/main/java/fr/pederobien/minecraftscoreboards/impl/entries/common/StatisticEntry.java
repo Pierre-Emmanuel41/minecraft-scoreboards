@@ -5,9 +5,9 @@ import org.bukkit.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class StatisticEntry extends AbstractEntry {
+public class StatisticEntry extends AbstractSimpleEntry {
 	private Statistic statistic;
 	private EntityType entityType;
 	private Material material;
@@ -100,11 +100,6 @@ public class StatisticEntry extends AbstractEntry {
 	 */
 	public StatisticEntry(int score, Statistic statistic, Material material, String before) {
 		this(score, statistic, null, material, before, "");
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override

@@ -5,9 +5,9 @@ import java.text.DecimalFormat;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class HealthEntry extends AbstractEntry {
+public class HealthEntry extends AbstractSimpleEntry {
 	private DecimalFormat format;
 
 	/**
@@ -35,11 +35,6 @@ public class HealthEntry extends AbstractEntry {
 	public HealthEntry(int score, String before, String after, String pattern) {
 		super(score, before, after);
 		format = new DecimalFormat(pattern);
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override

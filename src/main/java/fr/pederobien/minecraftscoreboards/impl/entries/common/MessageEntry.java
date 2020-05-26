@@ -2,9 +2,9 @@ package fr.pederobien.minecraftscoreboards.impl.entries.common;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class MessageEntry extends AbstractEntry {
+public class MessageEntry extends AbstractSimpleEntry {
 	private String entry;
 
 	/**
@@ -17,11 +17,6 @@ public class MessageEntry extends AbstractEntry {
 	public MessageEntry(int score, String entry) {
 		super(score, "", "");
 		this.entry = entry;
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override

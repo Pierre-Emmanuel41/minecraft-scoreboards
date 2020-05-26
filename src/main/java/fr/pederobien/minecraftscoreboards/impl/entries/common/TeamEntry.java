@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
 
 import fr.pederobien.minecraftmanagers.TeamManager;
-import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
+import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 
-public class TeamEntry extends AbstractEntry {
+public class TeamEntry extends AbstractSimpleEntry {
 	private boolean colored;
 
 	/**
@@ -34,11 +34,6 @@ public class TeamEntry extends AbstractEntry {
 	 */
 	public TeamEntry(int score, String before, boolean colored) {
 		this(score, before, "", colored);
-	}
-
-	@Override
-	public void initialize() {
-
 	}
 
 	@Override
