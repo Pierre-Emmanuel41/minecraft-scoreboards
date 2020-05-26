@@ -9,7 +9,7 @@ import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
 import fr.pederobien.minecraftscoreboards.impl.entries.common.OrientationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class AutoUpdateOrientationEntry extends AutoUpdater<OrientationEntry> {
+public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 	private int call;
 
 	/**
@@ -20,7 +20,7 @@ public class AutoUpdateOrientationEntry extends AutoUpdater<OrientationEntry> {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	public AutoUpdateOrientationEntry(Plugin plugin, ISimpleObjective objective, OrientationEntry source) {
+	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, OrientationEntry source) {
 		super(plugin, objective, source);
 		call = 0;
 	}

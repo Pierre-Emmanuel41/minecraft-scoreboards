@@ -9,7 +9,7 @@ import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
 import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class AutoUpdateLocationEntry extends AutoUpdater<LocationEntry> {
+public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
 	private int call;
 
 	/**
@@ -20,7 +20,7 @@ public class AutoUpdateLocationEntry extends AutoUpdater<LocationEntry> {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	public AutoUpdateLocationEntry(Plugin plugin, ISimpleObjective objective, LocationEntry source) {
+	public LocationAutoUpdater(Plugin plugin, ISimpleObjective objective, LocationEntry source) {
 		super(plugin, objective, source);
 		call = 0;
 	}

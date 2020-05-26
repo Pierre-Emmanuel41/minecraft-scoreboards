@@ -10,7 +10,7 @@ import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
 import fr.pederobien.minecraftscoreboards.impl.entries.common.EntityKilledEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class AutoUpdateEntityKilledEntry extends AutoUpdater<EntityKilledEntry> {
+public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link EntityDeathEvent}
@@ -21,7 +21,7 @@ public class AutoUpdateEntityKilledEntry extends AutoUpdater<EntityKilledEntry> 
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	public AutoUpdateEntityKilledEntry(Plugin plugin, ISimpleObjective objective, EntityKilledEntry source) {
+	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, EntityKilledEntry source) {
 		super(plugin, objective, source);
 	}
 

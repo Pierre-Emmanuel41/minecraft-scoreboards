@@ -9,7 +9,7 @@ import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
 import fr.pederobien.minecraftscoreboards.impl.entries.common.MinedBlockEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class AutoUpdateMinedBlockEntry extends AutoUpdater<MinedBlockEntry> {
+public class MinedBlockAutoUpdater extends AutoUpdater<MinedBlockEntry> {
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link BlockBreakEvent}
@@ -19,7 +19,7 @@ public class AutoUpdateMinedBlockEntry extends AutoUpdater<MinedBlockEntry> {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	public AutoUpdateMinedBlockEntry(Plugin plugin, ISimpleObjective objective, MinedBlockEntry source) {
+	public MinedBlockAutoUpdater(Plugin plugin, ISimpleObjective objective, MinedBlockEntry source) {
 		super(plugin, objective, source);
 	}
 
