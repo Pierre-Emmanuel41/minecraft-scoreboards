@@ -6,7 +6,7 @@ import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
 import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry> {
+public class LocationPeriodicUpdater extends PeriodicUpdater<LocationEntry> {
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
@@ -18,7 +18,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param period    Represents the number of server ticks between two objective updates.
 	 * @param source    The source tracked by this updater.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, LocationEntry source) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, LocationEntry source) {
 		super(plugin, objective, delay, period, source);
 	}
 
@@ -31,7 +31,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param period    Represents the number of server ticks between two objective updates.
 	 * @param source    The source tracked by this updater.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, LocationEntry source) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, LocationEntry source) {
 		this(plugin, objective, 0, period, source);
 	}
 
@@ -49,7 +49,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param score     The line number of this entry.
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before) {
 		this(plugin, objective, delay, period, new LocationEntry(score, before));
 	}
 
@@ -66,7 +66,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param score     The line number of this entry.
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before) {
 		this(plugin, objective, 0, period, new LocationEntry(score, before));
 	}
 
@@ -84,7 +84,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before, String delimiter) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before, String delimiter) {
 		this(plugin, objective, delay, period, new LocationEntry(score, before, delimiter));
 	}
 
@@ -101,7 +101,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param before    The sequence of characters to be displayed before the player location. See above.
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before, String delimiter) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before, String delimiter) {
 		this(plugin, objective, 0, period, new LocationEntry(score, before, delimiter));
 	}
 
@@ -120,7 +120,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before, String delimiter, String after) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, int score, String before, String delimiter, String after) {
 		this(plugin, objective, delay, period, new LocationEntry(score, before, delimiter, after));
 	}
 
@@ -138,7 +138,7 @@ public class LocationEntryPeriodicUpdater extends PeriodicUpdater<LocationEntry>
 	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
 	 * @param after     The sequence of characters to be displayed after the player location. See above.
 	 */
-	public LocationEntryPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before, String delimiter, String after) {
+	public LocationPeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, int score, String before, String delimiter, String after) {
 		this(plugin, objective, 0, period, new LocationEntry(score, before, delimiter, after));
 	}
 }
