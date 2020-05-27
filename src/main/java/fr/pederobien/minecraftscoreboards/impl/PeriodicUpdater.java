@@ -23,6 +23,19 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 		updater = new InternalUpdater(delay, period);
 	}
 
+	/**
+	 * Create an entry updater. This entry is responsible to update the source entry.
+	 * 
+	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
+	 *                  create periodic entry update.
+	 * @param objective The objective associated to the source entry.
+	 * @param period    Represents the number of server ticks between two objective updates.
+	 * @param source    The source tracked by this updater.
+	 */
+	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, T source) {
+		this(plugin, objective, 0, period, source);
+	}
+
 	@Override
 	public void initialize() {
 		updater.schedule();
