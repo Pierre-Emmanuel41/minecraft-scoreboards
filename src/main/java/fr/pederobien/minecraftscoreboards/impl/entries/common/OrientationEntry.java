@@ -27,6 +27,7 @@ public class OrientationEntry extends AbstractSimpleEntry {
 	 * @param score  The line number of this entry.
 	 * @param before The sequence of characters to be displayed before the orientation to follow.
 	 * @param block  The target block.
+	 * @param before The sequence of characters to be displayed after the orientation to follow.
 	 */
 	public OrientationEntry(int score, String before, Block block, String after) {
 		super(score, before, after);
