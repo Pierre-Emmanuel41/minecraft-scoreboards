@@ -3,6 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import fr.pederobien.minecraftmanagers.BukkitManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
@@ -10,6 +11,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	private Plugin plugin;
 	private ISimpleObjective objective;
 	private T source;
+	private Runnable update;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
@@ -23,6 +25,8 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 		this.plugin = plugin;
 		this.objective = objective;
 		this.source = source;
+
+		update = new InternalRunnable();
 	}
 
 	/**
@@ -75,7 +79,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	 * Update the objective associated to the source entry for the source entry.
 	 */
 	protected void update() {
-		getObjective().update(source);
+		BukkitManager.getScheduler().runTaskLater(getPlugin(), update, 2);
 	}
 
 	/**
@@ -83,5 +87,13 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	 */
 	protected T getSource() {
 		return source;
+	}
+
+	private class InternalRunnable implements Runnable {
+
+		@Override
+		public void run() {
+			getObjective().update(source);
+		}
 	}
 }

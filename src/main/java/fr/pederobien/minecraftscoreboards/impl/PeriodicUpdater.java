@@ -2,11 +2,13 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.plugin.Plugin;
 
+import fr.pederobien.minecraftmanagers.BukkitManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
-	private InternalUpdater updater;
+	private long period, delay;
+	private Runnable update;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
@@ -20,7 +22,9 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	 */
 	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, T source) {
 		super(plugin, objective, source);
-		updater = new InternalUpdater(delay, period);
+		this.delay = delay;
+		this.period = period;
+		update = new InternalUpdater();
 	}
 
 	/**
@@ -38,29 +42,19 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 
 	@Override
 	public void initialize() {
-		updater.schedule();
+		if (delay == 0 && period == 0)
+			BukkitManager.getScheduler().runTask(getPlugin(), update);
+		if (delay != 0 && period == 0)
+			BukkitManager.getScheduler().runTaskLater(getPlugin(), update, delay);
+		else
+			BukkitManager.getScheduler().runTaskTimer(getPlugin(), update, delay, period);
 	}
 
-	private class InternalUpdater extends MinecraftRunnable {
-		private long delay, period;
-
-		public InternalUpdater(long delay, long period) {
-			this.delay = delay;
-			this.period = period;
-		}
+	private class InternalUpdater implements Runnable {
 
 		@Override
 		public void run() {
 			update();
-		}
-
-		public void schedule() {
-			if (delay == 0 && period == 0)
-				runTask(getPlugin());
-			if (delay != 0 && period == 0)
-				runTaskLater(getPlugin(), delay);
-			else
-				runTaskTimer(getPlugin(), delay, period);
 		}
 	}
 }
