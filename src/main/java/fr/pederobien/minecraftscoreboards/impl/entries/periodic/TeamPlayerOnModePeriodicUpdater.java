@@ -5,7 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Team;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.TeamPlayerOnModeEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.TeamPlayerOnModeEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class TeamPlayerOnModePeriodicUpdater extends PeriodicUpdater<TeamPlayerOnModeEntry> {

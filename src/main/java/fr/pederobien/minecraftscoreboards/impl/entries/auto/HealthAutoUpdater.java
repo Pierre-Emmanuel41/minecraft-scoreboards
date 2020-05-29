@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.auto;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.HealthEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.HealthEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class HealthAutoUpdater extends AutoUpdater<HealthEntry> {

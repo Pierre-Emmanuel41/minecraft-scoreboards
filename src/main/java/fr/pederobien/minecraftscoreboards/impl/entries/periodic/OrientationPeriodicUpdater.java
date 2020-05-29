@@ -4,7 +4,7 @@ import org.bukkit.block.Block;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.OrientationEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.OrientationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class OrientationPeriodicUpdater extends PeriodicUpdater<OrientationEntry> {

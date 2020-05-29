@@ -3,7 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl.entries.periodic;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.HealthEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.HealthEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class HealthPeriodicUpdater extends PeriodicUpdater<HealthEntry> {

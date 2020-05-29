@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.auto;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.LocationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {

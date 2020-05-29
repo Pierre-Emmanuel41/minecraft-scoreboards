@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.auto;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.EntityKilledEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.EntityKilledEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {

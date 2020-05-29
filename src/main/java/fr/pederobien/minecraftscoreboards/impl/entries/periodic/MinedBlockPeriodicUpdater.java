@@ -4,7 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.MinedBlockEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.MinedBlockEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class MinedBlockPeriodicUpdater extends PeriodicUpdater<MinedBlockEntry> {

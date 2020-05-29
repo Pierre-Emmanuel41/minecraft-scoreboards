@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.auto;
 
 import java.util.Optional;
 
@@ -11,7 +11,7 @@ import org.bukkit.scoreboard.Team;
 
 import fr.pederobien.minecraftmanagers.TeamManager;
 import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.TeamPlayerOnModeEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.TeamPlayerOnModeEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEntry> {

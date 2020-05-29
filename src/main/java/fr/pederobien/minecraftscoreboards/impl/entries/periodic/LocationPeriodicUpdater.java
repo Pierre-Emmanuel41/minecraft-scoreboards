@@ -3,7 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl.entries.periodic;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.LocationEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.LocationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class LocationPeriodicUpdater extends PeriodicUpdater<LocationEntry> {

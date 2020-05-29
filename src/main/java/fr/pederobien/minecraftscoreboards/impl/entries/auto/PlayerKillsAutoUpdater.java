@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.entries.update;
+package fr.pederobien.minecraftscoreboards.impl.entries.auto;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -6,7 +6,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.AutoUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.PlayerKillsEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.PlayerKillsEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class PlayerKillsAutoUpdater extends AutoUpdater<PlayerKillsEntry> {

@@ -4,7 +4,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.impl.PeriodicUpdater;
-import fr.pederobien.minecraftscoreboards.impl.entries.common.EntityKilledEntry;
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.EntityKilledEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class EntityKilledPeriodicUpdater extends PeriodicUpdater<EntityKilledEntry> {
