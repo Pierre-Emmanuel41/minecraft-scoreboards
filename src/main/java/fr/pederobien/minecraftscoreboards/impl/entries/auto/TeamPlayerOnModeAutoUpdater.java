@@ -98,7 +98,7 @@ public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEnt
 		this(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerDeathEvent(PlayerGameModeChangeEvent event) {
 		Optional<Team> optTeam = TeamManager.getTeam(event.getPlayer());
 		if (optTeam.isPresent() && optTeam.get().equals(getSource().getTeam()))

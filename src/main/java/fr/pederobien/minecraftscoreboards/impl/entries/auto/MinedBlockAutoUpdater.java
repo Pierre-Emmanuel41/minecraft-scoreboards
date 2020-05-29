@@ -51,7 +51,7 @@ public class MinedBlockAutoUpdater extends AutoUpdater<MinedBlockEntry> {
 		this(plugin, objective, new MinedBlockEntry(score, material, before));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMineBlock(BlockBreakEvent event) {
 		if (getSource().getMaterial().equals(event.getBlock().getType()) && event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
 			update();

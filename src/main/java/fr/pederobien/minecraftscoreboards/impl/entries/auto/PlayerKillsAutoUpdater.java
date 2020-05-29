@@ -48,7 +48,7 @@ public class PlayerKillsAutoUpdater extends AutoUpdater<PlayerKillsEntry> {
 		this(plugin, objective, new PlayerKillsEntry(score, before, after));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerDeathEvent(PlayerDeathEvent event) {
 		if (event.getEntity().getKiller().equals(getObjective().getPlayer()))
 			update();

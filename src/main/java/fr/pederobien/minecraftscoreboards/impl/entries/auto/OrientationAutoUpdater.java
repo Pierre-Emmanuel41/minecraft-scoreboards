@@ -11,7 +11,6 @@ import fr.pederobien.minecraftscoreboards.impl.entries.simple.OrientationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
-	private int call;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link PlayerMoveEvent}
@@ -23,7 +22,6 @@ public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 	 */
 	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, OrientationEntry source) {
 		super(plugin, objective, source);
-		call = 0;
 	}
 
 	/**
@@ -52,16 +50,9 @@ public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 		this(plugin, objective, new OrientationEntry(score, before, block, after));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
-		if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
-			return;
-
-		// Updating player objective each 2 calls.
-		call++;
-		if (call > 2) {
+		if (event.getPlayer().equals(getObjective().getPlayer()))
 			update();
-			call = 0;
-		}
 	}
 }

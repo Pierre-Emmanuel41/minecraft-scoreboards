@@ -52,7 +52,7 @@ public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {
 		this(plugin, objective, new EntityKilledEntry(score, entityType, before));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onEntityDeathEvent(EntityDeathEvent event) {
 		if (!getSource().getEntityType().equals(event.getEntityType()) || event.getEntity().getKiller() == null
 				|| !event.getEntity().getKiller().equals(getObjective().getPlayer()))

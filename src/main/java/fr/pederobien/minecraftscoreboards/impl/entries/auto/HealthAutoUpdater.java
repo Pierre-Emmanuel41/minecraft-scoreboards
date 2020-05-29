@@ -59,25 +59,25 @@ public class HealthAutoUpdater extends AutoUpdater<HealthEntry> {
 		this(plugin, objective, new HealthEntry(score, before, pattern));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onEntityDamageEvent(PlayerDeathEvent event) {
 		if (event.getEntity().equals(getObjective().getPlayer()))
 			update();
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onEntityDamageEvent(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player && ((Player) event.getEntity()).equals(getObjective().getPlayer()))
 			update();
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onEntityRegainHealthEvent(EntityRegainHealthEvent event) {
 		if (event.getEntity() instanceof Player && ((Player) event.getEntity()).equals(getObjective().getPlayer()))
 			update();
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
 		if (event.getPlayer().equals(getObjective().getPlayer()))
 			update();

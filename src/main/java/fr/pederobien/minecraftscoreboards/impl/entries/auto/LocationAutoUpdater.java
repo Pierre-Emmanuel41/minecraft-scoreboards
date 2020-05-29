@@ -10,7 +10,6 @@ import fr.pederobien.minecraftscoreboards.impl.entries.simple.LocationEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
-	private int call;
 
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link PlayerMoveEvent}
@@ -22,7 +21,6 @@ public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
 	 */
 	public LocationAutoUpdater(Plugin plugin, ISimpleObjective objective, LocationEntry source) {
 		super(plugin, objective, source);
-		call = 0;
 	}
 
 	/**
@@ -71,16 +69,9 @@ public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
 		this(plugin, objective, new LocationEntry(score, before, delimiter, after));
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
-		if (!event.getPlayer().getName().equals(getObjective().getPlayer().getName()))
-			return;
-
-		// Updating player objective each 4 calls.
-		call++;
-		if (call > 4) {
+		if (event.getPlayer().equals(getObjective().getPlayer()))
 			update();
-			call = 0;
-		}
 	}
 }
