@@ -13,12 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
+import fr.pederobien.minecraftscoreboards.impl.entries.simple.MessageEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
 public class EntriesObjective extends AbstractSimpleObjective implements IEntriesObjective {
-	private Map<Integer, IEntry> entries;
+	private Map<Integer, ExtendedEntry> entries;
 	private List<IEntry> entriesList;
+	private int emptyEntryCount;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -54,20 +56,36 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 	 */
 	public EntriesObjective(Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		super(player, name, displayName, criteria, displaySlot);
-		entries = new HashMap<Integer, IEntry>();
+		entries = new HashMap<Integer, ExtendedEntry>();
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+		emptyEntryCount = 0;
 	}
 
 	@Override
 	public void addEntry(IEntry entry) {
-		entries.put(entry.getScore(), entry);
+		entries.put(entry.getScore(), new ExtendedEntry(entry, false));
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 	}
 
 	@Override
-	public void removeEntry(IEntry entry) {
-		entries.remove(entry.getScore());
+	public void removeEntry(int score) {
+		ExtendedEntry entry = entries.remove(score);
+		if (entry == null)
+			return;
+
+		if (entry.isEmpty())
+			emptyEntryCount--;
+
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+	}
+
+	@Override
+	public void emptyEntry(int score) {
+		String spaces = " ";
+		for (int i = 0; i < emptyEntryCount; i++)
+			spaces = spaces.concat(" ");
+		emptyEntryCount++;
+		addEntry(new ExtendedEntry(new MessageEntry(score, spaces), true));
 	}
 
 	@Override
@@ -118,5 +136,59 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 		for (IEntry entry : entries())
 			if (predicate.test(entry))
 				consumer.accept(entry);
+	}
+
+	private class ExtendedEntry implements IEntry {
+		private IEntry source;
+		private boolean isEmpty;
+
+		public ExtendedEntry(IEntry source, boolean isEmpty) {
+			this.source = source;
+			this.isEmpty = isEmpty;
+		}
+
+		@Override
+		public String getOldValue() {
+			return source.getOldValue();
+		}
+
+		@Override
+		public String getCurrentValue() {
+			return source.getCurrentValue();
+		}
+
+		@Override
+		public void update(Player player) {
+			source.update(player);
+		}
+
+		@Override
+		public int getScore() {
+			return source.getScore();
+		}
+
+		@Override
+		public void setScore(int score) {
+			source.setScore(score);
+		}
+
+		@Override
+		public void initialize() {
+			source.initialize();
+		}
+
+		@Override
+		public boolean isActivated() {
+			return source.isActivated();
+		}
+
+		@Override
+		public void setActivated(boolean isActivated) {
+			source.setActivated(isActivated);
+		}
+
+		public boolean isEmpty() {
+			return isEmpty;
+		}
 	}
 }

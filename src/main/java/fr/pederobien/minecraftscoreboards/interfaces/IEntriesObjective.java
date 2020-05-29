@@ -13,11 +13,18 @@ public interface IEntriesObjective extends ISimpleObjective {
 	void addEntry(IEntry entry);
 
 	/**
-	 * Remove the given entry from the list of entry for this objective.
+	 * Remove the entry associated to the given score from the list of entry for this objective.
 	 * 
-	 * @param entry The entry to remove.
+	 * @param score the score, ie the line number, of the entry to remove.
 	 */
-	void removeEntry(IEntry entry);
+	void removeEntry(int score);
+
+	/**
+	 * Create an empty entry and add it to the list of entry for this objective.
+	 * 
+	 * @param score The line number of the empty entry.
+	 */
+	void emptyEntry(int score);
 
 	/**
 	 * @return A list that contains all registered entries for this objective. This list is unmodifiable.
