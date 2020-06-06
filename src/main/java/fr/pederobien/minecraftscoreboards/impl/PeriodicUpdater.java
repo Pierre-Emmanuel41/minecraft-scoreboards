@@ -52,7 +52,7 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 
 		@Override
 		public void run() {
-			update();
+			internalUpdate();
 		}
 	}
 }

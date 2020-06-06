@@ -47,6 +47,6 @@ public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {
 				|| !event.getEntity().getKiller().equals(getObjective().getPlayer()))
 			return;
 
-		update();
+		internalUpdate();
 	}
 }

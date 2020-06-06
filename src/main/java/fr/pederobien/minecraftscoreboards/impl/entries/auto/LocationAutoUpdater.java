@@ -42,6 +42,6 @@ public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
 		if (event.getPlayer().equals(getObjective().getPlayer()))
-			update();
+			internalUpdate();
 	}
 }

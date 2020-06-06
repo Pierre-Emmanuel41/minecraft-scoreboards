@@ -112,7 +112,7 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
 		getScoreboard().get().resetScores(entry.getOldValue());
-		entry.update(getPlayer());
+		entry.update();
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 
@@ -148,6 +148,16 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 		}
 
 		@Override
+		public Player getPlayer() {
+			return source.getPlayer();
+		}
+
+		@Override
+		public IEntry setPlayer(Player player) {
+			return source.setPlayer(player);
+		}
+
+		@Override
 		public String getOldValue() {
 			return source.getOldValue();
 		}
@@ -158,8 +168,8 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 		}
 
 		@Override
-		public void update(Player player) {
-			source.update(player);
+		public void update() {
+			source.update();
 		}
 
 		@Override

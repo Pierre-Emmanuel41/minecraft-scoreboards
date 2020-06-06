@@ -54,7 +54,7 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 	@Override
 	public final void start() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		action(entry -> entry.setActivated(true));
+		action(entry -> entry.setPlayer(getPlayer()).setActivated(true));
 		update();
 	}
 
