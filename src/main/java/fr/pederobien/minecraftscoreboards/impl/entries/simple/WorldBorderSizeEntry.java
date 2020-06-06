@@ -12,6 +12,7 @@ import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
 public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 	private World world;
 	private DecimalFormat format;
+	private boolean displayHalfSize;
 
 	/**
 	 * Create an entry that display the current size of the {@link WorldBorder} associated to the given world.
@@ -29,7 +30,7 @@ public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 
 	@Override
 	protected String updateCurrentValue(Player player) {
-		return format.format(world.getWorldBorder().getSize());
+		return !displayHalfSize ? format.format(world.getWorldBorder().getSize()) : "\u00b1" + format.format(world.getWorldBorder().getSize() / 2.0);
 	}
 
 	/**
@@ -37,5 +38,18 @@ public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 	 */
 	public World getWorld() {
 		return world;
+	}
+
+	/**
+	 * Used to to display the "diameter" or the "radius" of the world border. By default, this entry display the diameter. When set to
+	 * true, this entry display the following message : <code>WorldName : \u00b1 + radius + after</code>. The code \u00b1 correspond
+	 * to the symbol +/-.
+	 * 
+	 * @param displayHalfSize True to display the radius, false to display the diameter.
+	 * @return This entry.
+	 */
+	public WorldBorderSizeEntry setDisplayHalfSize(boolean displayHalfSize) {
+		this.displayHalfSize = displayHalfSize;
+		return this;
 	}
 }
