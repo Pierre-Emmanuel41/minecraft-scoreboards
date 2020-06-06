@@ -13,43 +13,32 @@ import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 public class EntityKilledAutoUpdater extends AutoUpdater<EntityKilledEntry> {
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link EntityDeathEvent}
-	 * listener. This means that when an this event is thrown by the server, this updater verify the killer and the {@link EntityType}
-	 * of the dead entity and update the player objective.
+	 * Create an entry updated when an {@link EntityDeathEvent} is thrown by the server.
 	 * 
 	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
+	 * 
+	 * @see EntityKilledEntry
 	 */
 	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, EntityKilledEntry source) {
 		super(plugin, objective, source);
 	}
 
 	/**
-	 * Create an entry updated when an entity of the given {@link EntityType} is killed.
+	 * Create an entry updated when an {@link EntityDeathEvent} is thrown by the server. This entry displays the number of entity
+	 * corresponding to the given entity type a player has killed.
 	 * 
 	 * @param plugin     The plugin to register this entry as event listener.
 	 * @param objective  The objective associated to the source entry.
 	 * @param score      The line number of this entry.
 	 * @param entityType The type of entity used to update this entry.
-	 * @param before     The sequence of characters to be displayed before the player statistic.
-	 * @param after      The sequence of characters to be displayed after the player statistic.
-	 */
-	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, EntityType entityType, String before, String after) {
-		this(plugin, objective, new EntityKilledEntry(score, entityType, before, after));
-	}
-
-	/**
-	 * Create an entry updated when an entity of the given {@link EntityType} is killed.
 	 * 
-	 * @param plugin     The plugin to register this entry as event listener.
-	 * @param objective  The objective associated to the source entry.
-	 * @param score      The line number of this entry.
-	 * @param entityType The type of entity used to update this entry.
-	 * @param before     The sequence of characters to be displayed before the player statistic.
+	 * @see EntityType
+	 * @see EntityKilledEntry
 	 */
-	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, EntityType entityType, String before) {
-		this(plugin, objective, new EntityKilledEntry(score, entityType, before));
+	public EntityKilledAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, EntityType entityType) {
+		this(plugin, objective, new EntityKilledEntry(score, entityType));
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

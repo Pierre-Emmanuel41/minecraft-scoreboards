@@ -16,24 +16,11 @@ public class TeamNameEntry extends AbstractSimpleEntry {
 	 * Create an entry that displays the player team name. If any team has been found, the symbol "?" is displayed.
 	 * 
 	 * @param score   The line number of this entry.
-	 * @param before  The sequence of characters to be displayed before the player team name.
-	 * @param after   The sequence of characters to be displayed after the player team name.
 	 * @param colored True if the team name should be displayed in team color, false otherwise.
 	 */
-	public TeamNameEntry(int score, String before, String after, boolean colored) {
-		super(score, before, after);
+	public TeamNameEntry(int score, boolean colored) {
+		super(score);
 		this.colored = colored;
-	}
-
-	/**
-	 * Create an entry that displays the player team name. If any team has been found, the symbol "?" is displayed.
-	 * 
-	 * @param score   The line number of this entry.
-	 * @param before  The sequence of characters to be displayed before the player team name.
-	 * @param colored True if the team name should be displayed in team color, false otherwise.
-	 */
-	public TeamNameEntry(int score, String before, boolean colored) {
-		this(score, before, "", colored);
 	}
 
 	@Override

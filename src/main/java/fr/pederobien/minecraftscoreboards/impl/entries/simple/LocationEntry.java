@@ -11,43 +11,13 @@ public class LocationEntry extends AbstractSimpleEntry {
 	private String delimiter;
 
 	/**
-	 * Create an entry that displays the player location. The message associated to this entry is :</br>
-	 * Location loc = player.getLocation();</br>
-	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()</br>
-	 * This constructor use " " as default delimiter.
-	 * 
-	 * @param score  The line number of this entry.
-	 * @param before The sequence of characters to be displayed before the player location. See above.
-	 */
-	public LocationEntry(int score, String before) {
-		this(score, before, " ");
-	}
-
-	/**
-	 * Create an entry that displays the player location. The message associated to this entry is :</br>
-	 * Location loc = player.getLocation();</br>
-	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ()
+	 * Create an entry that displays the current player location.
 	 * 
 	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the player location. See above.
-	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
+	 * @param delimiter The sequence of characters to be displayed between each element added.
 	 */
-	public LocationEntry(int score, String before, String delimiter) {
-		this(score, before, delimiter, "");
-	}
-
-	/**
-	 * Create an entry that displays the player location. The message associated to this entry is :</br>
-	 * Location loc = player.getLocation();</br>
-	 * return before + loc.getBlockX() + delimiter + loc.getBlockY() + delimiter + loc.getBlockZ() + after;</br>
-	 * 
-	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the player location. See above.
-	 * @param delimiter The sequence of characters to be displayed between each element added. See above.
-	 * @param after     The sequence of characters to be displayed after the player location. See above.
-	 */
-	public LocationEntry(int score, String before, String delimiter, String after) {
-		super(score, before, after);
+	public LocationEntry(int score, String delimiter) {
+		super(score);
 		this.delimiter = delimiter;
 	}
 

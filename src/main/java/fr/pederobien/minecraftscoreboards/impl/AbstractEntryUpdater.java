@@ -16,8 +16,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
+	 * @param plugin    The plugin to register this entry to be periodically updated.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */

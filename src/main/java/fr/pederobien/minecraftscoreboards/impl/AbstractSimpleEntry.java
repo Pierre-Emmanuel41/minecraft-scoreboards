@@ -1,19 +1,29 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import org.bukkit.entity.Player;
+
 public abstract class AbstractSimpleEntry extends AbstractEntry {
 
 	/**
 	 * Create an entry.
 	 * 
-	 * @param score  The line number of this entry in the player objective.
-	 * @param before The sequence of characters to be displayed before the value to update.
-	 * @param after  The sequence of characters to be displayed after the value to update.
+	 * @param score The line number of this entry in the player objective.
 	 */
-	protected AbstractSimpleEntry(int score, String before, String after) {
-		super(score, before, after);
+	protected AbstractSimpleEntry(int score) {
+		super(score);
 	}
 
 	@Override
 	public void initialize() {
+	}
+
+	@Override
+	protected String getBefore(Player player) {
+		return "";
+	}
+
+	@Override
+	protected String getAfter(Player player) {
+		return "";
 	}
 }

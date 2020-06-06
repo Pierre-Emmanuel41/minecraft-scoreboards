@@ -7,21 +7,17 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
 public abstract class AbstractEntry implements IEntry {
-	private String oldValue, currentValue, before, after;
+	private String oldValue, currentValue;
 	private int score;
 	private boolean isActivated;
 
 	/**
 	 * Create an entry.
 	 * 
-	 * @param score  The line number of this entry in the player objective.
-	 * @param before The sequence of characters to be displayed before the value to update.
-	 * @param after  The sequence of characters to be displayed after the value to update.
+	 * @param score The line number of this entry in the player objective.
 	 */
-	protected AbstractEntry(int score, String before, String after) {
+	protected AbstractEntry(int score) {
 		this.score = score;
-		this.before = before;
-		this.after = after;
 	}
 
 	@Override
@@ -76,22 +72,24 @@ public abstract class AbstractEntry implements IEntry {
 	 * @return A string that correspond to the current value of this entry.
 	 */
 	protected String internalUpdate(Player player, Function<Player, String> function) {
-		currentValue = before + function.apply(player) + after;
+		currentValue = getBefore(player) + function.apply(player) + getAfter(player);
 		oldValue = currentValue;
 		return currentValue;
 	}
 
 	/**
+	 * Get a string displayed before the value to update.
+	 * 
+	 * @param Player The player whose score board is updated.
 	 * @return The sequence of characters to be displayed before the value to update.
 	 */
-	protected String getBefore() {
-		return before;
-	}
+	protected abstract String getBefore(Player player);
 
 	/**
+	 * Get a string displayed after the value to update.
+	 * 
+	 * @param Player The player whose score board is updated.
 	 * @return The sequence of characters to be displayed after the value to update.
 	 */
-	protected String getAfter() {
-		return after;
-	}
+	protected abstract String getAfter(Player player);
 }

@@ -13,24 +13,11 @@ public class OrientationEntry extends AbstractSimpleEntry {
 	/**
 	 * Create an entry that displays the orientation to follow to reach the given block.
 	 * 
-	 * @param score  The line number of this entry.
-	 * @param before The sequence of characters to be displayed before the orientation to follow.
-	 * @param block  The target block.
+	 * @param score The line number of this entry.
+	 * @param block The target block.
 	 */
-	public OrientationEntry(int score, String before, Block block) {
-		this(score, before, block, "");
-	}
-
-	/**
-	 * Create an entry that displays the orientation to follow to reach the given block.
-	 * 
-	 * @param score  The line number of this entry.
-	 * @param before The sequence of characters to be displayed before the orientation to follow.
-	 * @param block  The target block.
-	 * @param before The sequence of characters to be displayed after the orientation to follow.
-	 */
-	public OrientationEntry(int score, String before, Block block, String after) {
-		super(score, before, after);
+	public OrientationEntry(int score, Block block) {
+		super(score);
 		this.block = block;
 	}
 

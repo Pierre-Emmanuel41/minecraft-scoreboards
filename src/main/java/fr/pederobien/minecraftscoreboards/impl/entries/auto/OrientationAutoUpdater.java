@@ -13,41 +13,31 @@ import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link PlayerMoveEvent}
-	 * listener. This means that when an this event is thrown by the server, this updater update the player objective.
+	 * Create an entry updated when a {@link PlayerMoveEvent} is thrown by the server.
 	 * 
 	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
+	 * 
+	 * @see OrientationEntry
 	 */
 	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, OrientationEntry source) {
 		super(plugin, objective, source);
 	}
 
 	/**
-	 * Create an entry that displays the orientation to follow to reach the given block.
+	 * Create an entry updated when a {@link PlayerMoveEvent} is thrown by the server. This entry display the direction to follow to
+	 * reach the given block.
 	 * 
 	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the orientation to follow.
 	 * @param block     The target block.
-	 */
-	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, Block block) {
-		this(plugin, objective, new OrientationEntry(score, before, block));
-	}
-
-	/**
-	 * Create an entry that displays the orientation to follow to reach the given block.
 	 * 
-	 * @param plugin    The plugin to register this entry as event listener.
-	 * @param objective The objective associated to the source entry.
-	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the orientation to follow.
-	 * @param block     The target block.
+	 * @see OrientationEntry
 	 */
-	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, Block block, String after) {
-		this(plugin, objective, new OrientationEntry(score, before, block, after));
+	public OrientationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Block block) {
+		super(plugin, objective, new OrientationEntry(score, block));
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

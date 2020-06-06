@@ -12,40 +12,30 @@ import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 public class PlayerKillsAutoUpdater extends AutoUpdater<PlayerKillsEntry> {
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a {@link PlayerDeathEvent}
-	 * listener. This means that when an this event is thrown by the server, this updater update the player objective.
+	 * Create an entry updated when {@link PlayerDeathEvent} is thrown by the server.
 	 * 
 	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
+	 * 
+	 * @see PlayerKillsEntry
 	 */
-	protected PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, PlayerKillsEntry source) {
+	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, PlayerKillsEntry source) {
 		super(plugin, objective, source);
 	}
 
 	/**
-	 * Create an entry that is updated when a player kills another player.
+	 * Create an entry that is updated when {@link PlayerDeathEvent} is thrown by the server. This entry display the number of player
+	 * a player has killed.
 	 * 
 	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the player kill number.
-	 */
-	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before) {
-		this(plugin, objective, new PlayerKillsEntry(score, before));
-	}
-
-	/**
-	 * Create an entry that is updated when a player kills another player.
 	 * 
-	 * @param plugin    The plugin to register this entry as event listener.
-	 * @param objective The objective associated to the source entry.
-	 * @param score     The line number of this entry.
-	 * @param before    The sequence of characters to be displayed before the player kill number.
-	 * @param after     The sequence of characters to be displayed after the player kill number.
+	 * @see PlayerKillsEntry
 	 */
-	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, String before, String after) {
-		this(plugin, objective, new PlayerKillsEntry(score, before, after));
+	public PlayerKillsAutoUpdater(Plugin plugin, ISimpleObjective objective, int score) {
+		super(plugin, objective, new PlayerKillsEntry(score));
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

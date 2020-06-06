@@ -19,11 +19,9 @@ public class StatisticEntry extends AbstractSimpleEntry {
 	 * @param statistic  The statistic tracked by this entry.
 	 * @param entityType The type of entity used to update this entry.
 	 * @param material   The material used to update this entry.
-	 * @param before     The sequence of characters to be displayed before the player statistic.
-	 * @param after      The sequence of characters to be displayed after the player statistic.
 	 */
-	private StatisticEntry(int score, Statistic statistic, EntityType entityType, Material material, String before, String after) {
-		super(score, before, after);
+	private StatisticEntry(int score, Statistic statistic, EntityType entityType, Material material) {
+		super(score);
 		this.statistic = statistic;
 		this.entityType = entityType;
 		this.material = material;
@@ -34,11 +32,9 @@ public class StatisticEntry extends AbstractSimpleEntry {
 	 * 
 	 * @param score     The line number of this entry.
 	 * @param statistic The statistic tracked by this entry.
-	 * @param before    The sequence of characters to be displayed before the player statistic.
-	 * @param after     The sequence of characters to be displayed after the player statistic.
 	 */
-	public StatisticEntry(int score, Statistic statistic, String before, String after) {
-		this(score, statistic, null, null, before, after);
+	public StatisticEntry(int score, Statistic statistic) {
+		this(score, statistic, null, null);
 	}
 
 	/**
@@ -49,7 +45,7 @@ public class StatisticEntry extends AbstractSimpleEntry {
 	 * @param before    The sequence of characters to be displayed before the player statistic.
 	 */
 	public StatisticEntry(int score, Statistic statistic, String before) {
-		this(score, statistic, null, null, before, "");
+		this(score, statistic, null, null);
 	}
 
 	/**
@@ -58,23 +54,9 @@ public class StatisticEntry extends AbstractSimpleEntry {
 	 * @param score      The line number of this entry.
 	 * @param statistic  The statistic tracked by this entry.
 	 * @param entityType The type of entity used to update this entry.
-	 * @param before     The sequence of characters to be displayed before the player statistic.
-	 * @param after      The sequence of characters to be displayed after the player statistic.
 	 */
-	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before, String after) {
-		this(score, statistic, entityType, null, before, after);
-	}
-
-	/**
-	 * Create a statistic entry.
-	 * 
-	 * @param score      The line number of this entry.
-	 * @param statistic  The statistic tracked by this entry.
-	 * @param entityType The type of entity used to update this entry.
-	 * @param before     The sequence of characters to be displayed before the player statistic.
-	 */
-	public StatisticEntry(int score, Statistic statistic, EntityType entityType, String before) {
-		this(score, statistic, entityType, null, before, "");
+	public StatisticEntry(int score, Statistic statistic, EntityType entityType) {
+		this(score, statistic, entityType, null);
 	}
 
 	/**
@@ -83,23 +65,9 @@ public class StatisticEntry extends AbstractSimpleEntry {
 	 * @param score     The line number of this entry.
 	 * @param statistic The statistic tracked by this entry.
 	 * @param material  The material used to update this entry.
-	 * @param before    The sequence of characters to be displayed before the player statistic.
-	 * @param after     The sequence of characters to be displayed after the player statistic.
 	 */
-	public StatisticEntry(int score, Statistic statistic, Material material, String before, String after) {
-		this(score, statistic, null, material, before, after);
-	}
-
-	/**
-	 * Create a statistic entry.
-	 * 
-	 * @param score     The line number of this entry.
-	 * @param statistic The statistic tracked by this entry.
-	 * @param material  The material used to update this entry.
-	 * @param before    The sequence of characters to be displayed before the player statistic.
-	 */
-	public StatisticEntry(int score, Statistic statistic, Material material, String before) {
-		this(score, statistic, null, material, before, "");
+	public StatisticEntry(int score, Statistic statistic, Material material) {
+		this(score, statistic, null, material);
 	}
 
 	@Override

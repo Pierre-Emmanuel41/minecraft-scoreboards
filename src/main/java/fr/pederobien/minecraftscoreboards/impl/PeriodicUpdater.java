@@ -11,10 +11,9 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	private Runnable update;
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry.
+	 * Create an entry updated periodically.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
+	 * @param plugin    The plugin to register this entry to be periodically updated.
 	 * @param objective The objective associated to the source entry.
 	 * @param delay     Represents the number of server ticks to wait before updating the objective.
 	 * @param period    Represents the number of server ticks between two objective updates.
@@ -28,10 +27,9 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	}
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry.
+	 * Create an entry updated periodically.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
+	 * @param plugin    The plugin to register this entry to be periodically updated.
 	 * @param objective The objective associated to the source entry.
 	 * @param period    Represents the number of server ticks between two objective updates.
 	 * @param source    The source tracked by this updater.

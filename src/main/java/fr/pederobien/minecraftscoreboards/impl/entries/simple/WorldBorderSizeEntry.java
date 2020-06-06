@@ -19,11 +19,10 @@ public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 	 * 
 	 * @param score   The line number of this entry in the player objective.
 	 * @param world   The world used to display the current size of its world border.
-	 * @param after   The sequence of characters to be displayed after the world border size.
 	 * @param pattern A string used to format the world border size.
 	 */
-	public WorldBorderSizeEntry(int score, World world, String after, String pattern) {
-		super(score, WorldManager.getWorldNameNormalised(world) + " : ", after);
+	public WorldBorderSizeEntry(int score, World world, String pattern) {
+		super(score);
 		this.world = world;
 		this.format = new DecimalFormat(pattern);
 	}
@@ -51,5 +50,10 @@ public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 	public WorldBorderSizeEntry setDisplayHalfSize(boolean displayHalfSize) {
 		this.displayHalfSize = displayHalfSize;
 		return this;
+	}
+
+	@Override
+	protected final String getBefore(Player player) {
+		return WorldManager.getWorldNameNormalised(world) + " : ";
 	}
 }

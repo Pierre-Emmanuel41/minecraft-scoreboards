@@ -17,85 +17,33 @@ import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEntry> {
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a
-	 * {@link PlayerGameModeChangeEvent} listener. This means that when an this event is thrown by the server, this updater update the
-	 * player objective.
+	 * Create an entry updated when a {@link PlayerGameModeChangeEvent} is thrown by the server.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
+	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
+	 * 
+	 * @see TeamPlayerOnModeEntry
 	 */
 	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, TeamPlayerOnModeEntry source) {
 		super(plugin, objective, source);
 	}
 
 	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a
-	 * {@link PlayerGameModeChangeEvent} listener. This means that when an this event is thrown by the server, this updater update the
-	 * player objective.
+	 * Create an entry updated when a {@link PlayerGameModeChangeEvent} is thrown by the server. This entry displays the number of
+	 * player in the given team who have the given game mode.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
-	 * @param objective The objective associated to the source entry.
-	 * @param score     The line number of this entry.
-	 * @param team      The team associated to this entry.
-	 * @param mode      The player game mode used to filter team players.
-	 * @param after     The sequence of characters to be displayed after the player number.
-	 * @param colored   True if the team name is colored, false otherwise.
-	 */
-	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Team team, GameMode mode, String after, boolean colored) {
-		this(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode, after, colored));
-	}
-
-	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a
-	 * {@link PlayerGameModeChangeEvent} listener. This means that when an this event is thrown by the server, this updater update the
-	 * player objective.
-	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
+	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param score     The line number of this entry.
 	 * @param team      The team associated to this entry.
 	 * @param mode      The player game mode used to filter team players.
 	 * @param colored   True if the team name is colored, false otherwise.
+	 * 
+	 * @see TeamPlayerOnModeEntry
 	 */
 	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Team team, GameMode mode, boolean colored) {
-		this(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode, colored));
-	}
-
-	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a
-	 * {@link PlayerGameModeChangeEvent} listener. This means that when an this event is thrown by the server, this updater update the
-	 * player objective.
-	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
-	 * @param objective The objective associated to the source entry.
-	 * @param score     The line number of this entry.
-	 * @param team      The team associated to this entry.
-	 * @param mode      The player game mode used to filter team players.
-	 * @param after     The sequence of characters to be displayed after the player number.
-	 */
-	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Team team, GameMode mode, String after) {
-		this(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode, after));
-	}
-
-	/**
-	 * Create an entry updater. This entry is responsible to update the source entry. This updater is a
-	 * {@link PlayerGameModeChangeEvent} listener. This means that when an this event is thrown by the server, this updater update the
-	 * player objective.
-	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
-	 * @param objective The objective associated to the source entry.
-	 * @param score     The line number of this entry.
-	 * @param team      The team associated to this entry.
-	 * @param mode      The player game mode used to filter team players.
-	 */
-	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Team team, GameMode mode) {
-		this(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode));
+		super(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode, colored));
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

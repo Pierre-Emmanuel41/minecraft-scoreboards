@@ -2,7 +2,6 @@ package fr.pederobien.minecraftscoreboards.impl.entries.simple;
 
 import java.text.DecimalFormat;
 
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
@@ -11,38 +10,18 @@ public class HealthEntry extends AbstractSimpleEntry {
 	private DecimalFormat format;
 
 	/**
-	 * Create an entry that display the player's health that looks like
-	 * "<code>before + (int) player.getHealth() + "/" + (int) player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()</code>".
+	 * Create an entry that displays the current player health.
 	 * 
 	 * @param score   The line number of this entry.
-	 * @param before  The sequence of characters to be displayed before the player health. See above.
 	 * @param pattern A string used to format the player health on screen.
 	 */
-	public HealthEntry(int score, String before, String pattern) {
-		this(score, before, "", pattern);
-	}
-
-	/**
-	 * Create an entry that display the player's health that looks like "<code>before + (int) player.getHealth() + after</code>".</br>
-	 * However if the value of parameter <code>after</code> is null, then it is replaced by :</br>
-	 * <code>"/" + (int) player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()</code>.
-	 * 
-	 * @param score   The line number of this entry.
-	 * @param before  The sequence of characters to be displayed before the player health. See above.
-	 * @param after   The sequence of characters to be displayed before the player health. See above.
-	 * @param pattern A string used to format the player health on screen.
-	 */
-	public HealthEntry(int score, String before, String after, String pattern) {
-		super(score, before, after);
+	public HealthEntry(int score, String pattern) {
+		super(score);
 		format = new DecimalFormat(pattern);
 	}
 
 	@Override
 	protected String updateCurrentValue(Player player) {
-		return format.format(player.getHealth()) + getAfter(player);
-	}
-
-	private String getAfter(Player player) {
-		return getAfter() == null ? "/" + (int) player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() : getAfter();
+		return format.format(player.getHealth());
 	}
 }
