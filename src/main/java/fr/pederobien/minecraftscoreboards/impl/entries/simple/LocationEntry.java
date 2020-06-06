@@ -21,6 +21,15 @@ public class LocationEntry extends AbstractSimpleEntry {
 		this.delimiter = delimiter;
 	}
 
+	/**
+	 * Create an entry that displays the current player location.
+	 * 
+	 * @param score The line number of this entry.
+	 */
+	public LocationEntry(int score) {
+		this(score, " ");
+	}
+
 	@Override
 	protected String updateCurrentValue(Player player) {
 		Location loc = player.getLocation();

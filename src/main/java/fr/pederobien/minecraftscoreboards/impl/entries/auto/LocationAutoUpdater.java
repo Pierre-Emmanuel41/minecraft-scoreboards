@@ -39,6 +39,20 @@ public class LocationAutoUpdater extends AutoUpdater<LocationEntry> {
 		super(plugin, objective, new LocationEntry(score, delimiter));
 	}
 
+	/**
+	 * Create an entry updated when a {@link PlayerMoveEvent} is thrown by the server. This entry displays the current location of a
+	 * player.
+	 * 
+	 * @param plugin    The plugin to register this entry as event listener.
+	 * @param objective The objective associated to the source entry.
+	 * @param score     The line number of this entry.
+	 * 
+	 * @see LocationEntry
+	 */
+	public LocationAutoUpdater(Plugin plugin, ISimpleObjective objective, int score) {
+		super(plugin, objective, new LocationEntry(score));
+	}
+
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
 		if (event.getPlayer().equals(getObjective().getPlayer()))
