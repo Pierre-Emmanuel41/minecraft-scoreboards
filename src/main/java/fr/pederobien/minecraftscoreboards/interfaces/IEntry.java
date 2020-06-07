@@ -5,20 +5,6 @@ import org.bukkit.entity.Player;
 public interface IEntry {
 
 	/**
-	 * @return The player associated to this entry.
-	 */
-	Player getPlayer();
-
-	/**
-	 * Set the player associated to this entry. Normally this method should be never called. But when a player quit and join the
-	 * server during an update, the player lose its score board. This method is called only by the objective to which this entry has
-	 * been added. Do not call this method.
-	 * 
-	 * @param player The player to track.
-	 */
-	IEntry setPlayer(Player player);
-
-	/**
 	 * Get the old value of this entry. This value is used to clear or reset the player's objective.
 	 * 
 	 * @return The old value of this entry.
@@ -32,8 +18,10 @@ public interface IEntry {
 
 	/**
 	 * Update this entry. The old value equals the current value and the current value is updated.
+	 * 
+	 * @param player The player whose score board is updated.
 	 */
-	void update();
+	void update(Player player);
 
 	/**
 	 * Get the score of this entry. This score represents the line number of this entry in an objective.

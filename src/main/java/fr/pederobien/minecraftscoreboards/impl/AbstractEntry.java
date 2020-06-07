@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
 public abstract class AbstractEntry implements IEntry {
-	private Player player;
 	private String oldValue, currentValue;
 	private int score;
 	private boolean isActivated;
@@ -22,17 +21,6 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
-	public Player getPlayer() {
-		return player;
-	}
-
-	@Override
-	public IEntry setPlayer(Player player) {
-		this.player = player;
-		return this;
-	}
-
-	@Override
 	public String getOldValue() {
 		return oldValue == null ? "" : oldValue;
 	}
@@ -43,7 +31,7 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
-	public final void update() {
+	public final void update(Player player) {
 		internalUpdate(player, p -> updateCurrentValue(p));
 	}
 

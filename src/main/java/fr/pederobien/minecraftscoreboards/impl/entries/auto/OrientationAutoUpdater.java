@@ -43,6 +43,6 @@ public class OrientationAutoUpdater extends AutoUpdater<OrientationEntry> {
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
 		if (event.getPlayer().equals(getObjective().getPlayer()))
-			internalUpdate();
+			update();
 	}
 }

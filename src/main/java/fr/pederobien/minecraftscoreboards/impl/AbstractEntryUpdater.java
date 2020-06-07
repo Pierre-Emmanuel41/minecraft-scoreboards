@@ -28,16 +28,6 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 		update = new InternalRunnable();
 	}
 
-	@Override
-	public Player getPlayer() {
-		return source.getPlayer();
-	}
-
-	@Override
-	public IEntry setPlayer(Player player) {
-		return source.setPlayer(player);
-	}
-
 	/**
 	 * @return The plugin associated to this updater.
 	 */
@@ -60,8 +50,8 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	}
 
 	@Override
-	public void update() {
-		source.update();
+	public void update(Player player) {
+		source.update(player);
 	}
 
 	@Override
@@ -87,7 +77,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	/**
 	 * Update the objective associated to the source entry for the source entry.
 	 */
-	protected void internalUpdate() {
+	protected void update() {
 		BukkitManager.getScheduler().runTaskLater(getPlugin(), update, 2);
 	}
 

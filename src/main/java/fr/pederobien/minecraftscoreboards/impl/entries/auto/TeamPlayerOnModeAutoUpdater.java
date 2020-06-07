@@ -50,6 +50,6 @@ public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEnt
 	public void onPlayerDeathEvent(PlayerGameModeChangeEvent event) {
 		Optional<Team> optTeam = TeamManager.getTeam(event.getPlayer());
 		if (optTeam.isPresent() && optTeam.get().equals(getSource().getTeam()))
-			internalUpdate();
+			update();
 	}
 }
