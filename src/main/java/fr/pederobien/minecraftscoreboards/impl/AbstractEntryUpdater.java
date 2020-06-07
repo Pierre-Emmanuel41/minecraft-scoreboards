@@ -1,5 +1,6 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -72,6 +73,16 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	@Override
 	public void setActivated(boolean isActivated) {
 		source.setActivated(isActivated);
+	}
+
+	@Override
+	public ChatColor getColor() {
+		return source.getColor();
+	}
+
+	@Override
+	public void setColor(ChatColor color) {
+		source.setColor(color);
 	}
 
 	/**

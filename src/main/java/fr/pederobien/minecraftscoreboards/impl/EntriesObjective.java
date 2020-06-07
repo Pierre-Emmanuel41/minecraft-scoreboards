@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
@@ -185,6 +186,16 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 		@Override
 		public void setActivated(boolean isActivated) {
 			source.setActivated(isActivated);
+		}
+
+		@Override
+		public ChatColor getColor() {
+			return source.getColor();
+		}
+
+		@Override
+		public void setColor(ChatColor color) {
+			source.setColor(color);
 		}
 
 		public boolean isEmpty() {

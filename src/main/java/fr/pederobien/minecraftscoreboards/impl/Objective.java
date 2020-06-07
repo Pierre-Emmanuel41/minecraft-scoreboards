@@ -1,5 +1,6 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -8,10 +9,14 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
+import fr.pederobien.minecraftmanagers.TeamManager;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public class Objective extends EntriesObjective implements IObjective, Listener {
 	private boolean isInitialized, isActivated;
+	private Runnable colorUpdater;
+	private ChatColor color;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -49,6 +54,13 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 		super(player, name, displayName, criteria, displaySlot);
 		isInitialized = false;
 		isActivated = false;
+		colorUpdater = new ColorUpdater();
+	}
+
+	@Override
+	public void setPlayer(Player player) {
+		super.setPlayer(player);
+		color = TeamManager.getColor(getPlayer());
 	}
 
 	@Override
@@ -86,5 +98,19 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
 			setPlayer(event.getPlayer());
+	}
+
+	private class ColorUpdater implements Runnable {
+
+		@Override
+		public void run() {
+			ChatColor oldColor = color, newColor = TeamManager.getColor(getPlayer());
+			if (oldColor == null || !newColor.equals(oldColor)) {
+				for (IEntry entry : entries()) {
+					entry.setColor(newColor);
+					update(entry);
+				}
+			}
+		}
 	}
 }

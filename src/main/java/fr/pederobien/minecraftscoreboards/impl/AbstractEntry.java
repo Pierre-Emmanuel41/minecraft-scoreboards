@@ -2,6 +2,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import java.util.function.Function;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
@@ -10,6 +11,7 @@ public abstract class AbstractEntry implements IEntry {
 	private String oldValue, currentValue;
 	private int score;
 	private boolean isActivated;
+	private ChatColor color;
 
 	/**
 	 * Create an entry.
@@ -55,6 +57,16 @@ public abstract class AbstractEntry implements IEntry {
 		this.isActivated = isActivated;
 	}
 
+	@Override
+	public ChatColor getColor() {
+		return color;
+	}
+
+	@Override
+	public void setColor(ChatColor color) {
+		this.color = color;
+	}
+
 	/**
 	 * Because method {@link #update(Player)} is declared final, this method is the only way to update the value of the entry
 	 * according to the given player.
@@ -72,7 +84,7 @@ public abstract class AbstractEntry implements IEntry {
 	 * @return A string that correspond to the current value of this entry.
 	 */
 	protected String internalUpdate(Player player, Function<Player, String> function) {
-		currentValue = getBefore(player) + function.apply(player) + getAfter(player);
+		currentValue = getBeforeColored(player) + function.apply(player) + getAfter(player);
 		oldValue = currentValue;
 		return currentValue;
 	}
@@ -92,4 +104,8 @@ public abstract class AbstractEntry implements IEntry {
 	 * @return The sequence of characters to be displayed after the value to update.
 	 */
 	protected abstract String getAfter(Player player);
+
+	private String getBeforeColored(Player player) {
+		return (color == null ? ChatColor.RESET : color) + getBefore(player);
+	}
 }

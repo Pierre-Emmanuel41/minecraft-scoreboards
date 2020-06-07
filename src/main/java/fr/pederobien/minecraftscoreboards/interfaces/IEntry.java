@@ -1,5 +1,6 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public interface IEntry {
@@ -53,4 +54,16 @@ public interface IEntry {
 	 * @param isActivated True if this listener is activated, false otherwise.
 	 */
 	void setActivated(boolean isActivated);
+
+	/**
+	 * @return The color in which this entry display messages. Generally, this color correspond to the player team color.
+	 */
+	ChatColor getColor();
+
+	/**
+	 * Set the color in which this entry display messages.
+	 * 
+	 * @param color The color used to display messages on player screen.
+	 */
+	void setColor(ChatColor color);
 }
