@@ -6,7 +6,6 @@ import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Team;
 
 import fr.pederobien.minecraftmanagers.TeamManager;
@@ -19,21 +18,19 @@ public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEnt
 	/**
 	 * Create an entry updated when a {@link PlayerGameModeChangeEvent} is thrown by the server.
 	 * 
-	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 * 
 	 * @see TeamPlayerOnModeEntry
 	 */
-	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, TeamPlayerOnModeEntry source) {
-		super(plugin, objective, source);
+	public TeamPlayerOnModeAutoUpdater(ISimpleObjective objective, TeamPlayerOnModeEntry source) {
+		super(objective, source);
 	}
 
 	/**
 	 * Create an entry updated when a {@link PlayerGameModeChangeEvent} is thrown by the server. This entry displays the number of
 	 * player in the given team who have the given game mode.
 	 * 
-	 * @param plugin    The plugin to register this entry as event listener.
 	 * @param objective The objective associated to the source entry.
 	 * @param score     The line number of this entry.
 	 * @param team      The team associated to this entry.
@@ -42,8 +39,8 @@ public class TeamPlayerOnModeAutoUpdater extends AutoUpdater<TeamPlayerOnModeEnt
 	 * 
 	 * @see TeamPlayerOnModeEntry
 	 */
-	public TeamPlayerOnModeAutoUpdater(Plugin plugin, ISimpleObjective objective, int score, Team team, GameMode mode, boolean colored) {
-		super(plugin, objective, new TeamPlayerOnModeEntry(score, team, mode, colored));
+	public TeamPlayerOnModeAutoUpdater(ISimpleObjective objective, int score, Team team, GameMode mode, boolean colored) {
+		super(objective, new TeamPlayerOnModeEntry(score, team, mode, colored));
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

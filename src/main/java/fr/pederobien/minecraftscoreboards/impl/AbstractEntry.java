@@ -106,6 +106,6 @@ public abstract class AbstractEntry implements IEntry {
 	protected abstract String getAfter(Player player);
 
 	private String getBeforeColored(Player player) {
-		return (color == null ? ChatColor.RESET : color) + getBefore(player);
+		return (color == null ? ChatColor.RESET : color) + getBefore(player) + ChatColor.RESET;
 	}
 }

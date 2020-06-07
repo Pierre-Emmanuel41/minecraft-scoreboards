@@ -1,7 +1,5 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import org.bukkit.plugin.Plugin;
-
 import fr.pederobien.minecraftmanagers.BukkitManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
@@ -13,14 +11,13 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	/**
 	 * Create an entry updated periodically.
 	 * 
-	 * @param plugin    The plugin to register this entry to be periodically updated.
 	 * @param objective The objective associated to the source entry.
 	 * @param delay     Represents the number of server ticks to wait before updating the objective.
 	 * @param period    Represents the number of server ticks between two objective updates.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, long delay, long period, T source) {
-		super(plugin, objective, source);
+	protected PeriodicUpdater(ISimpleObjective objective, long delay, long period, T source) {
+		super(objective, source);
 		this.delay = delay;
 		this.period = period;
 		update = new InternalUpdater();
@@ -29,13 +26,12 @@ public class PeriodicUpdater<T extends IEntry> extends AbstractEntryUpdater<T> {
 	/**
 	 * Create an entry updated periodically.
 	 * 
-	 * @param plugin    The plugin to register this entry to be periodically updated.
 	 * @param objective The objective associated to the source entry.
 	 * @param period    Represents the number of server ticks between two objective updates.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected PeriodicUpdater(Plugin plugin, ISimpleObjective objective, long period, T source) {
-		this(plugin, objective, 0, period, source);
+	protected PeriodicUpdater(ISimpleObjective objective, long period, T source) {
+		this(objective, 0, period, source);
 	}
 
 	@Override

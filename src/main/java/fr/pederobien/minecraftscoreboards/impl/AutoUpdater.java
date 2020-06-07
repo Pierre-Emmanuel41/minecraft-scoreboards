@@ -1,7 +1,6 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
@@ -11,13 +10,11 @@ public class AutoUpdater<T extends IEntry> extends AbstractEntryUpdater<T> imple
 	/**
 	 * Create an entry updater. This entry is responsible to update the source entry.
 	 * 
-	 * @param plugin    The plugin of this objective. The plugin could be useful to register its entries as event listener of to
-	 *                  create periodic entry update.
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected AutoUpdater(Plugin plugin, ISimpleObjective objective, T source) {
-		super(plugin, objective, source);
+	protected AutoUpdater(ISimpleObjective objective, T source) {
+		super(objective, source);
 	}
 
 	@Override

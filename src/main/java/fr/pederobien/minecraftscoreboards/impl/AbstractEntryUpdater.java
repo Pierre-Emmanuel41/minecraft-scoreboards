@@ -9,7 +9,6 @@ import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
 public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
-	private Plugin plugin;
 	private ISimpleObjective objective;
 	private T source;
 	private Runnable update;
@@ -21,8 +20,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected AbstractEntryUpdater(Plugin plugin, ISimpleObjective objective, T source) {
-		this.plugin = plugin;
+	protected AbstractEntryUpdater(ISimpleObjective objective, T source) {
 		this.objective = objective;
 		this.source = source;
 
@@ -33,7 +31,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	 * @return The plugin associated to this updater.
 	 */
 	public Plugin getPlugin() {
-		return plugin;
+		return objective.getPlugin();
 	}
 
 	public ISimpleObjective getObjective() {
