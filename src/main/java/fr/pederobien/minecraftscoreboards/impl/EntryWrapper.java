@@ -8,6 +8,11 @@ import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 public class EntryWrapper<T extends IEntry> implements IEntry {
 	private T source;
 
+	/**
+	 * Constructs a wrapper for the given entry.
+	 * 
+	 * @param source The entry to wrap.
+	 */
 	public EntryWrapper(T source) {
 		this.source = source;
 	}
