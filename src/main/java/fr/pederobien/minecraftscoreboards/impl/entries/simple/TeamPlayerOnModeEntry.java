@@ -49,7 +49,7 @@ public class TeamPlayerOnModeEntry extends AbstractSimpleEntry {
 	}
 
 	@Override
-	protected final String getBefore(Player player) {
+	public final String getBefore(Player player) {
 		return (colored ? team.getColor() + team.getName() + ChatColor.RESET : team.getName()) + " : ";
 	}
 }

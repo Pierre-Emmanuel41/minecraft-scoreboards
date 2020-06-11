@@ -89,22 +89,6 @@ public abstract class AbstractEntry implements IEntry {
 		return currentValue;
 	}
 
-	/**
-	 * Get a string displayed before the value to update.
-	 * 
-	 * @param Player The player whose score board is updated.
-	 * @return The sequence of characters to be displayed before the value to update.
-	 */
-	protected abstract String getBefore(Player player);
-
-	/**
-	 * Get a string displayed after the value to update.
-	 * 
-	 * @param Player The player whose score board is updated.
-	 * @return The sequence of characters to be displayed after the value to update.
-	 */
-	protected abstract String getAfter(Player player);
-
 	private String getBeforeColored(Player player) {
 		return (color == null ? ChatColor.RESET : color) + getBefore(player) + ChatColor.RESET;
 	}

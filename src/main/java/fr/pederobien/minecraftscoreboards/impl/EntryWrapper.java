@@ -23,8 +23,18 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
+	public String getBefore(Player player) {
+		return source.getBefore(player);
+	}
+
+	@Override
 	public void update(Player player) {
 		source.update(player);
+	}
+
+	@Override
+	public String getAfter(Player player) {
+		return source.getAfter(player);
 	}
 
 	@Override

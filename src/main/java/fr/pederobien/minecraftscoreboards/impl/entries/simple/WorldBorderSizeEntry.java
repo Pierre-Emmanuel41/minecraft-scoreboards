@@ -53,7 +53,7 @@ public class WorldBorderSizeEntry extends AbstractSimpleEntry {
 	}
 
 	@Override
-	protected final String getBefore(Player player) {
+	public final String getBefore(Player player) {
 		return WorldManager.getWorldNameNormalised(world) + " : ";
 	}
 }

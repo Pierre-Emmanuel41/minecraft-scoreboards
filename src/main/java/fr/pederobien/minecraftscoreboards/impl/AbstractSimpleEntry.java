@@ -18,12 +18,12 @@ public abstract class AbstractSimpleEntry extends AbstractEntry {
 	}
 
 	@Override
-	protected String getBefore(Player player) {
+	public String getBefore(Player player) {
 		return "";
 	}
 
 	@Override
-	protected String getAfter(Player player) {
+	public String getAfter(Player player) {
 		return "";
 	}
 }

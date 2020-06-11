@@ -18,11 +18,27 @@ public interface IEntry {
 	String getCurrentValue();
 
 	/**
+	 * Get a sequence of character displayed before the value to update.
+	 * 
+	 * @param Player The player whose score board is updated.
+	 * @return The sequence of characters to be displayed before the value to update.
+	 */
+	String getBefore(Player player);
+
+	/**
 	 * Update this entry. The old value equals the current value and the current value is updated.
 	 * 
 	 * @param player The player whose score board is updated.
 	 */
 	void update(Player player);
+
+	/**
+	 * Get a sequence of character displayed after the value to update.
+	 * 
+	 * @param Player The player whose score board is updated.
+	 * @return The sequence of characters to be displayed after the value to update.
+	 */
+	String getAfter(Player player);
 
 	/**
 	 * Get the score of this entry. This score represents the line number of this entry in an objective.
