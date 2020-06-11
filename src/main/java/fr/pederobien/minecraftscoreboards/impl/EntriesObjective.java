@@ -14,7 +14,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
-import fr.pederobien.minecraftscoreboards.impl.entries.simple.MessageEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntriesObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 
