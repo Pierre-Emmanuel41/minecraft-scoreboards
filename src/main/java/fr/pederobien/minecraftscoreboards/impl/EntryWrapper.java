@@ -19,62 +19,62 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 
 	@Override
 	public String getOldValue() {
-		return source.getOldValue();
+		return getSource().getOldValue();
 	}
 
 	@Override
 	public String getCurrentValue() {
-		return source.getCurrentValue();
+		return getSource().getCurrentValue();
 	}
 
 	@Override
 	public String getBefore(Player player) {
-		return source.getBefore(player);
+		return getSource().getBefore(player);
 	}
 
 	@Override
 	public void update(Player player) {
-		source.update(player);
+		getSource().update(player);
 	}
 
 	@Override
 	public String getAfter(Player player) {
-		return source.getAfter(player);
+		return getSource().getAfter(player);
 	}
 
 	@Override
 	public int getScore() {
-		return source.getScore();
+		return getSource().getScore();
 	}
 
 	@Override
 	public void setScore(int score) {
-		source.setScore(score);
+		getSource().setScore(score);
 	}
 
 	@Override
 	public void initialize() {
-		source.initialize();
+		getSource().initialize();
 	}
 
 	@Override
 	public boolean isActivated() {
-		return source.isActivated();
+		return getSource().isActivated();
 	}
 
 	@Override
 	public void setActivated(boolean isActivated) {
-		source.setActivated(isActivated);
+		getSource().setActivated(isActivated);
 	}
 
 	@Override
 	public ChatColor getColor() {
-		return source.getColor();
+		return getSource().getColor();
 	}
 
 	@Override
 	public void setColor(ChatColor color) {
-		source.setColor(color);
+		getSource().setColor(color);
 	}
 
 	/**
