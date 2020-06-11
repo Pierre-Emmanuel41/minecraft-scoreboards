@@ -1,16 +1,13 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftmanagers.BukkitManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
 
-public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
+public abstract class AbstractEntryUpdater<T extends IEntry> extends EntryWrapper<T> {
 	private ISimpleObjective objective;
-	private T source;
 	private Runnable update;
 
 	/**
@@ -21,8 +18,8 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 	 * @param source    The source tracked by this updater.
 	 */
 	protected AbstractEntryUpdater(ISimpleObjective objective, T source) {
+		super(source);
 		this.objective = objective;
-		this.source = source;
 
 		update = new InternalRunnable();
 	}
@@ -38,51 +35,6 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 		return objective;
 	}
 
-	@Override
-	public String getOldValue() {
-		return source.getOldValue();
-	}
-
-	@Override
-	public String getCurrentValue() {
-		return source.getCurrentValue();
-	}
-
-	@Override
-	public void update(Player player) {
-		source.update(player);
-	}
-
-	@Override
-	public int getScore() {
-		return source.getScore();
-	}
-
-	@Override
-	public void setScore(int score) {
-		source.setScore(score);
-	}
-
-	@Override
-	public boolean isActivated() {
-		return source.isActivated();
-	}
-
-	@Override
-	public void setActivated(boolean isActivated) {
-		source.setActivated(isActivated);
-	}
-
-	@Override
-	public ChatColor getColor() {
-		return source.getColor();
-	}
-
-	@Override
-	public void setColor(ChatColor color) {
-		source.setColor(color);
-	}
-
 	/**
 	 * Update the objective associated to the source entry for the source entry.
 	 */
@@ -90,18 +42,11 @@ public abstract class AbstractEntryUpdater<T extends IEntry> implements IEntry {
 		BukkitManager.getScheduler().runTaskLater(getPlugin(), update, 2);
 	}
 
-	/**
-	 * @return The source entry updated by this updater.
-	 */
-	protected T getSource() {
-		return source;
-	}
-
 	private class InternalRunnable implements Runnable {
 
 		@Override
 		public void run() {
-			getObjective().update(source);
+			getObjective().update(getSource());
 		}
 	}
 }

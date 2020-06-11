@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -143,63 +142,12 @@ public class EntriesObjective extends AbstractSimpleObjective implements IEntrie
 				consumer.accept(entry);
 	}
 
-	private class ExtendedEntry implements IEntry {
-		private IEntry source;
+	private class ExtendedEntry extends EntryWrapper<IEntry> {
 		private boolean isEmpty;
 
 		public ExtendedEntry(IEntry source, boolean isEmpty) {
-			this.source = source;
+			super(source);
 			this.isEmpty = isEmpty;
-		}
-
-		@Override
-		public String getOldValue() {
-			return source.getOldValue();
-		}
-
-		@Override
-		public String getCurrentValue() {
-			return source.getCurrentValue();
-		}
-
-		@Override
-		public void update(Player player) {
-			source.update(player);
-		}
-
-		@Override
-		public int getScore() {
-			return source.getScore();
-		}
-
-		@Override
-		public void setScore(int score) {
-			source.setScore(score);
-		}
-
-		@Override
-		public void initialize() {
-			source.initialize();
-		}
-
-		@Override
-		public boolean isActivated() {
-			return source.isActivated();
-		}
-
-		@Override
-		public void setActivated(boolean isActivated) {
-			source.setActivated(isActivated);
-		}
-
-		@Override
-		public ChatColor getColor() {
-			return source.getColor();
-		}
-
-		@Override
-		public void setColor(ChatColor color) {
-			source.setColor(color);
 		}
 
 		public boolean isEmpty() {
