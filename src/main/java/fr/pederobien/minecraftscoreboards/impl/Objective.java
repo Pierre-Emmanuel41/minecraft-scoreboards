@@ -64,12 +64,6 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 	}
 
 	@Override
-	public void setPlayer(Player player) {
-		super.setPlayer(player);
-		color = TeamManager.getColor(getPlayer());
-	}
-
-	@Override
 	public final void start() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
 		action(entry -> entry.setActivated(true));
@@ -119,6 +113,7 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 					entry.setColor(newColor);
 					update(entry);
 				}
+				color = newColor;
 			}
 		}
 	}
