@@ -19,7 +19,13 @@ import fr.pederobien.minecraftmanagers.TeamManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public class Objective extends AbstractSimpleObjective implements IObjective {
+public class Objective implements IObjective {
+	private String name, criteria, displayName;
+	private DisplaySlot displaySlot;
+	private Plugin plugin;
+	private Player player;
+	private Scoreboard scoreboard;
+	private org.bukkit.scoreboard.Objective objective;
 	private Map<Integer, ExtendedEntry> entries;
 	private List<IEntry> entriesList;
 	private boolean isInitialized, isActivated;
@@ -63,13 +69,86 @@ public class Objective extends AbstractSimpleObjective implements IObjective {
 	 * @param displaySlot The slot where this objective is displayed on player screen.
 	 */
 	public Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
-		super(plugin, player, name, displayName, criteria, displaySlot);
+		this.plugin = plugin;
+		this.player = player;
+		this.name = name;
+		this.criteria = criteria;
+		this.displayName = displayName;
+		this.displaySlot = displaySlot;
 		entries = new HashMap<Integer, ExtendedEntry>();
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 		isInitialized = false;
 		isActivated = false;
 		colorUpdater = new ColorUpdater();
 		emptyEntryCount = 0;
+	}
+
+	@Override
+	public void start() {
+		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
+		setActivated(true);
+		update();
+		taskId = BukkitManager.getScheduler().runTaskTimer(getPlugin(), colorUpdater, 0, 5).getTaskId();
+	}
+
+	@Override
+	public void stop() {
+		setActivated(false);
+		BukkitManager.getScheduler().cancelTask(taskId);
+	}
+
+	@Override
+	public Plugin getPlugin() {
+		return plugin;
+	}
+
+	@Override
+	public Player getPlayer() {
+		return player;
+	}
+
+	@Override
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getCriteria() {
+		return criteria;
+	}
+
+	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	@Override
+	public DisplaySlot getDisplaySlot() {
+		return displaySlot;
+	}
+
+	@Override
+	public void setScoreboard(Scoreboard scoreboard) {
+		this.scoreboard = scoreboard;
+		if (scoreboard == null)
+			return;
+
+		objective = ScoreboardManager.createObjective(scoreboard, getName(), getCriteria(), getDisplayName(), getDisplaySlot());
+	}
+
+	@Override
+	public Optional<Scoreboard> getScoreboard() {
+		return Optional.ofNullable(scoreboard);
+	}
+
+	@Override
+	public Optional<org.bukkit.scoreboard.Objective> getObjective() {
+		return Optional.ofNullable(objective);
 	}
 
 	@Override
@@ -85,20 +164,6 @@ public class Objective extends AbstractSimpleObjective implements IObjective {
 	@Override
 	public void update(IEntry entry) {
 		updateEntry(entry, true);
-	}
-
-	@Override
-	public void start() {
-		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		setActivated(true);
-		update();
-		taskId = BukkitManager.getScheduler().runTaskTimer(getPlugin(), colorUpdater, 0, 5).getTaskId();
-	}
-
-	@Override
-	public void stop() {
-		setActivated(false);
-		BukkitManager.getScheduler().cancelTask(taskId);
 	}
 
 	@Override

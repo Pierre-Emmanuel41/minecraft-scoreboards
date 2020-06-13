@@ -1,8 +1,94 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface IObjective extends ISimpleObjective, IUpdateObjective {
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+
+public interface IObjective extends IUpdateObjective {
+
+	/**
+	 * @return The plugin used to update this objective.
+	 */
+	Plugin getPlugin();
+
+	/**
+	 * @return The player tracked by this objective.
+	 */
+	Player getPlayer();
+
+	/**
+	 * Set the player tracked by this objective. Normally this method should be never called. But when a player quit and join the
+	 * server during an update, the player lose its score board.
+	 * 
+	 * @param player The player to track.
+	 */
+	void setPlayer(Player player);
+
+	/**
+	 * @return The name of this objective.
+	 */
+	String getName();
+
+	/**
+	 * Gets the criteria this objective tracks.
+	 * 
+	 * @return this objective's criteria.
+	 */
+	String getCriteria();
+
+	/**
+	 * Gets the name displayed to players for this objective.
+	 * 
+	 * @return this objective's display name
+	 */
+	String getDisplayName();
+
+	/**
+	 * Gets the display slot this objective is displayed at.
+	 *
+	 * @return the display slot for this objective, or null if not displayed
+	 */
+	DisplaySlot getDisplaySlot();
+
+	/**
+	 * Set the score board of this objective. This objective is also attached to this score board.
+	 * 
+	 * @param scoreboard The score board attached to this objective.
+	 */
+	void setScoreboard(Scoreboard scoreboard);
+
+	/**
+	 * Gets the score board to which this objective is attached if it exist.
+	 * 
+	 * @return An optional that contains the score board to which this objective is attached if it exist, an empty optional otherwise.
+	 */
+	Optional<Scoreboard> getScoreboard();
+
+	/**
+	 * Get the bukkit objective equivalent of this objective.
+	 * 
+	 * @return An optional that contains the bukkit objective equivalent if this objective is attached to a score board, an empty
+	 *         optional otherwise.
+	 */
+	Optional<Objective> getObjective();
+
+	/**
+	 * Update this objective for the tracked player. This method reset the objective for each entry old value and then display each
+	 * entry current value.
+	 */
+	void update();
+
+	/**
+	 * Update this objective for the tracked player and the specified entry.
+	 * 
+	 * @param entry The entry to update in this objective.
+	 */
+	void update(IEntry entry);
 
 	/**
 	 * Append an entry to this objective. If an entry is already registered for the given {@link IEntry#getScore()} then the former
