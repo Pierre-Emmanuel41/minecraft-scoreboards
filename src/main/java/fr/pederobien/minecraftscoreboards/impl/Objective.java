@@ -66,14 +66,14 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 	@Override
 	public final void start() {
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
-		action(entry -> entry.setActivated(true));
+		setActivated(true);
 		update();
 		taskId = BukkitManager.getScheduler().runTaskTimer(getPlugin(), colorUpdater, 0, 5).getTaskId();
 	}
 
 	@Override
 	public void stop() {
-		action(entry -> entry.setActivated(false));
+		setActivated(false);
 		BukkitManager.getScheduler().cancelTask(taskId);
 	}
 
@@ -94,6 +94,7 @@ public class Objective extends EntriesObjective implements IObjective, Listener 
 	@Override
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
+		action(entry -> entry.setActivated(isActivated));
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
