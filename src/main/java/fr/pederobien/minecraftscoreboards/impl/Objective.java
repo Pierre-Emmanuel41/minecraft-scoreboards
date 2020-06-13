@@ -33,7 +33,7 @@ public class Objective implements IObjective {
 	private ChatColor color;
 	private int emptyEntryCount, taskId;
 
-	private Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	protected Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		this.plugin = plugin;
 		this.player = player;
 		this.name = name;
