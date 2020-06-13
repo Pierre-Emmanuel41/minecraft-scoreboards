@@ -33,42 +33,7 @@ public class Objective implements IObjective {
 	private ChatColor color;
 	private int emptyEntryCount, taskId;
 
-	/**
-	 * Create an empty objective based on the given parameters.
-	 * 
-	 * @param plugin      The plugin used to update this objective.
-	 * @param player      The player associated to this objective. This player is used to display its informations.
-	 * @param name        The name of this objective.
-	 * @param displayName The name displayed on the given player score board.
-	 */
-	public Objective(Plugin plugin, Player player, String name, String displayName) {
-		this(plugin, player, name, displayName, DisplaySlot.SIDEBAR);
-	}
-
-	/**
-	 * Create an empty objective based on the given parameters.
-	 * 
-	 * @param plugin      The plugin used to update this objective.
-	 * @param player      The player associated to this objective. This player is used to display its informations.
-	 * @param name        The name of this objective.
-	 * @param displayName The name displayed on the given player score board.
-	 * @param displaySlot The slot where this objective is displayed on player screen.
-	 */
-	public Objective(Plugin plugin, Player player, String name, String displayName, DisplaySlot displaySlot) {
-		this(plugin, player, name, displayName, "dummy", displaySlot);
-	}
-
-	/**
-	 * Create an empty objective based on the given parameters.
-	 * 
-	 * @param plugin      The plugin used to update this objective.
-	 * @param player      The player associated to this objective. This player is used to display its informations.
-	 * @param name        The name of this objective.
-	 * @param displayName The name displayed on the given player score board.
-	 * @param criteria    The criteria tracked by this objective.
-	 * @param displaySlot The slot where this objective is displayed on player screen.
-	 */
-	public Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+	private Objective(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
 		this.plugin = plugin;
 		this.player = player;
 		this.name = name;
@@ -81,6 +46,45 @@ public class Objective implements IObjective {
 		isActivated = false;
 		colorUpdater = new ColorUpdater();
 		emptyEntryCount = 0;
+	}
+
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param plugin      The plugin used to update this objective.
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 * @param criteria    The criteria tracked by this objective.
+	 * @param displaySlot The slot where this objective is displayed on player screen.
+	 */
+	public static IObjective of(Plugin plugin, Player player, String name, String displayName, String criteria, DisplaySlot displaySlot) {
+		return new Objective(plugin, player, name, displayName, criteria, displaySlot);
+	}
+
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param plugin      The plugin used to update this objective.
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 * @param displaySlot The slot where this objective is displayed on player screen.
+	 */
+	public static IObjective of(Plugin plugin, Player player, String name, String displayName, DisplaySlot displaySlot) {
+		return new Objective(plugin, player, name, displayName, "dummy", displaySlot);
+	}
+
+	/**
+	 * Create an empty objective based on the given parameters.
+	 * 
+	 * @param plugin      The plugin used to update this objective.
+	 * @param player      The player associated to this objective. This player is used to display its informations.
+	 * @param name        The name of this objective.
+	 * @param displayName The name displayed on the given player score board.
+	 */
+	public static IObjective of(Plugin plugin, Player player, String name, String displayName) {
+		return new Objective(plugin, player, name, displayName, "dummy", DisplaySlot.SIDEBAR);
 	}
 
 	@Override
