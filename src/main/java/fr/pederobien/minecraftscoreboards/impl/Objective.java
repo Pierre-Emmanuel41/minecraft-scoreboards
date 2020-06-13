@@ -9,10 +9,6 @@ import java.util.Optional;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
@@ -23,7 +19,7 @@ import fr.pederobien.minecraftmanagers.TeamManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
-public class Objective extends AbstractSimpleObjective implements IObjective, Listener {
+public class Objective extends AbstractSimpleObjective implements IObjective {
 	private Map<Integer, ExtendedEntry> entries;
 	private List<IEntry> entriesList;
 	private boolean isInitialized, isActivated;
@@ -155,12 +151,6 @@ public class Objective extends AbstractSimpleObjective implements IObjective, Li
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
 		entries().forEach(entry -> entry.setActivated(isActivated));
-	}
-
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-	public void onPlayerJoinEvent(PlayerJoinEvent event) {
-		if (isActivated && event.getPlayer().getName().equals(event.getPlayer().getName()))
-			setPlayer(event.getPlayer());
 	}
 
 	private void updateEntry(IEntry entry, boolean checkScoreboard) {
