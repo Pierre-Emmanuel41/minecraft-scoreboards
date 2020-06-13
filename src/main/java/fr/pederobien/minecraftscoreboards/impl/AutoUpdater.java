@@ -3,7 +3,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 import org.bukkit.event.Listener;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public class AutoUpdater<T extends IEntry> extends AbstractEntryUpdater<T> implements Listener {
 
@@ -13,7 +13,7 @@ public class AutoUpdater<T extends IEntry> extends AbstractEntryUpdater<T> imple
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected AutoUpdater(ISimpleObjective objective, T source) {
+	protected AutoUpdater(IObjective objective, T source) {
 		super(objective, source);
 	}
 

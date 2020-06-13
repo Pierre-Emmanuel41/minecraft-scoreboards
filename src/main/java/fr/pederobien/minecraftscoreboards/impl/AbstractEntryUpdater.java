@@ -4,10 +4,10 @@ import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftmanagers.BukkitManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.ISimpleObjective;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public abstract class AbstractEntryUpdater<T extends IEntry> extends EntryWrapper<T> {
-	private ISimpleObjective objective;
+	private IObjective objective;
 	private Runnable update;
 
 	/**
@@ -16,7 +16,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> extends EntryWrappe
 	 * @param objective The objective associated to the source entry.
 	 * @param source    The source tracked by this updater.
 	 */
-	protected AbstractEntryUpdater(ISimpleObjective objective, T source) {
+	protected AbstractEntryUpdater(IObjective objective, T source) {
 		super(source);
 		this.objective = objective;
 
@@ -30,7 +30,7 @@ public abstract class AbstractEntryUpdater<T extends IEntry> extends EntryWrappe
 		return objective.getPlugin();
 	}
 
-	public ISimpleObjective getObjective() {
+	public IObjective getObjective() {
 		return objective;
 	}
 
