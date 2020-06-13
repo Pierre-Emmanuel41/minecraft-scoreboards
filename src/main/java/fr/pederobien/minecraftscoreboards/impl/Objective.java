@@ -105,6 +105,12 @@ public class Objective extends AbstractSimpleObjective implements IObjective {
 	public void addEntry(IEntry entry) {
 		entries.put(entry.getScore(), new ExtendedEntry(entry, false));
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+
+		if (isActivated()) {
+			entry.initialize();
+			entry.setActivated(true);
+			update(entry);
+		}
 	}
 
 	@Override
@@ -117,6 +123,11 @@ public class Objective extends AbstractSimpleObjective implements IObjective {
 			emptyEntryCount--;
 
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+
+		if (isActivated() && getScoreboard().isPresent()) {
+			getScoreboard().get().resetScores(entry.getCurrentValue());
+			entry.setActivated(false);
+		}
 	}
 
 	@Override
