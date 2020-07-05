@@ -2,8 +2,6 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.impl.AbstractSimpleEntry;
-
 public class MessageEntry extends AbstractSimpleEntry {
 	private String entry;
 
