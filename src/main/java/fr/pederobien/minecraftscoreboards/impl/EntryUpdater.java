@@ -1,5 +1,7 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import org.bukkit.plugin.Plugin;
+
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
 
@@ -31,7 +33,20 @@ public class EntryUpdater implements IEntryUpdater {
 		this.isActivated = isActivated;
 	}
 
+	/**
+	 * Common method to update this entry on player screen. First verify if this updater is activated then ask to the objective to
+	 * update the entry source of this updater.
+	 */
 	protected void update() {
+		if (isActivated())
+			getSource().getObjective().update(getSource());
+	}
 
+	/**
+	 * @return The plugin associated to this updater. This is a convenient method and is equivalent to
+	 *         <code>getSource().getObjective().getPlugin()</code>
+	 */
+	protected Plugin getPlugin() {
+		return getSource().getObjective().getPlugin();
 	}
 }
