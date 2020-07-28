@@ -1,9 +1,12 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
+import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 
 public class EntryWrapper<T extends IEntry> implements IEntry {
 	private T source;
@@ -18,6 +21,16 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
+	public IObjective getObjective() {
+		return source.getObjective();
+	}
+
+	@Override
+	public void setObjective(IObjective objective) {
+		source.setObjective(objective);
+	}
+
+	@Override
 	public String getOldValue() {
 		return getSource().getOldValue();
 	}
@@ -28,18 +41,18 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
-	public String getBefore(Player player) {
-		return getSource().getBefore(player);
+	public String getBefore() {
+		return getSource().getBefore();
 	}
 
 	@Override
-	public void update(Player player) {
-		getSource().update(player);
+	public void update() {
+		getSource().update();
 	}
 
 	@Override
-	public String getAfter(Player player) {
-		return getSource().getAfter(player);
+	public String getAfter() {
+		return getSource().getAfter();
 	}
 
 	@Override
@@ -75,6 +88,21 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	@Override
 	public void setColor(ChatColor color) {
 		getSource().setColor(color);
+	}
+
+	@Override
+	public void addUpdater(IEntryUpdater updater) {
+		source.addUpdater(updater);
+	}
+
+	@Override
+	public void removeUpdater(IEntryUpdater updater) {
+		source.removeUpdater(updater);
+	}
+
+	@Override
+	public List<IEntryUpdater> updaters() {
+		return source.updaters();
 	}
 
 	/**

@@ -2,7 +2,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.entity.Player;
 
-public class MessageEntry extends AbstractSimpleEntry {
+public class MessageEntry extends AbstractEntry {
 	private String entry;
 
 	/**

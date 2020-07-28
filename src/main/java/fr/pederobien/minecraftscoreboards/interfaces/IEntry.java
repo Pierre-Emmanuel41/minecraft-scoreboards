@@ -1,9 +1,22 @@
 package fr.pederobien.minecraftscoreboards.interfaces;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 
 public interface IEntry {
+
+	/**
+	 * @return The objective to which this entry is associated.
+	 */
+	IObjective getObjective();
+
+	/**
+	 * Set the objective to which this entry is associated.
+	 * 
+	 * @param objective The objective to which this entry is associated.
+	 */
+	void setObjective(IObjective objective);
 
 	/**
 	 * Get the old value of this entry. This value is used to clear or reset the player's objective.
@@ -20,25 +33,21 @@ public interface IEntry {
 	/**
 	 * Get a sequence of character displayed before the value to update.
 	 * 
-	 * @param Player The player whose score board is updated.
 	 * @return The sequence of characters to be displayed before the value to update.
 	 */
-	String getBefore(Player player);
+	String getBefore();
 
 	/**
 	 * Update this entry. The old value equals the current value and the current value is updated.
-	 * 
-	 * @param player The player whose score board is updated.
 	 */
-	void update(Player player);
+	void update();
 
 	/**
 	 * Get a sequence of character displayed after the value to update.
 	 * 
-	 * @param Player The player whose score board is updated.
 	 * @return The sequence of characters to be displayed after the value to update.
 	 */
-	String getAfter(Player player);
+	String getAfter();
 
 	/**
 	 * Get the score of this entry. This score represents the line number of this entry in an objective.
@@ -82,4 +91,23 @@ public interface IEntry {
 	 * @param color The color used to display messages on player screen.
 	 */
 	void setColor(ChatColor color);
+
+	/**
+	 * Register the specified updater so that it updates this entry.
+	 * 
+	 * @param updater An updater of this entry.
+	 */
+	void addUpdater(IEntryUpdater updater);
+
+	/**
+	 * Unregister the specified updater from the list of updater for this entry. The given updater, if found, is deactivated.
+	 * 
+	 * @param updater The updater to remove.
+	 */
+	void removeUpdater(IEntryUpdater updater);
+
+	/**
+	 * @return A list that contains all registered updaters for this entry. This list is unmodifiable.
+	 */
+	List<IEntryUpdater> updaters();
 }

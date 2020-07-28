@@ -258,7 +258,7 @@ public class Objective implements IObjective {
 		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
 		getScoreboard().get().resetScores(entry.getOldValue());
-		entry.update(getPlayer());
+		entry.update();
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 
