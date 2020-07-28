@@ -133,6 +133,11 @@ public class Objective implements IObjective {
 	}
 
 	@Override
+	public Optional<Scoreboard> getScoreboard() {
+		return Optional.ofNullable(scoreboard);
+	}
+
+	@Override
 	public void setScoreboard(Scoreboard scoreboard) {
 		this.scoreboard = scoreboard;
 		if (scoreboard == null)
@@ -142,28 +147,17 @@ public class Objective implements IObjective {
 	}
 
 	@Override
-	public Optional<Scoreboard> getScoreboard() {
-		return Optional.ofNullable(scoreboard);
-	}
-
-	@Override
 	public Optional<org.bukkit.scoreboard.Objective> getObjective() {
 		return Optional.ofNullable(objective);
 	}
 
 	@Override
-	public void update() {
-		Optional<Scoreboard> optScoreboard = getScoreboard();
-		if (!optScoreboard.isPresent())
+	public void initialize() {
+		if (isInitialized)
 			return;
 
-		for (IEntry entry : entries.values())
-			updateEntry(entry, false);
-	}
-
-	@Override
-	public void update(IEntry entry) {
-		updateEntry(entry, true);
+		entries().forEach(entry -> entry.initialize());
+		isInitialized = true;
 	}
 
 	@Override
@@ -176,6 +170,23 @@ public class Objective implements IObjective {
 			entry.setActivated(true);
 			update(entry);
 		}
+	}
+
+	@Override
+	public void addEntry(int index, IEntry entry) {
+		IEntry before = entries.get(index);
+		if (before == null) {
+			entries.put(index, new ExtendedEntry(entry, false));
+			entry.setScore(index);
+			entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+
+			if (isActivated()) {
+				entry.initialize();
+				entry.setActivated(true);
+				update(entry);
+			}
+		} else
+			addEntry(index++, before);
 	}
 
 	@Override
@@ -202,6 +213,7 @@ public class Objective implements IObjective {
 			spaces = spaces.concat(" ");
 		emptyEntryCount++;
 		addEntry(new ExtendedEntry(new MessageEntry(score, spaces), true));
+		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 	}
 
 	@Override
@@ -210,12 +222,25 @@ public class Objective implements IObjective {
 	}
 
 	@Override
-	public void initialize() {
-		if (isInitialized)
+	public void update() {
+		Optional<Scoreboard> optScoreboard = getScoreboard();
+		if (!optScoreboard.isPresent())
 			return;
 
-		entries().forEach(entry -> entry.initialize());
-		isInitialized = true;
+		for (IEntry entry : entries.values())
+			updateEntry(entry, false);
+	}
+
+	@Override
+	public void update(IEntry entry) {
+		updateEntry(entry, true);
+	}
+
+	@Override
+	public void update(int score) {
+		IEntry entry = entries.get(score);
+		if (entry != null)
+			update(entry);
 	}
 
 	@Override

@@ -56,18 +56,18 @@ public interface IObjective extends IUpdateObjective {
 	DisplaySlot getDisplaySlot();
 
 	/**
-	 * Set the score board of this objective. This objective is also attached to this score board.
-	 * 
-	 * @param scoreboard The score board attached to this objective.
-	 */
-	void setScoreboard(Scoreboard scoreboard);
-
-	/**
 	 * Gets the score board to which this objective is attached if it exist.
 	 * 
 	 * @return An optional that contains the score board to which this objective is attached if it exist, an empty optional otherwise.
 	 */
 	Optional<Scoreboard> getScoreboard();
+
+	/**
+	 * Set the score board of this objective. This objective is also attached to this score board.
+	 * 
+	 * @param scoreboard The score board attached to this objective.
+	 */
+	void setScoreboard(Scoreboard scoreboard);
 
 	/**
 	 * Get the bukkit objective equivalent of this objective.
@@ -76,6 +76,46 @@ public interface IObjective extends IUpdateObjective {
 	 *         optional otherwise.
 	 */
 	Optional<Objective> getObjective();
+
+	/**
+	 * Initialize each registered entry if not already initialized.
+	 */
+	void initialize();
+
+	/**
+	 * Appends an entry to this objective. If an entry is already registered for the given {@link IEntry#getScore()} then the former
+	 * entry is replaced.
+	 * 
+	 * @param entry The entry to add to the objective.
+	 */
+	void addEntry(IEntry entry);
+
+	/**
+	 * Inserts an entry to this objective. This method update also the score value of the given entry.
+	 * 
+	 * @param score the score, ie the line number, of the entry to add.
+	 * @param entry The entry to add to the objective.
+	 */
+	void addEntry(int score, IEntry entry);
+
+	/**
+	 * Create an empty entry and insert it to registered entries.
+	 * 
+	 * @param score the score, ie the line number, of the empty entry.
+	 */
+	void emptyEntry(int score);
+
+	/**
+	 * Remove the entry associated to the given score from the list of entry for this objective.
+	 * 
+	 * @param score the score, ie the line number, of the entry to remove.
+	 */
+	void removeEntry(int score);
+
+	/**
+	 * @return A list that contains all registered entries for this objective. This list is unmodifiable.
+	 */
+	List<IEntry> entries();
 
 	/**
 	 * Update this objective for the tracked player. This method reset the objective for each entry old value and then display each
@@ -91,36 +131,11 @@ public interface IObjective extends IUpdateObjective {
 	void update(IEntry entry);
 
 	/**
-	 * Append an entry to this objective. If an entry is already registered for the given {@link IEntry#getScore()} then the former
-	 * entry is replaced.
-	 * 
-	 * @param entry The entry to add to the objective.
-	 */
-	void addEntry(IEntry entry);
-
-	/**
-	 * Remove the entry associated to the given score from the list of entry for this objective.
+	 * Update this objective for the tracked player and the entry associated to the given score.
 	 * 
 	 * @param score the score, ie the line number, of the entry to remove.
 	 */
-	void removeEntry(int score);
-
-	/**
-	 * Create an empty entry and add it to the list of entry for this objective.
-	 * 
-	 * @param score The line number of the empty entry.
-	 */
-	void emptyEntry(int score);
-
-	/**
-	 * @return A list that contains all registered entries for this objective. This list is unmodifiable.
-	 */
-	List<IEntry> entries();
-
-	/**
-	 * Initialize each registered entry if not already initialized.
-	 */
-	void initialize();
+	void update(int score);
 
 	/**
 	 * @return True if this objective can be updated by its entry, false otherwise.
