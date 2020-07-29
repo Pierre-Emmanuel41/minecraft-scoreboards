@@ -38,7 +38,7 @@ public class EntryUpdater implements IEntryUpdater {
 	 * update the entry source of this updater.
 	 */
 	protected void update() {
-		if (isActivated())
+		if (source != null && isActivated())
 			getSource().getObjective().update(getSource());
 	}
 
@@ -47,6 +47,6 @@ public class EntryUpdater implements IEntryUpdater {
 	 *         <code>getSource().getObjective().getPlugin()</code>
 	 */
 	protected Plugin getPlugin() {
-		return getSource().getObjective().getPlugin();
+		return source == null ? null : getSource().getObjective().getPlugin();
 	}
 }
