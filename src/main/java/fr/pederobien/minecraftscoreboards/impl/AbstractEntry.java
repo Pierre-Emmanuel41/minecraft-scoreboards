@@ -103,20 +103,22 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
-	public void addUpdater(IEntryUpdater updater) {
+	public IEntry addUpdater(IEntryUpdater updater) {
 		updaters.add(updater);
 		updater.setSource(this);
 		if (isActivated) {
 			updater.initialize();
 			updater.setActivated(true);
 		}
+		return this;
 	}
 
 	@Override
-	public void removeUpdater(IEntryUpdater updater) {
+	public IEntry removeUpdater(IEntryUpdater updater) {
 		updaters.remove(updater);
 		updater.setSource(null);
 		updater.setActivated(false);
+		return this;
 	}
 
 	@Override

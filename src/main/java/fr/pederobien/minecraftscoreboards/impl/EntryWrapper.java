@@ -91,13 +91,15 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
-	public void addUpdater(IEntryUpdater updater) {
+	public IEntry addUpdater(IEntryUpdater updater) {
 		source.addUpdater(updater);
+		return this;
 	}
 
 	@Override
-	public void removeUpdater(IEntryUpdater updater) {
+	public IEntry removeUpdater(IEntryUpdater updater) {
 		source.removeUpdater(updater);
+		return this;
 	}
 
 	@Override

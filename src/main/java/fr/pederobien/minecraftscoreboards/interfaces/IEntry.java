@@ -96,15 +96,19 @@ public interface IEntry {
 	 * Register the specified updater so that it updates this entry.
 	 * 
 	 * @param updater An updater of this entry.
+	 * 
+	 * @return This entry.
 	 */
-	void addUpdater(IEntryUpdater updater);
+	IEntry addUpdater(IEntryUpdater updater);
 
 	/**
 	 * Unregister the specified updater from the list of updater for this entry. The given updater, if found, is deactivated.
 	 * 
 	 * @param updater The updater to remove.
+	 * 
+	 * @return This entry.
 	 */
-	void removeUpdater(IEntryUpdater updater);
+	IEntry removeUpdater(IEntryUpdater updater);
 
 	/**
 	 * @return A list that contains all registered updaters for this entry. This list is unmodifiable.
