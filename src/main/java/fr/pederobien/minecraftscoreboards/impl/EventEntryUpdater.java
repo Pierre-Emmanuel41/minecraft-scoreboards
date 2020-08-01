@@ -41,6 +41,11 @@ public class EventEntryUpdater<T extends Event> extends EntryUpdater implements 
 	protected void update(T event) {
 		this.event = event;
 		if (getSource() != null && isActivated()) {
+			if (conditions.isEmpty()) {
+				scheduleUpdate(2);
+				return;
+			}
+
 			boolean canUpdate = conditions.get(0).test(event);
 			for (int i = 1; i < conditions.size(); i++) {
 				if (!canUpdate)
