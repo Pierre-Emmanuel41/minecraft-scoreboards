@@ -162,29 +162,15 @@ public class Objective implements IObjective {
 
 	@Override
 	public void addEntry(IEntry entry) {
-		entries.put(entry.getScore(), new ExtendedEntry(entry, false));
-		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
-
-		if (isActivated()) {
-			entry.initialize();
-			entry.setActivated(true);
-			update(entry);
-		}
+		internalAddEntry(entry.getScore(), entry);
 	}
 
 	@Override
 	public void addEntry(int index, IEntry entry) {
 		IEntry before = entries.get(index);
 		if (before == null) {
-			entries.put(index, new ExtendedEntry(entry, false));
 			entry.setScore(index);
-			entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
-
-			if (isActivated()) {
-				entry.initialize();
-				entry.setActivated(true);
-				update(entry);
-			}
+			internalAddEntry(index, entry);
 		} else
 			addEntry(index++, before);
 	}
@@ -194,6 +180,8 @@ public class Objective implements IObjective {
 		ExtendedEntry entry = entries.remove(score);
 		if (entry == null)
 			return;
+
+		entry.setObjective(null);
 
 		if (entry.isEmpty())
 			emptyEntryCount--;
@@ -260,6 +248,18 @@ public class Objective implements IObjective {
 		getScoreboard().get().resetScores(entry.getOldValue());
 		entry.update();
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
+	}
+
+	private void internalAddEntry(int index, IEntry entry) {
+		entry.setObjective(this);
+		entries.put(index, new ExtendedEntry(entry, false));
+		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+
+		if (isActivated()) {
+			entry.initialize();
+			entry.setActivated(true);
+			update(entry);
+		}
 	}
 
 	private class ExtendedEntry extends EntryWrapper<IEntry> {
