@@ -5,7 +5,7 @@ import org.bukkit.plugin.Plugin;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
 
-public class EntryUpdater implements IEntryUpdater {
+public class EntryUpdater implements IEntryUpdater, Runnable {
 	private IEntry source;
 	private boolean isActivated;
 
@@ -39,7 +39,7 @@ public class EntryUpdater implements IEntryUpdater {
 	 */
 	protected void update() {
 		if (source != null && isActivated())
-			getSource().getObjective().update(getSource());
+			scheduleUpdate(2);
 	}
 
 	/**
@@ -48,5 +48,20 @@ public class EntryUpdater implements IEntryUpdater {
 	 */
 	protected Plugin getPlugin() {
 		return source == null ? null : getSource().getObjective().getPlugin();
+	}
+
+	/**
+	 * Schedule the update of the entry.
+	 * 
+	 * @param delay The number of server tick to wait before the entry update is called.
+	 */
+	protected void scheduleUpdate(long delay) {
+		if (getPlugin() != null)
+			getPlugin().getServer().getScheduler().runTaskLaterAsynchronously(getPlugin(), this, delay);
+	}
+
+	@Override
+	public void run() {
+		getSource().getObjective().update(getSource());
 	}
 }
