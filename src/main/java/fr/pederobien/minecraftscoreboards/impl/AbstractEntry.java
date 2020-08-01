@@ -134,7 +134,7 @@ public abstract class AbstractEntry implements IEntry {
 	protected abstract String updateCurrentValue(Player player);
 
 	/**
-	 * @return The player by thee objective associated to this entry. This is a convenient method and is equivalent to
+	 * @return The player tracked by the objective associated to this entry. This is a convenient method and is equivalent to
 	 *         <code>getObjective().getPlayer()</code>
 	 */
 	protected Player getPlayer() {
