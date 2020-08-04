@@ -243,8 +243,9 @@ public class Objective implements IObjective {
 	}
 
 	private void updateEntry(IEntry entry, boolean checkScoreboard) {
-		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent() || entry.getOldValue().equals(entry.getCurrentValue()))
+		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
+
 		getScoreboard().get().resetScores(entry.getOldValue());
 		entry.update();
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
