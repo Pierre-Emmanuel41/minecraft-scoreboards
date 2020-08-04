@@ -57,7 +57,7 @@ public class EntryUpdater implements IEntryUpdater, Runnable {
 	 */
 	protected void scheduleUpdate(long delay) {
 		if (getPlugin() != null)
-			getPlugin().getServer().getScheduler().runTaskLaterAsynchronously(getPlugin(), this, delay);
+			getPlugin().getServer().getScheduler().runTaskLater(getPlugin(), this, delay);
 	}
 
 	@Override
