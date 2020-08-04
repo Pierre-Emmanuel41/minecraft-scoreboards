@@ -90,6 +90,7 @@ public abstract class AbstractEntry implements IEntry {
 	@Override
 	public void setActivated(boolean isActivated) {
 		this.isActivated = isActivated;
+		updaters.forEach(updater -> updater.setActivated(isActivated));
 	}
 
 	@Override
