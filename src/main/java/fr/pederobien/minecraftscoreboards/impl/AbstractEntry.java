@@ -56,7 +56,7 @@ public abstract class AbstractEntry implements IEntry {
 
 	@Override
 	public final void update() {
-		currentValue = (getObjective().getPlayer() == null ? ChatColor.RESET : color) + getBefore() + ChatColor.RESET;
+		currentValue = (getObjective().getPlayer() == null || color == null ? ChatColor.RESET : color) + getBefore() + ChatColor.RESET;
 		currentValue += updateCurrentValue(getObjective().getPlayer()) + getAfter();
 		oldValue = currentValue;
 	}

@@ -162,7 +162,7 @@ public class Objective implements IObjective {
 
 	@Override
 	public void addEntry(IEntry entry) {
-		internalAddEntry(entry.getScore(), entry);
+		internalAddEntry(entry.getScore(), new ExtendedEntry(entry, false));
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class Objective implements IObjective {
 		IEntry before = entries.get(index);
 		if (before == null) {
 			entry.setScore(index);
-			internalAddEntry(index, entry);
+			internalAddEntry(entry.getScore(), new ExtendedEntry(entry, false));
 		} else
 			addEntry(index++, before);
 	}
@@ -200,7 +200,7 @@ public class Objective implements IObjective {
 		for (int i = 0; i < emptyEntryCount; i++)
 			spaces = spaces.concat(" ");
 		emptyEntryCount++;
-		addEntry(new ExtendedEntry(new MessageEntry(score, spaces), true));
+		internalAddEntry(score, new ExtendedEntry(new MessageEntry(score, spaces), true));
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 	}
 
@@ -251,14 +251,15 @@ public class Objective implements IObjective {
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 
-	private void internalAddEntry(int index, IEntry entry) {
+	private void internalAddEntry(int index, ExtendedEntry entry) {
 		entry.setObjective(this);
-		entries.put(index, new ExtendedEntry(entry, false));
+		entries.put(index, entry);
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 
 		if (isActivated()) {
 			entry.initialize();
 			entry.setActivated(true);
+			entry.setColor(color);
 			update(entry);
 		}
 	}
