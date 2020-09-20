@@ -4,8 +4,9 @@ import org.bukkit.scheduler.BukkitTask;
 
 import fr.pederobien.minecraftmanagers.BukkitManager;
 
-public class PeriodicEntryUpdater extends EntryUpdater implements Runnable {
+public class PeriodicEntryUpdater extends EntryUpdater {
 	private long delay, period;
+	private Runnable periodicUpdate;
 	private BukkitTask task;
 
 	/**
@@ -17,6 +18,7 @@ public class PeriodicEntryUpdater extends EntryUpdater implements Runnable {
 	public PeriodicEntryUpdater(long delay, long period) {
 		this.delay = delay;
 		this.period = period;
+		periodicUpdate = new PeriodicUpdate();
 	}
 
 	/**
@@ -33,12 +35,15 @@ public class PeriodicEntryUpdater extends EntryUpdater implements Runnable {
 		if (isActivated() && !isActivated)
 			getPlugin().getServer().getScheduler().cancelTask(task.getTaskId());
 		else if (!isActivated() && isActivated)
-			task = BukkitManager.getScheduler().runTaskTimer(getPlugin(), this, delay, period);
+			task = BukkitManager.getScheduler().runTaskTimer(getPlugin(), periodicUpdate, delay, period);
 		super.setActivated(isActivated);
 	}
 
-	@Override
-	public void run() {
-		update();
+	private class PeriodicUpdate implements Runnable {
+
+		@Override
+		public void run() {
+			update();
+		}
 	}
 }
