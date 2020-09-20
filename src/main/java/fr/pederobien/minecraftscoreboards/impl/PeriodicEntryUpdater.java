@@ -1,7 +1,12 @@
 package fr.pederobien.minecraftscoreboards.impl;
 
+import org.bukkit.scheduler.BukkitTask;
+
+import fr.pederobien.minecraftmanagers.BukkitManager;
+
 public class PeriodicEntryUpdater extends EntryUpdater implements Runnable {
 	private long delay, period;
+	private BukkitTask task;
 
 	/**
 	 * Construct a periodic entry updater.
@@ -24,8 +29,12 @@ public class PeriodicEntryUpdater extends EntryUpdater implements Runnable {
 	}
 
 	@Override
-	public void initialize() {
-		getPlugin().getServer().getScheduler().runTaskTimer(getPlugin(), this, delay, period);
+	public void setActivated(boolean isActivated) {
+		if (isActivated() && !isActivated)
+			getPlugin().getServer().getScheduler().cancelTask(task.getTaskId());
+		else if (!isActivated() && isActivated)
+			task = BukkitManager.getScheduler().runTaskTimer(getPlugin(), this, delay, period);
+		super.setActivated(isActivated);
 	}
 
 	@Override
