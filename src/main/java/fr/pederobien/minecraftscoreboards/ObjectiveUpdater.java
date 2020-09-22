@@ -2,7 +2,9 @@ package fr.pederobien.minecraftscoreboards;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -11,18 +13,19 @@ import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraftmanagers.PlayerManager;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
+import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjectiveUpdater;
 import fr.pederobien.minecraftscoreboards.interfaces.IUpdateObjective;
 
 public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpdater {
-	private List<IUpdateObjective> updates;
+	private List<IObjective> updates;
 	private boolean isRunning;
 	private InternalListener listener;
 	private Plugin plugin;
 
 	private ObjectiveUpdater(Plugin plugin) {
 		this.plugin = plugin;
-		updates = new ArrayList<IUpdateObjective>();
+		updates = new ArrayList<IObjective>();
 		listener = new InternalListener();
 	}
 
@@ -40,7 +43,7 @@ public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpd
 	}
 
 	@Override
-	public void register(IUpdateObjective objective) {
+	public void register(IObjective objective) {
 		updates.add(objective);
 		if (isRunning) {
 			objective.initialize();
@@ -49,7 +52,7 @@ public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpd
 	}
 
 	@Override
-	public void unregister(IUpdateObjective objective) {
+	public void unregister(IObjective objective) {
 		if (updates.remove(objective) && isRunning)
 			objective.stop();
 	}
@@ -88,6 +91,14 @@ public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpd
 
 		listener.setIgnore(true);
 		isRunning = false;
+	}
+
+	@Override
+	public Optional<IObjective> getObjective(Player player) {
+		for (IObjective obj : updates)
+			if (obj.getPlayer().equals(player))
+				return Optional.of(obj);
+		return Optional.empty();
 	}
 
 	private class InternalListener implements Listener {
