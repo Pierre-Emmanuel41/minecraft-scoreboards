@@ -93,10 +93,10 @@ public interface IObjective extends IUpdateObjective {
 	/**
 	 * Inserts an entry to this objective. This method update also the score value of the given entry.
 	 * 
-	 * @param score the score, ie the line number, of the entry to add.
+	 * @param index The index of the entry. The score is calculated according to the entries already registered.
 	 * @param entry The entry to add to the objective.
 	 */
-	void addEntry(int score, IEntry entry);
+	void addEntry(int index, IEntry entry);
 
 	/**
 	 * Create an empty entry and insert it to registered entries.
