@@ -21,6 +21,11 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
+	public int compareTo(IEntry o) {
+		return source.compareTo(o);
+	}
+
+	@Override
 	public IObjective getObjective() {
 		return source.getObjective();
 	}

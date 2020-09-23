@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 
-public interface IEntry {
+public interface IEntry extends Comparable<IEntry> {
 
 	/**
 	 * @return The objective to which this entry is associated.

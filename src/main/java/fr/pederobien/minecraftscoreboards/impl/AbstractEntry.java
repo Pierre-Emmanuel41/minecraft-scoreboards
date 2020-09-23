@@ -30,6 +30,11 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
+	public int compareTo(IEntry o) {
+		return Integer.compare(getScore(), o.getScore());
+	}
+
+	@Override
 	public IObjective getObjective() {
 		return objective;
 	}
