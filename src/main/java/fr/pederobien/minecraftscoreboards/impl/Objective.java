@@ -95,6 +95,7 @@ public class Objective implements IObjective {
 	public void stop() {
 		setActivated(false);
 		BukkitManager.getScheduler().cancelTask(taskId);
+		entries.clear();
 	}
 
 	@Override
@@ -162,17 +163,21 @@ public class Objective implements IObjective {
 
 	@Override
 	public void addEntry(IEntry entry) {
-		internalAddEntry(entry.getScore(), new ExtendedEntry(entry, false));
+		internalAddEntry(entry.getScore(), entry instanceof ExtendedEntry ? (ExtendedEntry) entry : new ExtendedEntry(entry, false));
 	}
 
 	@Override
 	public void addEntry(int index, IEntry entry) {
-		IEntry before = entries.get(index);
-		if (before == null) {
-			entry.setScore(index);
-			internalAddEntry(entry.getScore(), new ExtendedEntry(entry, false));
-		} else
-			addEntry(index++, before);
+		entry.setScore(entriesList.get(entriesList.size() - index - 1).getScore());
+
+		List<IEntry> copy = new ArrayList<IEntry>(entriesList);
+		for (int j = 0; j < copy.size() - index; j++) {
+			IEntry e = entriesList.get(j);
+			removeEntry(e.getScore());
+			e.setScore(e.getScore() - 1);
+			addEntry(e);
+		}
+		addEntry(entry);
 	}
 
 	@Override
@@ -186,7 +191,7 @@ public class Objective implements IObjective {
 		if (entry.isEmpty())
 			emptyEntryCount--;
 
-		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+		updateAndSortEntriesList();
 
 		if (isActivated() && getScoreboard().isPresent()) {
 			getScoreboard().get().resetScores(entry.getCurrentValue());
@@ -201,7 +206,7 @@ public class Objective implements IObjective {
 			spaces = spaces.concat(" ");
 		emptyEntryCount++;
 		internalAddEntry(score, new ExtendedEntry(new MessageEntry(score, spaces), true));
-		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+		updateAndSortEntriesList();
 	}
 
 	@Override
@@ -254,7 +259,8 @@ public class Objective implements IObjective {
 	private void internalAddEntry(int index, ExtendedEntry entry) {
 		entry.setObjective(this);
 		entries.put(index, entry);
-		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
+
+		updateAndSortEntriesList();
 
 		if (isActivated()) {
 			entry.initialize();
@@ -262,6 +268,12 @@ public class Objective implements IObjective {
 			entry.setColor(color);
 			update(entry);
 		}
+	}
+
+	private void updateAndSortEntriesList() {
+		List<IEntry> list = new ArrayList<IEntry>(entries.values());
+		Collections.sort(list);
+		entriesList = Collections.unmodifiableList(list);
 	}
 
 	private class ExtendedEntry extends EntryWrapper<IEntry> {
