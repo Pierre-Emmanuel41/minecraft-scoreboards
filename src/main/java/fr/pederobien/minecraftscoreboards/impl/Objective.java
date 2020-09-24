@@ -2,10 +2,10 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,6 +14,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
 import fr.pederobien.minecraftmanagers.BukkitManager;
+import fr.pederobien.minecraftmanagers.EColor;
 import fr.pederobien.minecraftmanagers.ScoreboardManager;
 import fr.pederobien.minecraftmanagers.TeamManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
@@ -50,7 +51,7 @@ public class Objective implements IObjective {
 		this.criteria = criteria;
 		this.displayName = displayName;
 		this.displaySlot = displaySlot;
-		entries = new HashMap<Integer, ExtendedEntry>();
+		entries = new TreeMap<Integer, ExtendedEntry>();
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 		isInitialized = false;
 		isActivated = false;
@@ -163,21 +164,16 @@ public class Objective implements IObjective {
 
 	@Override
 	public void addEntry(IEntry entry) {
-		internalAddEntry(entry.getScore(), entry instanceof ExtendedEntry ? (ExtendedEntry) entry : new ExtendedEntry(entry, false));
+		internalAdd(new ExtendedEntry(entry, false));
+		updateAndSortEntriesList();
 	}
 
 	@Override
 	public void addEntry(int index, IEntry entry) {
-		entry.setScore(entriesList.get(entriesList.size() - index - 1).getScore());
-
-		List<IEntry> copy = new ArrayList<IEntry>(entriesList);
-		for (int j = 0; j < copy.size() - index; j++) {
-			IEntry e = entriesList.get(j);
-			removeEntry(e.getScore());
-			e.setScore(e.getScore() - 1);
-			addEntry(e);
-		}
-		addEntry(entry);
+		entry.setScore(entriesList.isEmpty() ? 0 : entriesList.get(entriesList.size() - index - 1).getScore());
+		reorganizeWhenAdded(index);
+		internalAdd(new ExtendedEntry(entry, false));
+		updateAndSortEntriesList();
 	}
 
 	@Override
@@ -186,17 +182,19 @@ public class Objective implements IObjective {
 		if (entry == null)
 			return;
 
+		if (getScoreboard().isPresent())
+			getScoreboard().get().resetScores(entry.getCurrentValue());
+
+		if (isActivated())
+			entry.setActivated(false);
+
 		entry.setObjective(null);
 
 		if (entry.isEmpty())
 			emptyEntryCount--;
 
+		reorganizeWhenRemoved(toIndex(entry.getScore()) - 1);
 		updateAndSortEntriesList();
-
-		if (isActivated() && getScoreboard().isPresent()) {
-			getScoreboard().get().resetScores(entry.getCurrentValue());
-			entry.setActivated(false);
-		}
 	}
 
 	@Override
@@ -205,7 +203,7 @@ public class Objective implements IObjective {
 		for (int i = 0; i < emptyEntryCount; i++)
 			spaces = spaces.concat(" ");
 		emptyEntryCount++;
-		internalAddEntry(score, new ExtendedEntry(new MessageEntry(score, spaces), true));
+		internalAdd(new ExtendedEntry(new MessageEntry(score, spaces), true));
 		updateAndSortEntriesList();
 	}
 
@@ -256,11 +254,40 @@ public class Objective implements IObjective {
 		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
 	}
 
-	private void internalAddEntry(int index, ExtendedEntry entry) {
-		entry.setObjective(this);
-		entries.put(index, entry);
+	private int toIndex(int score) {
+		int index = 0;
+		for (IEntry entry : entriesList) {
+			if (entry.getScore() > score) {
+				index--;
+				break;
+			}
+			index++;
+		}
+		return index;
+	}
 
-		updateAndSortEntriesList();
+	private void reorganizeWhenAdded(int index) {
+		List<IEntry> copy = new ArrayList<IEntry>(entriesList);
+		for (int i = 0; i < copy.size() - index; i++) {
+			ExtendedEntry e = (ExtendedEntry) entriesList.get(i);
+			internalRemove(e);
+			e.setScore(e.getScore() - 1);
+			internalAdd(e);
+		}
+	}
+
+	private void reorganizeWhenRemoved(int index) {
+		for (int i = index; 0 <= i; i--) {
+			ExtendedEntry e = (ExtendedEntry) entriesList.get(i);
+			internalRemove(e);
+			e.setScore(e.getScore() + 1);
+			internalAdd(e);
+		}
+	}
+
+	private void internalAdd(ExtendedEntry entry) {
+		entry.setObjective(this);
+		entries.put(entry.getScore(), entry);
 
 		if (isActivated()) {
 			entry.initialize();
@@ -268,6 +295,12 @@ public class Objective implements IObjective {
 			entry.setColor(color);
 			update(entry);
 		}
+	}
+
+	private void internalRemove(ExtendedEntry entry) {
+		entry.setActivated(false);
+		entry.setColor(EColor.RESET.getChatColor());
+		entries.remove(entry.getScore());
 	}
 
 	private void updateAndSortEntriesList() {
