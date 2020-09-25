@@ -39,10 +39,19 @@ public class PeriodicEntryUpdater extends EntryUpdater {
 		super.setActivated(isActivated);
 	}
 
+	/**
+	 * Method called when the update is about to be updated. This method do nothing if not overridden but should be in order to do
+	 * additional treatment before the update.
+	 */
+	protected void onUpdate() {
+
+	}
+
 	private class PeriodicUpdate implements Runnable {
 
 		@Override
 		public void run() {
+			onUpdate();
 			update();
 		}
 	}
