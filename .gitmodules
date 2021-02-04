@@ -1,0 +1,4 @@
+[submodule "minecraft-managers"]
+	path = minecraft-managers
+	url = https://github.com/Pierre-Emmanuel41/minecraft-managers.git
+	branch = 2.0_MC_1.13.2
