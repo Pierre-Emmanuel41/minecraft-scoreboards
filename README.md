@@ -1,6 +1,6 @@
 # Minecraft-scoreboards
 
-This plugin propose an easy way to add several lines to an objective in order to updated them automatically.
+This plugin propose an easy way to add several lines to an objective in order to update them automatically.
 
 # Register as maven dependency
 
@@ -30,6 +30,6 @@ Finally, in the pom.xml of your project, you have to add the following lines :
 	<version>1.0</version>
 </dependency>
 ```
-You can now use features provided by this api in you project.
+You can now use features provided by this api in your project.
 
-To see how you can use thoses features, please have a look to [This tutorial](https://github.com/Pierre-Emmanuel41/minecraft-scoreboards/blob/master/Tutorial.md)
+To see how you can use those features, please have a look to [This tutorial](https://github.com/Pierre-Emmanuel41/minecraft-scoreboards/blob/master/Tutorial.md)
