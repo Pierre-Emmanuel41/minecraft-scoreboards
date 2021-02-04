@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.concurrent.Semaphore;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -33,6 +34,7 @@ public class Objective implements IObjective {
 	private Runnable colorUpdater;
 	private ChatColor color;
 	private int emptyEntryCount, taskId;
+	private Semaphore semaphore;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -57,6 +59,7 @@ public class Objective implements IObjective {
 		isActivated = false;
 		colorUpdater = new ColorUpdater();
 		emptyEntryCount = 0;
+		semaphore = new Semaphore(1, true);
 	}
 
 	/**
@@ -249,9 +252,11 @@ public class Objective implements IObjective {
 		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
 
-		getScoreboard().get().resetScores(entry.getOldValue());
-		entry.update();
-		getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
+		doSafely(() -> {
+			getScoreboard().get().resetScores(entry.getOldValue());
+			entry.update();
+			getObjective().get().getScore(entry.getCurrentValue()).setScore(entry.getScore());
+		});
 	}
 
 	private int toIndex(int score) {
@@ -287,7 +292,7 @@ public class Objective implements IObjective {
 
 	private void internalAdd(ExtendedEntry entry) {
 		entry.setObjective(this);
-		entries.put(entry.getScore(), entry);
+		doSafely(() -> entries.put(entry.getScore(), entry));
 
 		if (isActivated()) {
 			entry.initialize();
@@ -300,13 +305,24 @@ public class Objective implements IObjective {
 	private void internalRemove(ExtendedEntry entry) {
 		entry.setActivated(false);
 		entry.setColor(EColor.RESET.getChatColor());
-		entries.remove(entry.getScore());
+		doSafely(() -> entries.remove(entry.getScore()));
 	}
 
 	private void updateAndSortEntriesList() {
 		List<IEntry> list = new ArrayList<IEntry>(entries.values());
 		Collections.sort(list);
 		entriesList = Collections.unmodifiableList(list);
+	}
+
+	private void doSafely(Runnable runnable) {
+		try {
+			semaphore.acquire();
+			runnable.run();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			semaphore.release();
+		}
 	}
 
 	private class ExtendedEntry extends EntryWrapper<IEntry> {

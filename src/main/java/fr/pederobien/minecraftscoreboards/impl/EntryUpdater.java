@@ -62,6 +62,7 @@ public class EntryUpdater implements IEntryUpdater, Runnable {
 
 	@Override
 	public void run() {
-		getSource().getObjective().update(getSource());
+		if (getSource() != null && getSource().getObjective() != null && isActivated())
+			getSource().getObjective().update(getSource());
 	}
 }
