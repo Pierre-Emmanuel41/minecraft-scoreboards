@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,8 +18,8 @@ import fr.pederobien.minecraft.managers.BukkitManager;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.ScoreboardManager;
 import fr.pederobien.minecraft.managers.TeamManager;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
 
 public class Objective implements IObjective {
 	private String name, criteria, displayName;

@@ -1,10 +1,10 @@
-package fr.pederobien.minecraftscoreboards.impl.updaters;
+package fr.pederobien.minecraft.scoreboards.impl.updaters;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.EventEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.impl.EventEntryUpdater;
 
 public class EntityRegainHealthUpdater extends EventEntryUpdater<EntityRegainHealthEvent> {
 

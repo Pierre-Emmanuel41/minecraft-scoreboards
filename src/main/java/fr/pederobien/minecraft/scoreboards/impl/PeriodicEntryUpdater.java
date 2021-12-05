@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import org.bukkit.scheduler.BukkitTask;
 

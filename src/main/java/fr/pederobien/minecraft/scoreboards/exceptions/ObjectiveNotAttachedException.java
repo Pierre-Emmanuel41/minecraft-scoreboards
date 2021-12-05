@@ -1,6 +1,6 @@
-package fr.pederobien.minecraftscoreboards.exceptions;
+package fr.pederobien.minecraft.scoreboards.exceptions;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
 
 public class ObjectiveNotAttachedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

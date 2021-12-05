@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.interfaces;
+package fr.pederobien.minecraft.scoreboards.interfaces;
 
 import java.util.List;
 import java.util.Optional;

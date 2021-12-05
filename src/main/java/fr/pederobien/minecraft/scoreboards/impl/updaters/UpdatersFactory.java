@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl.updaters;
+package fr.pederobien.minecraft.scoreboards.impl.updaters;
 
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -8,9 +8,9 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import fr.pederobien.minecraftscoreboards.impl.PeriodicEntryUpdater;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
-import fr.pederobien.minecraftscoreboards.interfaces.IEventEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.impl.PeriodicEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEventEntryUpdater;
 
 public class UpdatersFactory {
 

@@ -1,12 +1,12 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import java.util.List;
 
 import org.bukkit.ChatColor;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
 
 public class EntryWrapper<T extends IEntry> implements IEntry {
 	private T source;

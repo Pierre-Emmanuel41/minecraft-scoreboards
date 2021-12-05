@@ -15,10 +15,6 @@ Once this is done, let's add some entries to our objective. Those entries are re
 However, it is also possible to create your own entry. To do so, you need to create a new class that extends AbstractEntry. Let's call it PlayerLocationEntry and let's say that it displays the current player location :
 
 ```java
-	import org.bukkit.entity.Player;
-
-	import fr.pederobien.minecraftscoreboards.impl.AbstractEntry;
-	
 	public class PlayerLocationEntry extends AbstractEntry {
 	
 		public PlayerLocationEntry(int score) {

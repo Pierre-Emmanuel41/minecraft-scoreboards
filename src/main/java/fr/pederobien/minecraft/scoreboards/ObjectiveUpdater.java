@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards;
+package fr.pederobien.minecraft.scoreboards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import org.bukkit.plugin.Plugin;
 
 import fr.pederobien.minecraft.managers.PlayerManager;
 import fr.pederobien.minecraft.managers.ScoreboardManager;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjectiveUpdater;
-import fr.pederobien.minecraftscoreboards.interfaces.IUpdateObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjectiveUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IUpdateObjective;
 
 public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpdater {
 	private List<IObjective> updates;

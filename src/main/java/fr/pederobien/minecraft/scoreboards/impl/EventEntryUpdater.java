@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import org.bukkit.event.Event;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IEventEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEventEntryUpdater;
 
 public class EventEntryUpdater<T extends Event> extends EntryUpdater implements IEventEntryUpdater<T> {
 	private T event;

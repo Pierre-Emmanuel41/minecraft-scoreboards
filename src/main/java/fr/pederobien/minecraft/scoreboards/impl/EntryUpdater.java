@@ -1,9 +1,9 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import org.bukkit.plugin.Plugin;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
 
 public class EntryUpdater implements IEntryUpdater, Runnable {
 	private IEntry source;

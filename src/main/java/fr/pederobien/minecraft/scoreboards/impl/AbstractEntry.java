@@ -1,4 +1,4 @@
-package fr.pederobien.minecraftscoreboards.impl;
+package fr.pederobien.minecraft.scoreboards.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,9 +7,9 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
-import fr.pederobien.minecraftscoreboards.interfaces.IEntryUpdater;
-import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
+import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
+import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
 
 public abstract class AbstractEntry implements IEntry {
 	private IObjective objective;
