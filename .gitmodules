@@ -2,4 +2,4 @@
 	path = minecraft-managers
 	url = https://github.com/Pierre-Emmanuel41/minecraft-managers.git
 	update = rebase
-	branch = master
+	branch = 3.0_MC_1.13.2-SNAPSHOT
