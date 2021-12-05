@@ -2,7 +2,7 @@ package fr.pederobien.minecraftscoreboards.impl;
 
 import org.bukkit.scheduler.BukkitTask;
 
-import fr.pederobien.minecraftmanagers.BukkitManager;
+import fr.pederobien.minecraft.managers.BukkitManager;
 
 public class PeriodicEntryUpdater extends EntryUpdater {
 	private long delay, period;

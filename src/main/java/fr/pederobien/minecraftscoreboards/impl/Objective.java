@@ -14,10 +14,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 
-import fr.pederobien.minecraftmanagers.BukkitManager;
-import fr.pederobien.minecraftmanagers.EColor;
-import fr.pederobien.minecraftmanagers.ScoreboardManager;
-import fr.pederobien.minecraftmanagers.TeamManager;
+import fr.pederobien.minecraft.managers.BukkitManager;
+import fr.pederobien.minecraft.managers.EColor;
+import fr.pederobien.minecraft.managers.ScoreboardManager;
+import fr.pederobien.minecraft.managers.TeamManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IEntry;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 

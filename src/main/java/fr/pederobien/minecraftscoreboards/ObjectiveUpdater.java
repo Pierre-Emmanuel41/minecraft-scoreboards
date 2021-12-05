@@ -11,8 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
-import fr.pederobien.minecraftmanagers.PlayerManager;
-import fr.pederobien.minecraftmanagers.ScoreboardManager;
+import fr.pederobien.minecraft.managers.PlayerManager;
+import fr.pederobien.minecraft.managers.ScoreboardManager;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjective;
 import fr.pederobien.minecraftscoreboards.interfaces.IObjectiveUpdater;
 import fr.pederobien.minecraftscoreboards.interfaces.IUpdateObjective;
