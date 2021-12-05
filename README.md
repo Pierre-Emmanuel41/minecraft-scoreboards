@@ -1,33 +1,24 @@
-# Minecraft-scoreboards
+# Presentation
 
 This plugin propose an easy way to add several lines to an objective in order to update them automatically.
 
-# Register as maven dependency
+# Download
 
-It is easy to register this project as dependency for your own project. To do so, you need to download this project.
+# Download
 
-The easiest way to do so is to use the following git command line 
+First you need to download this project on your computer. To do so, you can use the following command line :
 
 ```git
-git clone https://github.com/Pierre-Emmanuel41/dictionary.git --recursive
+git clone https://github.com/Pierre-Emmanuel41/minecraft-dictionary.git --recursive
 ```
-Indeed, this project depends on the project [minecraft-managers](https://github.com/Pierre-Emmanuel41/minecraft-managers) and need to be downloaded on your machine to avoid compilation errors.
 
-Then, you need to run the following maven command line twice : 
-
-```maven
-mvn clean package install
-
-```
-The first one in the project folder : <code>/minecraft-scoreboards/minecraft-managers</code> and the second one in the folder <code>/minecraft-scoreboards</code>. This will create the archive of the two projects in your .m2 folder.
-
-Finally, in the pom.xml of your project, you have to add the following lines :
+and then double click on the deploy.bat file. This will deploy this project and all its dependencies on your computer. Which means it generates the folder associated to this project and its dependencies in your .m2 folder. Once this has been done, you can add the project as maven dependency on your maven project :
 
 ```xml
 <dependency>
 	<groupId>fr.pederobien</groupId>
-	<artifactId>dictionary</artifactId>
-	<version>1.0</version>
+	<artifactId>minecraft-scoreboards</artifactId>
+	<version>2.0_MC_1.13.2-SNAPSHOT</version>
 </dependency>
 ```
 You can now use features provided by this api in your project.
