@@ -2,11 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.pederobien</groupId>
-	<artifactId>minecraft-scoreboards</artifactId>
+	<groupId>fr.pederobien.minecraft</groupId>
+	<artifactId>scoreboards</artifactId>
 	<packaging>jar</packaging>
 	<version>2.0_MC_1.13.2-SNAPSHOT</version>
-	<name>minecraft.scoreboards</name>
+	<name>scoreboards</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -24,8 +24,8 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>fr.pederobien</groupId>
-			<artifactId>minecraft-managers</artifactId>
+			<groupId>fr.pederobien.minecraft</groupId>
+			<artifactId>managers</artifactId>
 			<version>3.0_MC_1.13.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
