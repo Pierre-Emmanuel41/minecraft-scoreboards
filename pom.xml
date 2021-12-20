@@ -25,7 +25,7 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.pederobien.minecraft</groupId>
-			<artifactId>managers</artifactId>
+			<artifactId>dictionary</artifactId>
 			<version>3.0_MC_1.13.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
