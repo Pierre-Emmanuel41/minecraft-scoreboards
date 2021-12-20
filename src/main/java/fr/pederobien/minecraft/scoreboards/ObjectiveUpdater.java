@@ -17,7 +17,7 @@ import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
 import fr.pederobien.minecraft.scoreboards.interfaces.IObjectiveUpdater;
 import fr.pederobien.minecraft.scoreboards.interfaces.IUpdateObjective;
 
-public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpdater {
+public class ObjectiveUpdater implements IObjectiveUpdater {
 	private List<IObjective> updates;
 	private boolean isRunning;
 	private InternalListener listener;
@@ -87,7 +87,7 @@ public class ObjectiveUpdater extends ScoreboardManager implements IObjectiveUpd
 			update.stop();
 
 		if (removeScoreboard)
-			PlayerManager.getPlayers().forEach(player -> removePlayerScoreboard(player));
+			PlayerManager.getPlayers().forEach(player -> ScoreboardManager.removePlayerScoreboard(player));
 
 		listener.setIgnore(true);
 		isRunning = false;
