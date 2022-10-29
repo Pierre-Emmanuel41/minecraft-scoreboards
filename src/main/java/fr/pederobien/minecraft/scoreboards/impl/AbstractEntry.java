@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
 import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
 import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
@@ -16,7 +16,7 @@ public abstract class AbstractEntry implements IEntry {
 	private String oldValue, currentValue;
 	private int score;
 	private boolean isActivated;
-	private ChatColor color;
+	private EColor color;
 	private List<IEntryUpdater> updaters;
 
 	/**
@@ -61,7 +61,7 @@ public abstract class AbstractEntry implements IEntry {
 
 	@Override
 	public final void update() {
-		currentValue = (getObjective().getPlayer() == null || color == null ? ChatColor.RESET : color) + getBefore() + ChatColor.RESET;
+		currentValue = (color == null ? EColor.RESET : color).getInColor(getBefore());
 		currentValue += updateCurrentValue(getObjective().getPlayer()) + getAfter();
 		oldValue = currentValue;
 	}
@@ -99,12 +99,12 @@ public abstract class AbstractEntry implements IEntry {
 	}
 
 	@Override
-	public ChatColor getColor() {
+	public EColor getColor() {
 		return color;
 	}
 
 	@Override
-	public void setColor(ChatColor color) {
+	public void setColor(EColor color) {
 		this.color = color;
 	}
 

@@ -25,8 +25,8 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.pederobien.minecraft</groupId>
-			<artifactId>dictionary</artifactId>
-			<version>3.0_MC_1.16.5-SNAPSHOT</version>
+			<artifactId>game</artifactId>
+			<version>1.0_MC_1.16.5-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

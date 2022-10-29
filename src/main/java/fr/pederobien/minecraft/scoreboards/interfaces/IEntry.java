@@ -2,7 +2,7 @@ package fr.pederobien.minecraft.scoreboards.interfaces;
 
 import java.util.List;
 
-import org.bukkit.ChatColor;
+import fr.pederobien.minecraft.managers.EColor;
 
 public interface IEntry extends Comparable<IEntry> {
 
@@ -83,14 +83,14 @@ public interface IEntry extends Comparable<IEntry> {
 	/**
 	 * @return The color in which this entry display messages. Generally, this color correspond to the player team color.
 	 */
-	ChatColor getColor();
+	EColor getColor();
 
 	/**
 	 * Set the color in which this entry display messages.
 	 * 
 	 * @param color The color used to display messages on player screen.
 	 */
-	void setColor(ChatColor color);
+	void setColor(EColor color);
 
 	/**
 	 * Register the specified updater so that it updates this entry.

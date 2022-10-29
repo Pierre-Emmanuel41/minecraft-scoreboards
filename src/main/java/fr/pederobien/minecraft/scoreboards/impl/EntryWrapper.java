@@ -2,8 +2,7 @@ package fr.pederobien.minecraft.scoreboards.impl;
 
 import java.util.List;
 
-import org.bukkit.ChatColor;
-
+import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
 import fr.pederobien.minecraft.scoreboards.interfaces.IEntryUpdater;
 import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
@@ -86,12 +85,12 @@ public class EntryWrapper<T extends IEntry> implements IEntry {
 	}
 
 	@Override
-	public ChatColor getColor() {
+	public EColor getColor() {
 		return getSource().getColor();
 	}
 
 	@Override
-	public void setColor(ChatColor color) {
+	public void setColor(EColor color) {
 		getSource().setColor(color);
 	}
 

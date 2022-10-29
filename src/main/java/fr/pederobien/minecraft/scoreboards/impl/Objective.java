@@ -6,22 +6,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
+import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
+import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
+import fr.pederobien.minecraft.game.event.TeamColorChangePostEvent;
 import fr.pederobien.minecraft.managers.BukkitManager;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.ScoreboardManager;
 import fr.pederobien.minecraft.managers.TeamManager;
 import fr.pederobien.minecraft.scoreboards.interfaces.IEntry;
 import fr.pederobien.minecraft.scoreboards.interfaces.IObjective;
+import fr.pederobien.utils.event.EventHandler;
+import fr.pederobien.utils.event.EventManager;
+import fr.pederobien.utils.event.IEventListener;
 
-public class Objective implements IObjective {
+public class Objective implements IObjective, IEventListener {
 	private String name, criteria, displayName;
 	private DisplaySlot displaySlot;
 	private Plugin plugin;
@@ -31,10 +38,9 @@ public class Objective implements IObjective {
 	private Map<Integer, ExtendedEntry> entries;
 	private List<IEntry> entriesList;
 	private boolean isInitialized, isActivated;
-	private Runnable colorUpdater;
-	private ChatColor color;
+	private EColor color;
 	private int emptyEntryCount, taskId;
-	private Semaphore semaphore;
+	private Lock lock;
 
 	/**
 	 * Create an empty objective based on the given parameters.
@@ -57,9 +63,8 @@ public class Objective implements IObjective {
 		entriesList = Collections.unmodifiableList(new ArrayList<IEntry>(entries.values()));
 		isInitialized = false;
 		isActivated = false;
-		colorUpdater = new ColorUpdater();
 		emptyEntryCount = 0;
-		semaphore = new Semaphore(1, true);
+		lock = new ReentrantLock(true);
 	}
 
 	/**
@@ -89,10 +94,14 @@ public class Objective implements IObjective {
 
 	@Override
 	public void start() {
+		Optional<Team> optTeam = TeamManager.getTeam(player);
+		if (optTeam.isPresent())
+			setColor(EColor.getByColor(optTeam.get().getColor()));
+
 		ScoreboardManager.setPlayerScoreboard(getPlayer(), getScoreboard().get());
 		setActivated(true);
 		update();
-		taskId = BukkitManager.getScheduler().runTaskTimer(getPlugin(), colorUpdater, 0, 5).getTaskId();
+		EventManager.registerListener(this);
 	}
 
 	@Override
@@ -100,6 +109,7 @@ public class Objective implements IObjective {
 		setActivated(false);
 		BukkitManager.getScheduler().cancelTask(taskId);
 		entries.clear();
+		EventManager.unregisterListener(this);
 	}
 
 	@Override
@@ -248,6 +258,34 @@ public class Objective implements IObjective {
 		entries().forEach(entry -> entry.setActivated(isActivated));
 	}
 
+	@EventHandler
+	private void onTeamPlayerAdd(PlayerListPlayerAddPostEvent event) {
+		if (!event.getPlayer().equals(player))
+			return;
+
+		Optional<Team> optTeam = TeamManager.getTeam(event.getPlayer());
+		if (!optTeam.isPresent())
+			return;
+
+		setColor(EColor.getByColor(optTeam.get().getColor()));
+	}
+
+	@EventHandler
+	private void onTeamPlayerRemove(PlayerListPlayerRemovePostEvent event) {
+		if (!event.getPlayer().equals(player))
+			return;
+
+		setColor(EColor.RESET);
+	}
+
+	@EventHandler
+	private void onTeamColorChange(TeamColorChangePostEvent event) {
+		if (!event.getTeam().getPlayers().getPlayer(getPlayer().getName()).isPresent())
+			return;
+
+		setColor(event.getTeam().getColor());
+	}
+
 	private void updateEntry(IEntry entry, boolean checkScoreboard) {
 		if (getPlayer() == null || checkScoreboard && !getScoreboard().isPresent())
 			return;
@@ -304,7 +342,7 @@ public class Objective implements IObjective {
 
 	private void internalRemove(ExtendedEntry entry) {
 		entry.setActivated(false);
-		entry.setColor(EColor.RESET.getChatColor());
+		entry.setColor(EColor.RESET);
 		doSafely(() -> entries.remove(entry.getScore()));
 	}
 
@@ -315,13 +353,20 @@ public class Objective implements IObjective {
 	}
 
 	private void doSafely(Runnable runnable) {
+		lock.lock();
 		try {
-			semaphore.acquire();
 			runnable.run();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		} finally {
-			semaphore.release();
+			lock.unlock();
+		}
+	}
+
+	private void setColor(EColor color) {
+		this.color = color;
+		getObjective().get().setDisplayName(color.getInColor(getDisplayName()));
+		for (IEntry entry : entries()) {
+			entry.setColor(color);
+			update(entry);
 		}
 	}
 
@@ -335,22 +380,6 @@ public class Objective implements IObjective {
 
 		public boolean isEmpty() {
 			return isEmpty;
-		}
-	}
-
-	private class ColorUpdater implements Runnable {
-
-		@Override
-		public void run() {
-			ChatColor oldColor = color, newColor = TeamManager.getColor(getPlayer());
-			if (oldColor == null || !newColor.equals(oldColor)) {
-				getObjective().get().setDisplayName(newColor + getDisplayName() + ChatColor.RESET);
-				for (IEntry entry : entries()) {
-					entry.setColor(newColor);
-					update(entry);
-				}
-				color = newColor;
-			}
 		}
 	}
 }
