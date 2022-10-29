@@ -1,5 +1,4 @@
-[submodule "minecraft-dictionary"]
-	path = minecraft-dictionary
-	url = https://github.com/Pierre-Emmanuel41/minecraft-dictionary.git
-	update = rebase
-	branch = 3.0_MC_1.16.5-SNAPSHOT
+[submodule "minecraft-game"]
+	path = minecraft-game
+	url = https://github.com/Pierre-Emmanuel41/minecraft-game.git
+	branch = 1.0_MC_1.16.5-SNAPSHOT
