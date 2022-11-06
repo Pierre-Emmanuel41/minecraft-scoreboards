@@ -15,9 +15,9 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-import fr.pederobien.minecraft.game.event.PlayerListPlayerAddPostEvent;
-import fr.pederobien.minecraft.game.event.PlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.game.event.TeamColorChangePostEvent;
+import fr.pederobien.minecraft.game.event.TeamPlayerListPlayerAddPostEvent;
+import fr.pederobien.minecraft.game.event.TeamPlayerListPlayerRemovePostEvent;
 import fr.pederobien.minecraft.managers.BukkitManager;
 import fr.pederobien.minecraft.managers.EColor;
 import fr.pederobien.minecraft.managers.ScoreboardManager;
@@ -259,7 +259,7 @@ public class Objective implements IObjective, IEventListener {
 	}
 
 	@EventHandler
-	private void onTeamPlayerAdd(PlayerListPlayerAddPostEvent event) {
+	private void onTeamPlayerAdd(TeamPlayerListPlayerAddPostEvent event) {
 		if (!event.getPlayer().equals(player))
 			return;
 
@@ -271,7 +271,7 @@ public class Objective implements IObjective, IEventListener {
 	}
 
 	@EventHandler
-	private void onTeamPlayerRemove(PlayerListPlayerRemovePostEvent event) {
+	private void onTeamPlayerRemove(TeamPlayerListPlayerRemovePostEvent event) {
 		if (!event.getPlayer().equals(player))
 			return;
 
